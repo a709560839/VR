@@ -24,7 +24,7 @@
   <string name="title_activity_game_detail">GameDetailActivity</string>
   <string name="game_pic_share_name">gamePicShare</string>
   <string name="game_introduce">游戏介绍</string>
-  <string name="game_intro_detail">《王者荣耀》是腾讯第一款5V5英雄公平对战手游，于10月28日开启不限号测试！5V5王者峡谷（含迷雾模式）、5V5深渊大乱斗、以及3V3、1V1等多样模式一键体验，热血竞技尽享快感！海量英雄随心选择，精妙配合默契作战！10秒实时跨区匹配，与好友组队登顶最强王者！操作简单易上手，一血、五杀、超神，极致还原经典体验！实力操作公平对战，回归MOBA初心！
+  <string name="game_intro_detail">《王者荣耀》是腾讯第一5V5英雄公平对战手游，于10月28日开启不限号测试！5V5王者峡谷（含迷雾模式）、5V5深渊大乱斗、以及3V3、1V1等多样模式一键体验，热血竞技尽享快感！海量英雄随心选择，精妙配合默契作战！10秒实时跨区匹配，与好友组队登顶最强王者！操作简单易上手，一血、五杀、超神，极致还原经典体验！实力操作公平对战，回归MOBA初心！
   我们拥有5V5经典地图，使用三路推塔核心玩法，呈现出最原滋原味的MOBA游戏对战体验！在王者荣耀里，我们根据英雄玩法使用不同的策略，根据英雄特色组建完美阵容，默契配合成就最强王者！</string>
 
   <string name="loading">正在加载</string>
