@@ -46,16 +46,13 @@
       app:layout_constraintBottom_toTopOf="@+id/guideline"
       app:layout_constraintStart_toEndOf="@+id/iv_app_icon" />
 
-    <Button
-      android:id="@+id/bt_app_uninstall"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="16dp"
-      android:layout_centerVertical="true"
-      android:padding="2dp"
-      android:background="@drawable/shape_download_btn"
-      android:minHeight="16dp"
-      android:minWidth="40dp"
+    <TextView
+      android:id="@+id/tv_app_uninstall"
+      android:layout_width="48dp"
+      android:layout_height="22dp"
+      android:layout_marginEnd="8dp"
+      android:gravity="center"
+      android:background="@drawable/selector_download_btn"
       android:text="@string/app_manage_uninstall"
       android:textColor="@color/color6"
       android:textSize="@dimen/textSize7"

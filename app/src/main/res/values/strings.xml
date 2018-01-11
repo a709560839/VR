@@ -85,7 +85,7 @@
   <string name="person_app_uninstall">应用卸载</string>
   <string name="person_download_recent_download">最近的下载</string>
   <string name="person_download_continue_download">继续下载</string>
-  <string name="person_download_delete_all">全部删除</string>
+  <string name="person_download_cancel_all">全部取消</string>
   <string name="person_settings">设置</string>
   <string name="person_login">点我登录</string>
   <string name="person_account">账号：</string>

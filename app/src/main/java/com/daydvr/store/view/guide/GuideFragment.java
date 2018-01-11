@@ -131,13 +131,11 @@ public class GuideFragment extends BaseFragment implements GuideContract.View {
     }
 
     private void initDatas() {
-
-        mVideoAdapter = new VideoListAdapter();
-        mGameAdapter = new GameListAdapter(mRootView.getContext(), false, 15);
         mPresenter.loadAD();
-        mPresenter.loadGameRecommend();
-        mPresenter.loadVideoRecommend();
 
+        mPresenter.loadGameRecommend();
+
+        mPresenter.loadVideoRecommend();
     }
 
     @Override
@@ -158,22 +156,27 @@ public class GuideFragment extends BaseFragment implements GuideContract.View {
     }
 
     @Override
-    public <T> void showGameRecommend(List<T> beans) {
-        mGameAdapter.setDatas((ArrayList<GameListBean>) beans);
-        mGameAdapter.setListener(mGameItemListener);
-        mGameRecyclerView.setAdapter(mGameAdapter);
+    public <T> void showGameRecommend(List<T> beans, int start, int count) {
+        if (mGameAdapter == null) {
+            mGameAdapter = new GameListAdapter(mRootView.getContext(), false, 15);
+            mGameAdapter.setDatas((ArrayList<GameListBean>) beans);
+            mGameAdapter.setListener(mGameItemListener);
+            mGameRecyclerView.setAdapter(mGameAdapter);
+        } else {
+            mGameAdapter.notifyItemRangeInserted(start, count);
+        }
     }
 
     @Override
-    public <T> void showVideoRecommend(List<T> beans) {
-        mVideoAdapter.setDatas((ArrayList<VideoListBean>) beans);
-        mVideoAdapter.setListener(mVideoItemListener);
-        mVideoRecyclerView.setAdapter(mVideoAdapter);
-    }
-
-    @Override
-    public void showDownload(RecyclerView.ViewHolder holder) {
-
+    public <T> void showVideoRecommend(List<T> beans, int start, int count) {
+        if (mVideoAdapter == null) {
+            mVideoAdapter = new VideoListAdapter();
+            mVideoAdapter.setDatas((ArrayList<VideoListBean>) beans);
+            mVideoAdapter.setListener(mVideoItemListener);
+            mVideoRecyclerView.setAdapter(mVideoAdapter);
+        } else {
+            mVideoAdapter.notifyItemRangeInserted(start, count);
+        }
     }
 
     @Override
@@ -294,7 +297,7 @@ public class GuideFragment extends BaseFragment implements GuideContract.View {
 
                 case GUIDE_UI_UPDATE:
                     GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) msg.obj;
-                    if (holder.getItemId() != -1) {
+                    if (holder.getAdapterPosition() != -1) {
                         holder.setInitViewVisibility();
                         holder.setDownloadButtonText(TEXT_INSTALL);
                         holder.setFlag(holder.getAdapterPosition(), INSTALLABLE);

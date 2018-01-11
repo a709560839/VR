@@ -51,7 +51,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     private TextView mTipTextView;
     private ConstraintLayout mRecentDownloadConstraintLayout;
     private TextView mContinueDownloadTextView;
-    private TextView mDeleteAllTextView;
+    private TextView mCancelAllTextView;
 
     private LoaderHandler mHandler;
     private DownloadManagerActivity.LoaderListener mHandlerListener;
@@ -78,7 +78,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
         mDownloadManagerRecyclerView = findViewById(R.id.rv_download_manager_list);
         mRecentDownloadConstraintLayout = findViewById(R.id.cl_recent_download);
         mContinueDownloadTextView = findViewById(R.id.tv_continue_download);
-        mDeleteAllTextView = findViewById(R.id.tv_delete_all);
+        mCancelAllTextView = findViewById(R.id.tv_cancel_all);
 
         configComponent();
     }
@@ -88,7 +88,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
         mToolbar.setCenterTitle(R.string.person_game_manager);
         mToolbar.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0);
         mContinueDownloadTextView.setOnClickListener(this);
-        mDeleteAllTextView.setOnClickListener(this);
+        mCancelAllTextView.setOnClickListener(this);
 
         mDownloadManagerRecyclerView.setHasFixedSize(true);
         mDownloadManagerRecyclerView.setNestedScrollingEnabled(false);
@@ -209,7 +209,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_delete_all:
+            case R.id.tv_cancel_all:
                 mPresenter.cancelAll();
                 break;
 
@@ -229,7 +229,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
             switch (msg.what) {
                 case GAME_MANAGER_UI_UPDATE:
                     GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) msg.obj;
-                    if (holder.getItemId() != -1) {
+                    if (holder.getAdapterPosition() != -1) {
                         holder.setInitViewVisibility();
                         holder.setDownloadButtonText(TEXT_INSTALL);
                         holder.setFlag(holder.getAdapterPosition(), INSTALLABLE);

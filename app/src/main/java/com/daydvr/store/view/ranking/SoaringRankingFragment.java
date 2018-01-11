@@ -197,7 +197,7 @@ public class SoaringRankingFragment extends BaseFragment implements BaseGameRank
             switch (msg.what) {
                 case SOARING_RANKING_UI_UPDATE:
                     GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) msg.obj;
-                    if (holder.getItemId() != -1) {
+                    if (holder.getAdapterPosition() != -1) {
                         holder.setInitViewVisibility();
                         holder.setDownloadButtonText(TEXT_INSTALL);
                         holder.setFlag(holder.getAdapterPosition(), INSTALLABLE);

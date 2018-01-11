@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import com.daydvr.store.R;
 import com.daydvr.store.bean.AppListBean;
@@ -58,16 +57,16 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ViewHold
         private RoundImageView appImageView;
         private TextView appNameTextView;
         private TextView appSizeTextView;
-        private Button appUninstallButton;
+        private TextView appUninstallTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
             appImageView = itemView.findViewById(R.id.iv_app_icon);
             appNameTextView = itemView.findViewById(R.id.tv_app_name);
             appSizeTextView = itemView.findViewById(R.id.tv_app_size);
-            appUninstallButton = itemView.findViewById(R.id.bt_app_uninstall);
+            appUninstallTextView = itemView.findViewById(R.id.tv_app_uninstall);
 
-            appUninstallButton.setOnClickListener(new OnClickListener() {
+            appUninstallTextView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mListener.onButtonClick(view, getAdapterPosition());

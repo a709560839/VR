@@ -98,7 +98,7 @@
     <item name="android:paddingBottom">2dp</item>
     <item name="android:textColor">@color/color6</item>
     <item name="android:textSize">@dimen/textSize4</item>
-    <item name="android:background">@drawable/shape_download_btn</item>
+    <item name="android:background">@drawable/selector_download_btn</item>
   </style>
 
 

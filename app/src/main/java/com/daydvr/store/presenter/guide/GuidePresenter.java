@@ -169,15 +169,17 @@ public class GuidePresenter implements GuideContract.Presenter {
 
                 case GAME_LOADER_OK:
                     mGameDatas = (List<GameListBean>) msg.obj;
+                    int gameStart = mGameDatas.size();
                     if (mGameDatas != null && mView != null) {
-                        mView.showGameRecommend(mGameDatas);
+                        mView.showGameRecommend(mGameDatas, gameStart, ((List<GameListBean>) msg.obj).size());
                     }
                     break;
 
                 case VIDEO_LOADER_OK:
                     mVideoDatas = (List<VideoListBean>) msg.obj;
+                    int videoStart = mVideoDatas.size();
                     if (mVideoDatas != null && mView != null) {
-                        mView.showVideoRecommend(mVideoDatas);
+                        mView.showVideoRecommend(mVideoDatas, videoStart, ((List<VideoListBean>) msg.obj).size());
                     }
                     break;
 

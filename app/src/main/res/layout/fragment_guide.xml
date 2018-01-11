@@ -23,7 +23,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:autoPlayDuration="3000"
-                app:layout_constraintDimensionRatio="100:66"
+                app:layout_constraintDimensionRatio="16:11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +38,7 @@
                 android:id="@+id/space"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintDimensionRatio="100:60"
+                app:layout_constraintDimensionRatio="16:10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>

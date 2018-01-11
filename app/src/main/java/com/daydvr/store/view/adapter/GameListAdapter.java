@@ -1,12 +1,10 @@
 package com.daydvr.store.view.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -20,6 +18,7 @@ import com.daydvr.store.manager.GameManager;
 import com.daydvr.store.util.AppInfoUtil;
 
 import com.daydvr.store.util.GlideImageLoader;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -90,45 +89,12 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_NORMAL) {
-            GameListBean bean = mDatas.get(position);
-            byte state = bean.getStatus();
-            //            state = mAppInfoUtil.getApplicationStatus(bean);
-            holder.setFlag(position, state);
 
-            if (mIsRanking) {
-                holder.gameRankingTextView.setVisibility(View.VISIBLE);
-                if (position == 0) {
-                    holder.gameRankingTextView.setTextColor(mContext.get().getResources().getColor(R.color.ranking_first));
-                } else if (position == 1 || position == 2) {
-                    holder.gameRankingTextView.setTextColor(mContext.get().getResources().getColor(R.color.ranking_secondtothird));
-                } else {
-                    holder.gameRankingTextView.setTextColor(mContext.get().getResources().getColor(R.color.ranking_default));
-                }
-                if (position < 9) {
-                    holder.gameRankingTextView.setText("  " + (position + 1));
-                } else {
-                    holder.gameRankingTextView.setText(String.valueOf(position + 1));
-                }
-            }
-            holder.gameNameTextView.setText(bean.getName());
-            holder.gameSummaryTextView.setText(bean.getSummary());
-            holder.gameRatingBar.setMax(5);
-            holder.gameRatingBar.setRating(bean.getRating());
-            holder.gameSizeTextView.setText(bean.getSize() + "M");
-            holder.gameTypeTextView.setText(bean.getType());
-            String iconUrl = bean.getIconUrl();
-            GlideImageLoader.commonLoader(mRootView.getContext(),iconUrl,holder.gameIconImageView);
-            if (state == DOWNLOADING || state == PAUSED) {
-                holder.setAfterDownloadViewVisibility();
-                holder.gameProgressBar.setMax((int) bean.getSize());
-                holder.gameProgressBar.setProgress(bean.getProgress());
-                threadTest.get(bean.getId()).setBean(bean);
-                threadTest.get(bean.getId()).setHolder(holder);
-            } else if (state == DOWNLOADABLE) {
-                holder.setInitViewVisibility();
-            }
-            String text = getDownloadButton(holder, state);
-            holder.gameDetailButton.setText(text);
+            checkIsRanking(holder, position);
+
+            initItemView(holder, position);
+
+            initDownloadStatus(holder, position);
 
         } else if (getItemViewType(position) == TYPE_FOOTER && mDatas.size() > mPerPageCount) {
             if (mDatas.size() % mPerPageCount != 0) {
@@ -139,8 +105,9 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(0, 0);
             holder.itemView.setLayoutParams(params);
         }
-
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -156,19 +123,66 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         }
     }
 
-    public void setDatas(List<GameListBean> datas) {
-        this.mDatas = datas;
+    private void checkIsRanking(ViewHolder holder, int position) {
+        if (mIsRanking) {
+            holder.gameRankingTextView.setVisibility(View.VISIBLE);
+            if (position == 0) {
+                holder.gameRankingTextView.setTextColor(mContext.get().getResources().getColor(R.color.ranking_first));
+            } else if (position == 1 || position == 2) {
+                holder.gameRankingTextView.setTextColor(mContext.get().getResources().getColor(R.color.ranking_secondtothird));
+            } else {
+                holder.gameRankingTextView.setTextColor(mContext.get().getResources().getColor(R.color.ranking_default));
+            }
+            if (position < 9) {
+                holder.gameRankingTextView.setText("  " + (position + 1));
+            } else {
+                holder.gameRankingTextView.setText(String.valueOf(position + 1));
+            }
+        }
     }
 
-    public void setListener(ItemOnClickListener listener) {
-        this.mListener = listener;
+    private void initItemView(ViewHolder holder, int position) {
+        GameListBean bean = mDatas.get(position);
+        holder.gameNameTextView.setText(bean.getName());
+        holder.gameSummaryTextView.setText(bean.getSummary());
+        holder.gameRatingBar.setMax(5);
+        holder.gameRatingBar.setRating(bean.getRating());
+        holder.gameSizeTextView.setText(bean.getSize() + "M");
+        holder.gameTypeTextView.setText(bean.getType());
+        String iconUrl = bean.getIconUrl();
+        GlideImageLoader.commonLoader(mRootView.getContext(), iconUrl, holder.gameIconImageView);
     }
 
-    public String getDownloadButton(ViewHolder holder, int state) {
-        String text = null;
+    private void initDownloadStatus(ViewHolder holder, int position) {
+        GameListBean bean = mDatas.get(position);
+        byte state = bean.getStatus();
+        //            state = mAppInfoUtil.getApplicationStatus(bean);
+        holder.setFlag(position, state);
+
+        String text = "";
         switch (state) {
             case DOWNLOADABLE:
+                holder.setInitViewVisibility();
                 text = TEXT_DOWNLOAD;
+                break;
+
+            case DOWNLOADING:
+                holder.setInitViewVisibility();
+                holder.setAfterDownloadViewVisibility();
+                holder.gameProgressBar.setMax((int) bean.getSize());
+                holder.gameProgressBar.setProgress(bean.getProgress());
+                threadTest.get(bean.getId()).setBean(bean);
+                threadTest.get(bean.getId()).setHolder(holder);
+                text = TEXT_PAUSE;
+                break;
+
+            case PAUSED:
+                holder.setAfterDownloadViewVisibility();
+                holder.gameProgressBar.setMax((int) bean.getSize());
+                holder.gameProgressBar.setProgress(bean.getProgress());
+                threadTest.get(bean.getId()).setBean(bean);
+                threadTest.get(bean.getId()).setHolder(holder);
+                text = TEXT_CONTINUE;
                 break;
 
             case UPDATE:
@@ -184,24 +198,25 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 break;
 
             case INSTALLABLE:
-                text = TEXT_INSTALL;
                 holder.setInitViewVisibility();
+                text = TEXT_INSTALL;
                 break;
 
-            case DOWNLOADING:
-                text = TEXT_PAUSE;
-                break;
-
-            case PAUSED:
-                text = TEXT_CONTINUE;
-                break;
 
             default:
                 text = "";
                 break;
         }
-        return text;
-    };
+        holder.gameDetailTextView.setText(text);
+    }
+
+    public void setDatas(List<GameListBean> datas) {
+        this.mDatas = datas;
+    }
+
+    public void setListener(ItemOnClickListener listener) {
+        this.mListener = listener;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -213,7 +228,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         private TextView gameSummaryTextView;
         private TextView gameSizeTextView;
         private RatingBar gameRatingBar;
-        private Button gameDetailButton;
+        private TextView gameDetailTextView;
         private ProgressBar gameProgressBar;
         private TextView gameProgressTextView;
         private TextView gameSpeedTextView;
@@ -233,7 +248,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         private void initNormalView(final View itemView) {
             flag = this.getFlag();
             gameRankingTextView = itemView.findViewById(R.id.tv_rangking);
-            gameDetailButton = itemView.findViewById(R.id.bt_game_detail);
+            gameDetailTextView = itemView.findViewById(R.id.tv_game_detail);
             gameIconImageView = itemView.findViewById(R.id.iv_game_icon);
             gameNameTextView = itemView.findViewById(R.id.tv_game_name);
             gameSummaryTextView = itemView.findViewById(R.id.tv_game_summary);
@@ -245,7 +260,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             gameSpeedTextView = itemView.findViewById(R.id.tv_download_speed);
             cancelDownloadTextView = itemView.findViewById(R.id.tv_cancel_download);
 
-            gameDetailButton.setOnClickListener(new View.OnClickListener() {
+            gameDetailTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     GameListBean bean = mDatas.get(getAdapterPosition());
@@ -254,7 +269,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                             return;
                         }
 
-                        if (TEXT_DOWNLOAD.equals(gameDetailButton.getText())) {
+                        if (TEXT_DOWNLOAD.equals(gameDetailTextView.getText())) {
                             setAfterDownloadViewVisibility();
                         }
                         GameManager.saveGameDownloadStatus(bean);
@@ -289,7 +304,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         }
 
         public void setInitViewVisibility() {
-            gameDetailButton.setText(TEXT_DOWNLOAD);
+            gameDetailTextView.setText(TEXT_DOWNLOAD);
             gameRatingBar.setVisibility(View.VISIBLE);
             gameSizeTextView.setVisibility(View.VISIBLE);
             gameSummaryTextView.setVisibility(View.VISIBLE);
@@ -313,7 +328,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         }
 
         public void setDownloadButtonText(CharSequence text) {
-            gameDetailButton.setText(text);
+            gameDetailTextView.setText(text);
         }
 
         public void setProgressTextView(GameListBean bean, CharSequence text) {

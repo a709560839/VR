@@ -3,11 +3,9 @@ package com.daydvr.store.presenter.guide;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 
 import com.daydvr.store.base.IBaseDownloadPresenter;
 import com.daydvr.store.base.IBaseView;
-import com.daydvr.store.view.adapter.GameListAdapter;
 
 import java.util.List;
 
@@ -17,13 +15,11 @@ import java.util.List;
 
 public class GuideContract {
     public interface View extends IBaseView<Presenter> {
-        <T> void showGameRecommend(List<T> beans);
+        <T> void showGameRecommend(List<T> beans, int start, int count);
 
-        <T> void showVideoRecommend(List<T> beans);
+        <T> void showVideoRecommend(List<T> beans, int start, int count);
 
         <T> void showAD(List<T> beans);
-
-        void showDownload(RecyclerView.ViewHolder holder);
 
         void jumpGameList(Bundle bundle);
 

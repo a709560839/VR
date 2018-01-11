@@ -34,11 +34,11 @@
     android:id="@+id/tv_game_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="4dp"
     android:layout_marginStart="8dp"
     android:hint="@string/hint_game_name"
     app:layout_constraintBottom_toTopOf="@+id/rb_game_rating"
-    app:layout_constraintStart_toEndOf="@+id/iv_game_icon" />
+    app:layout_constraintStart_toEndOf="@+id/iv_game_icon"
+    app:layout_constraintTop_toTopOf="@+id/iv_game_icon" />
 
   <RatingBar
     android:id="@+id/rb_game_rating"
@@ -55,19 +55,16 @@
     app:layout_constraintStart_toStartOf="@+id/tv_game_name"
     app:layout_constraintTop_toTopOf="parent" />
 
-  <Button
-    android:id="@+id/bt_game_detail"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:layout_centerVertical="true"
-    android:padding="2dp"
-    android:background="@drawable/shape_download_btn"
-    android:minHeight="16dp"
-    android:minWidth="40dp"
+  <TextView
+    android:id="@+id/tv_game_detail"
+    android:layout_width="48dp"
+    android:layout_height="22dp"
+    android:layout_marginEnd="8dp"
+    android:gravity="center"
+    android:background="@drawable/selector_download_btn"
     android:text="@string/hint_game_download"
     android:textColor="@color/color6"
-    android:textSize="@dimen/textSize7"
+    android:textSize="@dimen/textSize5"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -76,10 +73,11 @@
     android:id="@+id/tv_game_summary"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
+    android:layout_marginStart="8dp"
     android:hint="@string/hint_game_smmary"
     android:textSize="@dimen/textSize7"
-    app:layout_constraintStart_toStartOf="@+id/rb_game_rating"
+    app:layout_constraintBottom_toBottomOf="@+id/iv_game_icon"
+    app:layout_constraintStart_toEndOf="@+id/iv_game_icon"
     app:layout_constraintTop_toBottomOf="@+id/rb_game_rating" />
 
   <TextView
@@ -112,36 +110,49 @@
     style="?android:attr/progressBarStyleHorizontal"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginEnd="32dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="16dp"
     android:visibility="invisible"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toStartOf="@+id/bt_game_detail"
-    app:layout_constraintStart_toStartOf="@+id/tv_game_name"
+    app:layout_constraintEnd_toStartOf="@+id/tv_game_detail"
+    app:layout_constraintStart_toEndOf="@+id/iv_game_icon"
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/tv_download_progress"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
+    android:layout_marginStart="8dp"
     android:hint="@string/hint_download_progress"
     android:textSize="@dimen/textSize8"
     android:visibility="invisible"
-    app:layout_constraintStart_toStartOf="@+id/tv_game_name"
+    app:layout_constraintBottom_toBottomOf="@+id/iv_game_icon"
+    app:layout_constraintStart_toEndOf="@+id/iv_game_icon"
     app:layout_constraintTop_toBottomOf="@id/pb_download" />
 
   <TextView
     android:id="@+id/tv_download_speed"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
     android:hint="@string/hint_download_speed"
     android:textSize="@dimen/textSize8"
     android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="@+id/iv_game_icon"
     app:layout_constraintEnd_toEndOf="@+id/pb_download"
     app:layout_constraintTop_toBottomOf="@id/pb_download" />
+
+  <TextView
+    android:id="@+id/tv_cancel_download"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:autoLink="all"
+    android:clickable="true"
+    android:text="@string/text_cancel_download"
+    android:textSize="@dimen/textSize8"
+    android:visibility="invisible"
+    app:layout_constraintBottom_toBottomOf="@+id/iv_game_icon"
+    app:layout_constraintEnd_toEndOf="@+id/tv_game_detail"
+    app:layout_constraintStart_toStartOf="@+id/tv_game_detail" />
 
   <View
     android:id="@+id/view"
@@ -151,19 +162,5 @@
     android:layout_marginEnd="8dp"
     android:background="@color/gray"
     app:layout_constraintBottom_toBottomOf="parent" />
-
-  <TextView
-    android:id="@+id/tv_cancel_download"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    android:autoLink="all"
-    android:clickable="true"
-    android:text="@string/text_cancel_download"
-    android:textSize="@dimen/textSize8"
-    android:visibility="invisible"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="@+id/bt_game_detail"
-    app:layout_constraintStart_toStartOf="@+id/bt_game_detail" />
 
 </android.support.constraint.ConstraintLayout>
