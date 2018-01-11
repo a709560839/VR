@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 
 import com.daydvr.store.R;
 import com.daydvr.store.manager.ActivityManager;
+import com.daydvr.store.util.AppInfoUtil;
 import com.daydvr.store.util.DensityUtil;
 import com.daydvr.store.view.custom.LoadingDialog;
 
@@ -24,7 +25,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 //    protected abstract int setFragmentContentId();
 
     private DensityUtil mDensityUtil = new DensityUtil();
-
     private LoadingDialog mLoadingDialog;
 
     @Override

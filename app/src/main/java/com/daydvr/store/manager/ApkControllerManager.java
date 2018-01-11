@@ -3,6 +3,7 @@ package com.daydvr.store.manager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -105,11 +106,16 @@ public class ApkControllerManager {
         if (hasRootPerssion()) {
             // 有root权限，利用静默卸载实现
             clientUninstall(packageName);
-        } else {
+        }
+        //无root权限或有root权限但拒绝授予应用权限
+        try {
+            mContext.get().getPackageManager().getApplicationIcon(packageName);
             Uri packageURI = Uri.parse("package:" + packageName);
             Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
             uninstallIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.get().startActivity(uninstallIntent);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

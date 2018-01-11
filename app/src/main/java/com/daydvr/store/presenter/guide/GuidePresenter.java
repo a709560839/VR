@@ -21,14 +21,17 @@ import java.util.List;
 import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.AD_LOADER_OK;
 import static com.daydvr.store.base.BaseConstant.GAME_LOADER_OK;
+import static com.daydvr.store.base.BaseConstant.GUIDE_CANCELED;
 import static com.daydvr.store.base.BaseConstant.VIDEO_LOADER_OK;
+import static com.daydvr.store.base.GameConstant.DOWNLOADING;
+import static com.daydvr.store.base.GameConstant.PAUSED;
 
 /**
  * @author LoSyc
  * @version Created on 2017/12/26. 9:38
  */
 
-public class GuidePresenter implements GuideContract.Presenter {
+public class GuidePresenter extends GuideContract.Presenter {
     private GuideContract.View mView;
 
     private GameManager mGameManager;
@@ -154,6 +157,21 @@ public class GuidePresenter implements GuideContract.Presenter {
     @Override
     public void openGame(String packageName) {
 //        mApkManager.startApp(packageName);
+    }
+
+    @Override
+    public List<GameListBean> getListBean() {
+        return mGameDatas;
+    }
+
+    @Override
+    public boolean getIsCanceled() {
+        return GUIDE_CANCELED;
+    }
+
+    @Override
+    public void setIsCanceled(boolean flag) {
+        GUIDE_CANCELED = flag;
     }
 
     private LoaderHandler.LoaderHandlerListener mHandleListener = new LoaderHandler.LoaderHandlerListener() {

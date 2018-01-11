@@ -1,12 +1,19 @@
 package com.daydvr.store.manager;
 
-import com.daydvr.store.base.IBaseDownloadPresenter;
+import com.daydvr.store.base.BaseDownloadPresenter;
 import com.daydvr.store.bean.GameListBean;
+import com.daydvr.store.util.AppInfoUtil;
 import com.daydvr.store.view.adapter.GameListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.daydvr.store.base.BaseConstant.DOWNLOAD_RANKING_CANCELED;
+import static com.daydvr.store.base.BaseConstant.GAME_LIST_CANCELED;
+import static com.daydvr.store.base.BaseConstant.GUIDE_CANCELED;
+import static com.daydvr.store.base.BaseConstant.IS_CANCELED_ALL_TASK;
+import static com.daydvr.store.base.BaseConstant.NEWS_RANKING_CANCELED;
+import static com.daydvr.store.base.BaseConstant.SORAING_RANKING_CANCELED;
 import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADING;
 import static com.daydvr.store.base.GameConstant.INSTALLABLE;
@@ -42,7 +49,16 @@ public class GameManager {
         return mDownloadGameDatas;
     }
 
-    public void downloadManager(IBaseDownloadPresenter presenter, final GameListAdapter.ViewHolder holder, final GameListBean bean) {
+    public static void setIsCanceled(boolean flag) {
+        IS_CANCELED_ALL_TASK = flag;
+        GUIDE_CANCELED = flag;
+        GAME_LIST_CANCELED = flag;
+        DOWNLOAD_RANKING_CANCELED = flag;
+        SORAING_RANKING_CANCELED = flag;
+        NEWS_RANKING_CANCELED = flag;
+    }
+
+    public void downloadManager(BaseDownloadPresenter presenter, final GameListAdapter.ViewHolder holder, final GameListBean bean) {
         byte flag = holder.getFlag();
         switch (flag) {
             case DOWNLOADABLE:
@@ -53,9 +69,9 @@ public class GameManager {
 
             case DOWNLOADING:
 //                presenter.pauseDownload(bean.getId());
-
                 holder.setFlag(holder.getAdapterPosition(), PAUSED);
                 holder.setDownloadButtonText(TEXT_CONTINUE);
+                AppInfoUtil.notifyPauseDownloadAppProgress(bean.getId());
                 break;
 
             case PAUSED:

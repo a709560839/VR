@@ -9,10 +9,13 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseFragment;
+import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.view.adapter.GameListAdapter;
 import com.daydvr.store.view.adapter.RankingPagerAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,18 +24,19 @@ import java.util.List;
  * @version Created on 2018/1/9. 14:54
  */
 
-public class RankingFragment extends BaseFragment {
+public class RankingFragment extends BaseNotifyDatasFragment {
 
     private View mRootView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private ScrollViewListener mScrollViewListener;
-    private String[] mTitle = {"飙升榜", "新品榜","下载榜"};
-    private List<BaseFragment> fragments = new ArrayList<>();
+    private GameListAdapter mAdapter;
+    private String[] mTitle = {"飙升榜", "新品榜", "下载榜"};
+    private List<BaseRankingNotifyDatasFragment> fragments = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_ranking_container, container, false);
 
         mScrollViewListener = new ScrollViewListener();
@@ -44,13 +48,22 @@ public class RankingFragment extends BaseFragment {
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
         if (!hidden) {
-            GameListAdapter adapter = fragments.get(mViewPager.getCurrentItem()).getListAdapter();
-            if (adapter != null) {
-                adapter.notifyDataSetChanged();
+            mAdapter = fragments.get(mViewPager.getCurrentItem()).getListAdapter();
+            if (mAdapter != null) {
+                super.onHiddenChanged(hidden);
             }
         }
+    }
+
+    @Override
+    protected List<Integer> getDownloadDatas() {
+        return fragments.get(mViewPager.getCurrentItem()).getCurrentItemPresenter().notifyDownloadDatas();
+    }
+
+    @Override
+    public GameListAdapter getListAdapter() {
+        return mAdapter;
     }
 
     private void initView() {

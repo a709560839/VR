@@ -16,6 +16,7 @@ import java.util.List;
 import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.AD_LOADER_OK;
 import static com.daydvr.store.base.BaseConstant.CATEGORY;
+import static com.daydvr.store.base.BaseConstant.GAME_LIST_CANCELED;
 import static com.daydvr.store.base.BaseConstant.GAME_LOADER_OK;
 import static com.daydvr.store.base.BaseConstant.NORMAL;
 
@@ -24,7 +25,7 @@ import static com.daydvr.store.base.BaseConstant.NORMAL;
  * @version Created on 2017/12/26. 9:38
  */
 
-public class GameListPresenter implements GameListContract.Presenter {
+public class GameListPresenter extends GameListContract.Presenter {
 
     private static final String TAG = "daydvr.GameListPresenter";
     private GameListContract.View mView;
@@ -130,6 +131,21 @@ public class GameListPresenter implements GameListContract.Presenter {
     @Override
     public void openGame(String packageName) {
 //        mApkManager.startApp(packageName);
+    }
+
+    @Override
+    public List<GameListBean> getListBean() {
+        return mGameDatas;
+    }
+
+    @Override
+    public boolean getIsCanceled() {
+        return GAME_LIST_CANCELED;
+    }
+
+    @Override
+    public void setIsCanceled(boolean flag) {
+        GAME_LIST_CANCELED = flag;
     }
 
     private LoaderHandler.LoaderHandlerListener mHandleListener = new LoaderHandler.LoaderHandlerListener() {

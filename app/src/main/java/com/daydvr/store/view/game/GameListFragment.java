@@ -16,12 +16,16 @@ import android.view.ViewGroup;
 
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseFragment;
+import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.presenter.game.GameListContract;
 import com.daydvr.store.presenter.game.GameListPresenter;
+import com.daydvr.store.util.AppInfoUtil;
 import com.daydvr.store.util.LoaderHandler;
+import com.daydvr.store.util.NotifyUtil;
 import com.daydvr.store.view.adapter.GameListAdapter;
+import com.daydvr.store.view.adapter.GameListAdapter.ViewHolder;
 import com.daydvr.store.view.custom.AppNestedScrollView;
 import com.daydvr.store.view.custom.BannerLayout;
 import com.daydvr.store.util.GlideImageLoader;
@@ -43,7 +47,7 @@ import static com.daydvr.store.base.LoginConstant.threadTest;
  * @version Created on 2017/12/26. 19:23
  */
 
-public class GameListFragment extends BaseFragment implements GameListContract.View {
+public class GameListFragment extends BaseNotifyDatasFragment implements GameListContract.View {
     public static final String TAG = "daydvr.GameListFragment";
 
     private boolean isLoadData;
@@ -78,13 +82,13 @@ public class GameListFragment extends BaseFragment implements GameListContract.V
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            if (mGameAdapter != null) {
-                mGameAdapter.notifyDataSetChanged();
-            }
-        }
+    protected List<Integer> getDownloadDatas() {
+        return mPresenter.notifyDownloadDatas();
+    }
+
+    @Override
+    public GameListAdapter getListAdapter() {
+        return mGameAdapter;
     }
 
     @Override
@@ -134,7 +138,6 @@ public class GameListFragment extends BaseFragment implements GameListContract.V
 
     private void initDatas() {
         mPresenter.loadAD();
-
         mPresenter.loadGame(mCurrentPage++);
     }
 
@@ -201,38 +204,10 @@ public class GameListFragment extends BaseFragment implements GameListContract.V
         public void onButtonClick(final View view, final GameListBean bean) {
             final GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) mGameRecyclerView.getChildViewHolder(view);
             mPresenter.downloadManager(holder, bean);
-
-            if (holder.getDownloadProgress() == 0) {
-                if (threadTest.get(bean.getId()) == null) {
-                    threadTest.put(bean.getId(), new TestThread(holder, bean, mHandler) {
-                        @Override
-                        public void run() {
-                            for (int i = 1; i <= 300 && !Thread.currentThread().isInterrupted(); ) {
-                                try {
-                                    if (this.getHolder().getFlag() == DOWNLOADING) {
-                                        this.getHolder().setDownloadProgress(this.getBean(), (int) (this.getBean().getSize() * i / 300));
-                                        i++;
-                                    } else if (this.getHolder().getFlag() != PAUSED) {
-                                        break;
-                                    }
-                                    if (i == 300 && this.getHandler().equals(mHandler)) {
-                                        Message msg = this.getHandler().createMessage(GAME_LIST_UI_UPDATE, 0, 0, this.getHolder());
-                                        this.getHandler().sendMessage(msg);
-                                        break;
-                                    }
-                                    Thread.sleep(100);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            return;
-                        }
-                    });
-                }
-
-                MultiThreadPool.execute(threadTest.get(bean.getId()));
-            }
+            AppInfoUtil.setHolderDownloadProgress(bean, holder,mHandler);
         }
+
+
 
         @Override
         public void onCancelButtonClick(View view, GameListBean bean) {

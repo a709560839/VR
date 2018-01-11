@@ -3,7 +3,7 @@ package com.daydvr.store.presenter.person;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import com.daydvr.store.base.IBaseDownloadPresenter;
+import com.daydvr.store.base.BaseDownloadPresenter;
 import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
@@ -24,15 +24,17 @@ public class DownloadManagerContract {
         Context getViewContext();
     }
 
-    public interface Presenter extends IBaseDownloadPresenter {
-        void initUtils(Activity activity);
+    public static abstract class Presenter extends BaseDownloadPresenter {
+        abstract void initUtils(Activity activity);
 
-        void loadDownloadGame();
+        abstract void loadDownloadGame();
 
-        void intoGameDetail(int apkId);
+        abstract void intoGameDetail(int apkId);
 
-        void cancelAll();
+        abstract void cancelAll();
 
-        void continueAll();
+        abstract void continueAll();
+
+        abstract int getDatasSize();
     }
 }

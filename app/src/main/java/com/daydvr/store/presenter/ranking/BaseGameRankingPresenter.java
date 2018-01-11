@@ -18,7 +18,7 @@ import com.daydvr.store.view.adapter.GameListAdapter.ViewHolder;
  * @version Created on 2018/1/9. 16:42
  */
 
-public abstract class BaseGameRankingPresenter implements BaseGameRankingContract.Presenter {
+public abstract class BaseGameRankingPresenter extends BaseGameRankingContract.Presenter {
 
     abstract void handleUIMessage(Message msg);
 

@@ -1,29 +1,45 @@
 package com.daydvr.store.util;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 
+import android.os.Message;
+import android.util.SparseArray;
+import com.daydvr.store.R;
 import com.daydvr.store.base.GameConstant;
 import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.manager.GameUriManager;
 
+import com.daydvr.store.model.game.TestThread;
+import com.daydvr.store.view.adapter.GameListAdapter.ViewHolder;
+import com.daydvr.store.view.person.DownloadManagerActivity;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
+import static com.daydvr.store.base.BaseConstant.DOWNLOAD_RANKING_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.GAME_LIST_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.GUIDE_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.NEWS_RANKING_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.SOARING_RANKING_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADING;
 import static com.daydvr.store.base.GameConstant.INSTALLABLE;
 import static com.daydvr.store.base.GameConstant.INSTALLED;
 import static com.daydvr.store.base.GameConstant.PAUSED;
 import static com.daydvr.store.base.GameConstant.UPDATE;
+import static com.daydvr.store.base.LoginConstant.threadTest;
 
 public class AppInfoUtil {
 
@@ -31,6 +47,7 @@ public class AppInfoUtil {
 
     private WeakReference<Context> mContext;
     private PackageManager mPackageManager;
+    private static SparseArray<NotifyUtil> mNotifyArray=new SparseArray<>();
 
     public AppInfoUtil(Context context) {
         mContext = new WeakReference<Context>(context);
@@ -321,5 +338,106 @@ public class AppInfoUtil {
             }
         }
         return true;
+    }
+
+    public static void notifyDownloadAppProgress(Context context,int id,String appName){
+        Intent intent = new Intent(context, DownloadManagerActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent mPendIntent = PendingIntent.getActivity(context,
+                id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        int smallIcon = R.mipmap.download_icon;
+        String ticker = "游戏正在下载";
+        NotifyUtil notify = new NotifyUtil(context,id);
+        mNotifyArray.append(id,notify);
+        notify.notify_progress(mPendIntent,smallIcon,ticker,"下载  "+appName,"正在下载中...",false,false,false);
+    }
+
+    public static void notifyUpdateDownloadAppProgress(int id,int max,int progress){
+        NotifyUtil notify = mNotifyArray.get(id);
+        if(null==notify){
+            Logger.d("the notify is null.");
+            return;
+        }
+        notify.getBuilder().setContentText("正在下载中...").setProgress(max,progress,false);
+        notify.send();
+    }
+
+    public static void notifyClearAll(){
+        if(mNotifyArray.size()>0){
+            for (int i = 0; i < mNotifyArray.size(); i++) {
+                int key = mNotifyArray.keyAt(i);
+                NotifyUtil notify = mNotifyArray.get(key);
+                notify.clear();
+            }
+        }
+    }
+
+    public static void notifyCompleteDownloadAppProgress(int id){
+        NotifyUtil notify = mNotifyArray.get(id);
+        if(null==notify){
+            Logger.d("the notify is null.");
+            return;
+        }
+        notify.getBuilder().setContentText("下载完成").setProgress(0,0,false);
+        notify.send();
+    }
+
+    public static void notifyPauseDownloadAppProgress(int id){
+        NotifyUtil notify = mNotifyArray.get(id);
+        if(null==notify){
+            Logger.d("the notify is null.");
+            return;
+        }
+        notify.getBuilder().setContentText("下载已暂停").setProgress(0,0,false);
+        notify.send();
+    }
+
+    public static void setHolderDownloadProgress(final GameListBean bean, final ViewHolder holder,
+            final LoaderHandler mHandler) {
+        if (holder.getDownloadProgress() == 0) {
+            if (threadTest.get(bean.getId()) == null) {
+                threadTest.put(bean.getId(), new TestThread(holder, bean, mHandler) {
+                    @Override
+                    public void run() {
+                        for (int i = 1; i <= 300 && !Thread.currentThread().isInterrupted(); ) {
+                            try {
+                                if (threadTest.get(bean.getId()) != null) {
+                                    if (threadTest.get(bean.getId()).getHolder().getFlag() == DOWNLOADING) {
+                                        threadTest.get(bean.getId()).getHolder().setDownloadProgress(this.getBean(), (int) (this.getBean().getSize() * i / 300));
+                                        i++;
+                                        AppInfoUtil
+                                                .notifyUpdateDownloadAppProgress(bean.getId(),300,i);
+                                    } else if (threadTest.get(bean.getId()).getHolder().getFlag() != PAUSED) {
+                                        break;
+                                    }
+                                    if (i == 300 && this.getHandler().equals(mHandler)) {
+                                        Message msg = threadTest.get(bean.getId()).getHandler().createMessage(GAME_LIST_UI_UPDATE, 0, 0, this.getHolder());
+                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg);
+                                        Message msg1 = threadTest.get(bean.getId()).getHandler().createMessage(GUIDE_UI_UPDATE, 0, 0, this.getHolder());
+                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg1);
+                                        Message msg2 = threadTest.get(bean.getId()).getHandler().createMessage(DOWNLOAD_RANKING_UI_UPDATE, 0, 0, this.getHolder());
+                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg2);
+                                        Message msg3 = threadTest.get(bean.getId()).getHandler().createMessage(SOARING_RANKING_UI_UPDATE, 0, 0, this.getHolder());
+                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg3);
+                                        Message msg4 = threadTest.get(bean.getId()).getHandler().createMessage(NEWS_RANKING_UI_UPDATE, 0, 0, this.getHolder());
+                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg4);
+                                        Message msg5 = threadTest.get(bean.getId()).getHandler().createMessage(GAME_MANAGER_UI_UPDATE, 0, 0, this.getHolder());
+                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg5);
+                                        AppInfoUtil.notifyCompleteDownloadAppProgress(bean.getId());
+                                        break;
+                                    }
+                                    Thread.sleep(100);
+                                }
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        return;
+                    }
+                });
+            }
+
+            MultiThreadPool.execute(threadTest.get(bean.getId()));
+        }
     }
 }

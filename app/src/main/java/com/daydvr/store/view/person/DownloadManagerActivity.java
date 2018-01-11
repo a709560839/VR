@@ -18,6 +18,7 @@ import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.presenter.person.DownloadManagerContract;
 import com.daydvr.store.presenter.person.DownloadManagerPresenter;
+import com.daydvr.store.util.AppInfoUtil;
 import com.daydvr.store.util.DensityUtil;
 import com.daydvr.store.util.LoaderHandler;
 import com.daydvr.store.view.adapter.GameListAdapter;
@@ -35,6 +36,7 @@ import static com.daydvr.store.base.GameConstant.INSTALLABLE;
 import static com.daydvr.store.base.GameConstant.PAUSED;
 import static com.daydvr.store.base.GameConstant.TEXT_INSTALL;
 import static com.daydvr.store.base.LoginConstant.threadTest;
+import static com.daydvr.store.util.AppInfoUtil.notifyClearAll;
 
 /**
  * @author LoSyc
@@ -154,45 +156,13 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
                     .getChildViewHolder(view);
             mPresenter.downloadManager(holder, bean);
 
-            if (holder.getDownloadProgress() == 0) {
-                if (threadTest.get(bean.getId()) == null) {
-                    threadTest.put(bean.getId(), new TestThread(holder, bean, mHandler) {
-                        @Override
-                        public void run() {
-                            for (int i = 1; i <= 300 && !Thread.currentThread().isInterrupted(); ) {
-                                try {
-                                    if (this.getHolder().getFlag() == DOWNLOADING) {
-                                        this.getHolder().setDownloadProgress(this.getBean(),
-                                                (int) (this.getBean().getSize() * i / 300));
-                                        i++;
-                                    } else if (this.getHolder().getFlag() != PAUSED) {
-                                        break;
-                                    }
-                                    if (i == 300 && this.getHandler().equals(mHandler)) {
-                                        Message msg = this.getHandler()
-                                                .createMessage(GAME_MANAGER_UI_UPDATE, 0, 0,
-                                                        this.getHolder());
-                                        this.getHandler().sendMessage(msg);
-                                        break;
-                                    }
-                                    Thread.sleep(100);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            return;
-                        }
-                    });
-                }
-
-                MultiThreadPool.execute(threadTest.get(bean.getId()));
-            }
+            AppInfoUtil.setHolderDownloadProgress(bean, holder,mHandler);
         }
 
         @Override
         public void onCancelButtonClick(View view, GameListBean bean) {
             mGameAdapter.notifyDataSetChanged();
-            if (mGameAdapter.getItemCount() < 0) {
+            if (mPresenter.getDatasSize() > 0) {
                 mTipTextView.setVisibility(View.GONE);
                 mRecentDownloadConstraintLayout.setVisibility(View.VISIBLE);
             } else {
@@ -211,6 +181,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
         switch (v.getId()) {
             case R.id.tv_cancel_all:
                 mPresenter.cancelAll();
+                notifyClearAll();
                 break;
 
             case R.id.tv_continue_download:

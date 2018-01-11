@@ -15,6 +15,7 @@ import java.util.List;
 
 import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_LOADER_OK;
+import static com.daydvr.store.base.BaseConstant.IS_CANCELED_ALL_TASK;
 import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
 import static com.daydvr.store.base.GameConstant.PAUSED;
 
@@ -23,7 +24,7 @@ import static com.daydvr.store.base.GameConstant.PAUSED;
  * @version Created on 2018/1/8. 14:38
  */
 
-public class DownloadManagerPresenter implements DownloadManagerContract.Presenter {
+public class DownloadManagerPresenter extends DownloadManagerContract.Presenter {
     private DownloadManagerContract.View mView;
 
     private LoaderHandler mHandler;
@@ -74,9 +75,10 @@ public class DownloadManagerPresenter implements DownloadManagerContract.Present
 
     @Override
     public void cancelAll() {
+        setIsCanceled(true);
         RecyclerView view = mView.getListView();
         int size = mDatas.size();
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             GameListAdapter.ViewHolder holder =
                     (GameListAdapter.ViewHolder) view.getChildViewHolder(view.getChildAt(0));
 
@@ -98,6 +100,11 @@ public class DownloadManagerPresenter implements DownloadManagerContract.Present
                 downloadManager(holder, bean);
             }
         }
+    }
+
+    @Override
+    public int getDatasSize() {
+        return mDatas.size();
     }
 
     private LoaderHandler.LoaderHandlerListener mHandleListener = new LoaderHandler.LoaderHandlerListener() {
@@ -146,5 +153,20 @@ public class DownloadManagerPresenter implements DownloadManagerContract.Present
     @Override
     public void openGame(String packageName) {
 
+    }
+
+    @Override
+    public List<GameListBean> getListBean() {
+        return mDatas;
+    }
+
+    @Override
+    public boolean getIsCanceled() {
+        return IS_CANCELED_ALL_TASK;
+    }
+
+    @Override
+    public void setIsCanceled(boolean flag) {
+        GameManager.setIsCanceled(flag);
     }
 }

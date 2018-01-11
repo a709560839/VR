@@ -7,6 +7,7 @@ import com.daydvr.store.bean.GameListBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.daydvr.store.base.BaseConstant.DOWNLOAD_RANKING_CANCELED;
 import static com.daydvr.store.base.BaseConstant.DOWNLOAD_RANKING_LOADER_OK;
 
 /**
@@ -47,8 +48,18 @@ public class DownloadRankingPresenter extends BaseGameRankingPresenter {
     }
 
     @Override
-    public void initUtils() {
+    public List<GameListBean> getListBean() {
+        return mDatas;
+    }
 
+    @Override
+    public boolean getIsCanceled() {
+        return DOWNLOAD_RANKING_CANCELED;
+    }
+
+    @Override
+    public void setIsCanceled(boolean flag) {
+        DOWNLOAD_RANKING_CANCELED = flag;
     }
 
     @Override
@@ -61,5 +72,10 @@ public class DownloadRankingPresenter extends BaseGameRankingPresenter {
                 }
             }
         }
+    }
+
+    @Override
+    void initUtils() {
+
     }
 }

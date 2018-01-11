@@ -1,7 +1,7 @@
 package com.daydvr.store.presenter.ranking;
 
 import android.content.Context;
-import com.daydvr.store.base.IBaseDownloadPresenter;
+import com.daydvr.store.base.BaseDownloadPresenter;
 import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
@@ -20,11 +20,11 @@ public abstract class BaseGameRankingContract {
         Context getViewContext();
     }
 
-    public interface Presenter extends IBaseDownloadPresenter {
-        void initUtils();
+    public static abstract class Presenter extends BaseDownloadPresenter {
+        abstract void initUtils();
 
-        void loadRanking(int type, int page);
+        abstract void loadRanking(int type, int page);
 
-        void intoGameDetail(int apkId);
+        abstract void intoGameDetail(int apkId);
     }
 }

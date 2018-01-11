@@ -6,6 +6,7 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.daydvr.store.base.BaseFragment;
+import com.daydvr.store.view.ranking.BaseRankingNotifyDatasFragment;
 
 import java.util.List;
 
@@ -16,10 +17,10 @@ import java.util.List;
 
 public class RankingPagerAdapter extends FragmentPagerAdapter {
 
-    private List<BaseFragment> mFragments;
+    private List<BaseRankingNotifyDatasFragment> mFragments;
     private String[] mTitle;
 
-    public RankingPagerAdapter(FragmentManager fm,String[] title, List<BaseFragment> fragments) {
+    public RankingPagerAdapter(FragmentManager fm,String[] title, List<BaseRankingNotifyDatasFragment> fragments) {
         super(fm);
         this.mTitle = title;
         this.mFragments = fragments;

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.daydvr.store.base.IBaseDownloadPresenter;
+import com.daydvr.store.base.BaseDownloadPresenter;
 import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
@@ -32,21 +32,21 @@ public class GuideContract {
         Context getViewContext();
     }
 
-    public interface Presenter extends IBaseDownloadPresenter {
-       void initUtils(Activity activity);
+    public static abstract class Presenter extends BaseDownloadPresenter {
+        abstract void initUtils(Activity activity);
 
-        void loadAD();
+        abstract void loadAD();
 
-        void loadGameRecommend();
+        abstract void loadGameRecommend();
 
-        void loadVideoRecommend();
+        abstract void loadVideoRecommend();
 
-        void intoGameList();
+        abstract void intoGameList();
 
-        void intoVideoList();
+        abstract void intoVideoList();
 
-        void intoGameDetail(int apkId);
+        abstract void intoGameDetail(int apkId);
 
-        void intoVideoDetail();
+        abstract void intoVideoDetail();
     }
 }

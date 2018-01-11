@@ -4,30 +4,34 @@
   android:id="@+id/cl_global"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  app:layout_constraintStart_toStartOf="parent"
   app:layout_constraintEnd_toEndOf="parent"
-  app:layout_constraintTop_toTopOf="parent"
-  app:popupTheme="@style/AppTheme.PopupOverlay">
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintTop_toTopOf="parent">
 
   <com.daydvr.store.view.custom.CommonToolbar
     android:id="@+id/toolbar"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:background="@color/color6"
-    android:focusable="false"
     android:fitsSystemWindows="true"
+    android:focusable="false"
     app:contentInsetStartWithNavigation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     app:navigationIcon="@mipmap/back_white"
-    app:popupTheme="@style/Base.Widget.AppCompat.Toolbar"
-    app:titleTextColor="@android:color/white" />
+    app:titleTextColor="@android:color/white" >
+
+  </com.daydvr.store.view.custom.CommonToolbar>
 
   <View
     android:id="@+id/v_shadow"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
     android:layout_height="4dp"
     android:background="@drawable/tool_bar_shadow"
-    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-    />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </android.support.constraint.ConstraintLayout>
 

@@ -2,7 +2,7 @@ package com.daydvr.store.presenter.game;
 
 import android.content.Context;
 
-import com.daydvr.store.base.IBaseDownloadPresenter;
+import com.daydvr.store.base.BaseDownloadPresenter;
 import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
@@ -26,15 +26,15 @@ public class GameListContract {
         Context getViewContext();
     }
 
-    public interface Presenter extends IBaseDownloadPresenter {
-        void initUtils();
+    public static abstract class Presenter extends BaseDownloadPresenter {
+        abstract void initUtils();
 
-        void loadAD();
+        abstract void loadAD();
 
-        void loadGame(int page);
+        abstract void loadGame(int page);
 
-        void intoGameDetail(int apkId);
+        abstract void intoGameDetail(int apkId);
 
-        void gameCategory(int type);
+        abstract void gameCategory(int type);
     }
 }

@@ -9,6 +9,15 @@ import com.daydvr.store.util.PermissionUtil;
 
 public class BaseConstant {
 
+    public static final int NOTIFY_ALL = -10;
+
+    public static boolean IS_CANCELED_ALL_TASK = false;
+    public static boolean GUIDE_CANCELED = false;
+    public static boolean GAME_LIST_CANCELED = false;
+    public static boolean DOWNLOAD_RANKING_CANCELED = false;
+    public static boolean SORAING_RANKING_CANCELED = false;
+    public static boolean NEWS_RANKING_CANCELED = false;
+
     public static int GUIDE_FRAGEMNT_ITEM = 0;
     public static int GAME_LIST_FRAGEMNT_ITEM = 1;
     public static int RANKING_LIST_FRAGEMNT_ITEM = 2;
