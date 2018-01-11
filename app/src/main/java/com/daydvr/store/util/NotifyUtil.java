@@ -64,7 +64,7 @@ public class NotifyUtil {
         cBuilder.setOngoing(true);
         cBuilder.setWhen(System.currentTimeMillis());
         cBuilder.setAutoCancel(true);
-        cBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
+        cBuilder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         int defaults = 0;
 

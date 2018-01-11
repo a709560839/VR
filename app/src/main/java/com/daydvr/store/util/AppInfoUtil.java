@@ -292,8 +292,7 @@ public class AppInfoUtil {
     public boolean checkMemoryAndNet(final GameListBean bean) {
         if (MemoryManagerUtil.isMemoryLack(bean.getSize())) {
             new AlertDialog.Builder(mContext.get())
-                    .setTitle("空间不足")
-                    .setMessage("手机内存空间不足，无法下载！\n 请清理手机垃圾！")
+                    .setMessage("手机内存空间不足，无法下载，请清理手机垃圾。")
                     .setPositiveButton("确定", null)
                     .show();
             return false;
@@ -301,8 +300,7 @@ public class AppInfoUtil {
 
         if (NetWorkUtils.getAPNType(mContext.get()) == 0) {
             new AlertDialog.Builder(mContext.get())
-                    .setTitle("无网络")
-                    .setMessage("无网络链接！\n 请检查网络！")
+                    .setMessage("你当前无网络，请检查网络连接。")
                     .setPositiveButton("确定", null)
                     .show();
             return false;
@@ -312,16 +310,15 @@ public class AppInfoUtil {
             final boolean[] back = {false};
             try {
                 new AlertDialog.Builder(mContext.get())
-                        .setTitle("无WIFI网络")
-                        .setMessage("当前并不是wifi网络！\n 是否还要下载！")
+                        .setMessage("你正在使用手机移动网络流量，是否继续下载？")
                         .setCancelable(false)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Looper.getMainLooper().quitSafely();
                             }
                         })
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("否", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Looper.getMainLooper().quitSafely();

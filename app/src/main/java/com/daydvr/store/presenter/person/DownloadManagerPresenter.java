@@ -17,6 +17,7 @@ import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_LOADER_OK;
 import static com.daydvr.store.base.BaseConstant.IS_CANCELED_ALL_TASK;
 import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
+import static com.daydvr.store.base.GameConstant.INSTALLABLE;
 import static com.daydvr.store.base.GameConstant.PAUSED;
 
 /**
@@ -80,13 +81,16 @@ public class DownloadManagerPresenter extends DownloadManagerContract.Presenter 
         int size = mDatas.size();
         for (int i = 0; i < size; i++) {
             GameListAdapter.ViewHolder holder =
-                    (GameListAdapter.ViewHolder) view.getChildViewHolder(view.getChildAt(0));
+                    (GameListAdapter.ViewHolder) view.getChildViewHolder(view.getChildAt(i));
 
-            holder.setInitViewVisibility();
-            holder.setFlag(0, DOWNLOADABLE);
-            GameManager.removeGameDownloadStatus(mDatas.get(0));
+            if (holder.getFlag() != INSTALLABLE) {
+                holder.setInitViewVisibility();
+                holder.setFlag(i, DOWNLOADABLE);
+                GameManager.removeGameDownloadStatus(mDatas.get(i));
+                i--;
+            }
         }
-        mView.showDownloadGame(new ArrayList<GameListBean>());
+        mView.showDownloadGame(mDatas);
     }
 
     @Override

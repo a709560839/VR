@@ -89,6 +89,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
         mToolbar.initmToolBar(this);
         mToolbar.setCenterTitle(R.string.person_game_manager);
         mToolbar.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0);
+        mHandler.setListener(mHandlerListener);
         mContinueDownloadTextView.setOnClickListener(this);
         mCancelAllTextView.setOnClickListener(this);
 
@@ -156,7 +157,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
                     .getChildViewHolder(view);
             mPresenter.downloadManager(holder, bean);
 
-            AppInfoUtil.setHolderDownloadProgress(bean, holder,mHandler);
+            AppInfoUtil.setHolderDownloadProgress(bean, holder, mHandler);
         }
 
         @Override
