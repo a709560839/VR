@@ -73,7 +73,6 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     }
 
     private void initView() {
-
         mToolbar = findViewById(R.id.toolbar);
         mTipTextView = findViewById(R.id.tv_tip_download_manager);
         mDownloadManagerRecyclerView = findViewById(R.id.rv_download_manager_list);

@@ -13,17 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+
 import com.daydvr.store.R;
 import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.manager.GameManager;
 import com.daydvr.store.util.AppInfoUtil;
 
-import com.daydvr.store.util.Logger;
+import com.daydvr.store.util.GlideImageLoader;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -120,19 +116,8 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             holder.gameRatingBar.setRating(bean.getRating());
             holder.gameSizeTextView.setText(bean.getSize() + "M");
             holder.gameTypeTextView.setText(bean.getType());
-            String icon = bean.getIconUrl();
-            Glide.with(mRootView.getContext()).load(icon)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .into(new GlideDrawableImageViewTarget(holder.gameIconImageView) {
-                        @Override
-                        public void onResourceReady(GlideDrawable resource,
-
-                                GlideAnimation<? super GlideDrawable> animation) {
-                            super.onResourceReady(resource, animation);
-                        }
-                    });
-
+            String iconUrl = bean.getIconUrl();
+            GlideImageLoader.commonLoader(mRootView.getContext(),iconUrl,holder.gameIconImageView);
             if (state == DOWNLOADING || state == PAUSED) {
                 holder.setAfterDownloadViewVisibility();
                 holder.gameProgressBar.setMax((int) bean.getSize());

@@ -7,14 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.daydvr.store.R;
 import com.daydvr.store.bean.SearchListBean;
 
+import com.daydvr.store.util.GlideImageLoader;
 import java.util.List;
 
 /**
@@ -61,16 +57,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             holder.searchDataNameTextView.setText(mDatas.get(position).getName());
             holder.searchDataTypeTextView.setText(mDatas.get(position).getType());
             String imageUrl = mDatas.get(position).getIconUrl();
-            Glide.with(mRootView.getContext()).load(imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(new GlideDrawableImageViewTarget(holder.searchDataImageView) {
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                            super.onResourceReady(resource, animation);
-                        }
-                    });
+            GlideImageLoader.commonLoader(mRootView.getContext(),imageUrl,holder.searchDataImageView);
         } else if (getItemViewType(position) == TYPE_FOOTER) {
             if (mDatas.size() % mPerPageCount != 0) {
                 holder.gameLoadTipTextView.setText("已经到底了！");

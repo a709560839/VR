@@ -12,15 +12,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseFragment;
 import com.daydvr.store.presenter.person.PersonContract;
 import com.daydvr.store.presenter.person.PersonPresenter;
+import com.daydvr.store.util.GlideImageLoader;
 import com.daydvr.store.view.custom.RoundImageView;
 import com.daydvr.store.view.home.MainActivity;
 import com.daydvr.store.view.login.LoginActivity;
@@ -179,16 +175,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
 
         mUserNameTextView.setText(getString(R.string.person_account) + name);
         mRegisteredTextView.setText(getString(R.string.person_registered_time) + registeredTime);
-        Glide.with(mRootView.getContext()).load(headUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerCrop()
-                .into(new GlideDrawableImageViewTarget(mLoginedRoundImageView) {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource,
-                            GlideAnimation<? super GlideDrawable> animation) {
-                        super.onResourceReady(resource, animation);
-                    }
-                });
+        GlideImageLoader.commonLoader(mRootView.getContext(),headUrl,mLoginedRoundImageView);
     }
 
     @Override

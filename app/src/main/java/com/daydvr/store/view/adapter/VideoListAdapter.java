@@ -10,13 +10,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.daydvr.store.R;
 import com.daydvr.store.bean.VideoListBean;
+import com.daydvr.store.util.GlideImageLoader;
 import com.daydvr.store.view.custom.RoundImageView;
 
 import java.util.List;
@@ -54,16 +50,7 @@ public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.View
         if (getItemViewType(position) == TYPE_NORMAL) {
             holder.videoNameTextView.setText(mDatas.get(position).getName());
             String imageUrl = mDatas.get(position).getVideoUrl();
-            Glide.with(mRootView.getContext()).load(imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(new GlideDrawableImageViewTarget(holder.videoImageView) {
-                        @Override
-                        public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-                            super.onResourceReady(resource, animation);
-                        }
-                    });
+            GlideImageLoader.commonLoader(mRootView.getContext(),imageUrl,holder.videoImageView);
             holder.videoViewsTextView.setText(mDatas.get(position).getViews());
         } else if (getItemViewType(position) == TYPE_FOOTER) {
             if (mDatas.size() <= 5) {

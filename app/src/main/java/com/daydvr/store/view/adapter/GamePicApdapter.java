@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import com.bumptech.glide.Glide;
 import com.daydvr.store.R;
+import com.daydvr.store.util.GlideImageLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class GamePicApdapter extends RecyclerView.Adapter <GamePicApdapter.ViewH
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(imageUrls.get(position)).into(holder.mImg);
+         GlideImageLoader.commonLoader(context,imageUrls.get(position),holder.mImg);
     }
 
     @Override
