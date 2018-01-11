@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="85dp"
+  android:background="@drawable/selector_view_click">
+
+    <android.support.constraint.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.5" />
+
+    <com.daydvr.store.view.custom.RoundImageView
+      android:id="@+id/iv_app_icon"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="8dp"
+      android:scaleType="fitXY"
+      android:src="@mipmap/ic_launcher_round"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:type="round" />
+
+    <TextView
+      android:id="@+id/tv_app_size"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginTop="2dp"
+      android:hint="@string/hint_game_size"
+      android:textSize="@dimen/textSize6"
+      app:layout_constraintStart_toEndOf="@+id/iv_app_icon"
+      app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <TextView
+      android:id="@+id/tv_app_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginBottom="2dp"
+      android:hint="@string/hint_game_name"
+      app:layout_constraintBottom_toTopOf="@+id/guideline"
+      app:layout_constraintStart_toEndOf="@+id/iv_app_icon" />
+
+    <Button
+      android:id="@+id/bt_app_uninstall"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="16dp"
+      android:layout_centerVertical="true"
+      android:padding="2dp"
+      android:background="@drawable/shape_download_btn"
+      android:minHeight="16dp"
+      android:minWidth="40dp"
+      android:text="@string/app_manage_uninstall"
+      android:textColor="@color/color6"
+      android:textSize="@dimen/textSize7"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+      android:id="@+id/view"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:background="@color/gray"
+      app:layout_constraintBottom_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants" >
+
+    <com.daydvr.store.view.custom.AppNestedScrollView
+        android:id="@+id/ansv_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/appBackground">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.daydvr.store.view.custom.BannerLayout
+                android:id="@+id/bl_home_ad"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:autoPlayDuration="3000"
+                app:layout_constraintDimensionRatio="100:66"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:scrollDuration="1100"
+                app:selectedIndicatorHeight="6dp"
+                app:selectedIndicatorWidth="6dp"
+                app:unSelectedIndicatorColor="#99ffffff"
+                app:unSelectedIndicatorHeight="6dp"
+                app:unSelectedIndicatorWidth="6dp"/>
+
+            <Space
+                android:id="@+id/space"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="100:60"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                android:id="@+id/v_category_bg"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@mipmap/shadow_background"
+                app:layout_constraintDimensionRatio="100:20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/space"/>
+
+            <View
+                android:id="@+id/view_dividing_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@+id/v_category_bg"
+                app:layout_constraintEnd_toEndOf="@+id/v_category_bg"
+                app:layout_constraintStart_toStartOf="@+id/v_category_bg"
+                app:layout_constraintTop_toTopOf="@+id/v_category_bg"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl_vr_games"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_view_click"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_category_bg"
+                app:layout_constraintEnd_toEndOf="@+id/view_dividing_line"
+                app:layout_constraintStart_toStartOf="@+id/v_category_bg"
+                app:layout_constraintTop_toTopOf="@+id/v_category_bg">
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/gl_vr_games"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.52"/>
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/gl2_vr_games"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.4"/>
+
+                <ImageView
+                    android:id="@+id/iv_vr_games"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:src="@mipmap/vr_game_home"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/gl2_vr_games"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_vr_games"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/iv_vr_games"
+                    android:text="VR 游戏"
+                    android:textStyle="bold"
+                    android:textColor="@color/color1"
+                    app:layout_constraintBottom_toTopOf="@+id/gl_vr_games"
+                    app:layout_constraintStart_toStartOf="@+id/gl2_vr_games"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_vr_games"
+                    android:layout_toEndOf="@+id/iv_vr_games"
+                    android:text="游戏：神剑亚瑟王"
+                    android:textColor="@color/color5"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/gl2_vr_games"
+                    app:layout_constraintTop_toBottomOf="@+id/gl_vr_games"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/cl_vr_videos"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/selector_view_click"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_category_bg"
+                app:layout_constraintEnd_toEndOf="@+id/v_category_bg"
+                app:layout_constraintStart_toStartOf="@+id/view_dividing_line"
+                app:layout_constraintTop_toTopOf="@+id/v_category_bg">
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/gl_vr_videos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.52"/>
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/gl2_vr_videos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.4"/>
+
+                <ImageView
+                    android:id="@+id/iv_vr_videos"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="4dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:src="@mipmap/vr_video_home"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@+id/gl2_vr_videos"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_vr_videos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/iv_vr_videos"
+                    android:text="VR 视频"
+                    android:textStyle="bold"
+                    android:textColor="@color/color1"
+                    app:layout_constraintBottom_toTopOf="@+id/gl_vr_videos"
+                    app:layout_constraintStart_toStartOf="@+id/gl2_vr_videos"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_vr_videos"
+                    android:layout_toEndOf="@+id/iv_vr_videos"
+                    android:text="视频：美女直播视频"
+                    android:textColor="@color/color5"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/gl2_vr_videos"
+                    app:layout_constraintTop_toBottomOf="@+id/gl_vr_videos"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/rl_top_games"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/shadow_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_category_bg">
+
+                <TextView
+                    android:id="@+id/tv_top_games"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/top_games"
+                    android:textColor="@color/color2"
+                    app:layout_constraintBottom_toTopOf="@+id/rv_home_hotgame"
+                    app:layout_constraintStart_toStartOf="@+id/rv_home_hotgame"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_top_games"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_home_hotgame"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_top_games"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <com.daydvr.store.view.custom.RoundImageView
+                android:id="@+id/iv_advertising"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/home_bg"
+                app:layout_constraintDimensionRatio="730:280"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rl_top_games"
+                app:type="round"/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/rl_top_videos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@mipmap/shadow_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_advertising">
+
+                <TextView
+                    android:id="@+id/tv_top_videos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/top_videos"
+                    android:textColor="@color/color2"
+                    app:layout_constraintBottom_toTopOf="@+id/rv_home_hotvideo"
+                    app:layout_constraintStart_toStartOf="@+id/rv_home_hotvideo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="@color/gray"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_top_videos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_home_hotvideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_top_videos"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rl_top_videos"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </com.daydvr.store.view.custom.AppNestedScrollView>
+
+    <include layout="@layout/item_search_toolbar"/>
+
+</android.support.constraint.ConstraintLayout>

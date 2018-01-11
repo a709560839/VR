@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:fitsSystemWindows="true"
+    tools:context="com.daydvr.store.view.login.LoginActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/login_logo"
+        app:layout_constraintBottom_toTopOf="@id/csl_input"
+        app:layout_constraintEnd_toEndOf="@id/gl_3"
+        app:layout_constraintStart_toStartOf="@id/gl_2"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_login_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/back_login_description"
+        android:src="@mipmap/back_white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/csl_input"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:background="@mipmap/shadow_background"
+        app:layout_constraintBottom_toTopOf="@+id/gl_1"
+        app:layout_constraintDimensionRatio="100:33"
+        app:layout_constraintEnd_toEndOf="@+id/gl_3"
+        app:layout_constraintStart_toStartOf="@+id/gl_2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_login_account"
+            style="@style/loginEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:drawableStart="@mipmap/login_account"
+            android:ems="10"
+            android:hint="@string/account_hint"
+            android:inputType="phone"
+            app:layout_constraintBottom_toTopOf="@id/v_divide"
+            app:layout_constraintEnd_toEndOf="@id/csl_input"
+            app:layout_constraintStart_toStartOf="@id/csl_input"
+            app:layout_constraintTop_toTopOf="@id/csl_input"/>
+
+        <View
+            android:id="@+id/v_divide"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/color9"
+            app:layout_constraintBottom_toBottomOf="@id/csl_input"
+            app:layout_constraintEnd_toEndOf="@id/csl_input"
+            app:layout_constraintStart_toStartOf="@id/csl_input"
+            app:layout_constraintTop_toTopOf="@id/csl_input"
+            />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            style="@style/loginEditTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:drawableStart="@mipmap/login_password"
+            android:ems="10"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:labelFor="@+id/et_forgot_pw_password"
+            app:layout_constraintBottom_toBottomOf="@+id/csl_input"
+            app:layout_constraintEnd_toEndOf="@id/csl_input"
+            app:layout_constraintStart_toStartOf="@id/csl_input"
+            app:layout_constraintTop_toBottomOf="@id/v_divide"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape_login_btn"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/csl_input"/>
+
+    <TextView
+        android:id="@+id/tv_registered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/register"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@id/bt_login"
+        app:layout_constraintTop_toBottomOf="@id/bt_login"/>
+
+    <TextView
+        android:id="@+id/tv_forgot_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/forgot_password"
+        android:textColor="@android:color/white"
+        app:layout_constraintRight_toRightOf="@id/bt_login"
+        app:layout_constraintTop_toBottomOf="@id/bt_login"/>
+
+    <TextView
+        android:id="@+id/tv_had_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/third_login"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_1"/>
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="0.5dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/tv_had_account"
+        app:layout_constraintEnd_toStartOf="@id/tv_had_account"
+        app:layout_constraintTop_toBottomOf="@id/gl_1"
+        app:layout_constraintTop_toTopOf="@id/tv_had_account"/>
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/tv_had_account"
+        app:layout_constraintStart_toEndOf="@id/tv_had_account"
+        app:layout_constraintTop_toBottomOf="@id/gl_1"
+        app:layout_constraintTop_toTopOf="@id/tv_had_account"/>
+
+    <ImageView
+        android:id="@+id/iv_qq_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/qq_login_description"
+        android:src="@mipmap/login_qq"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_4"
+        app:layout_constraintTop_toBottomOf="@id/tv_had_account"/>
+
+    <ImageView
+        android:id="@+id/iv_wechat_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/wechat_login_description"
+        android:src="@mipmap/login_wechat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/gl_4"
+        app:layout_constraintTop_toBottomOf="@id/tv_had_account"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.83"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/gl_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,144 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+  </style>
+
+  <style name="RatingBar_Custom_Color">
+    <!--Background Color-->
+    <item name="colorControlNormal">#D7D7D7</item>
+    <!--Progress Color-->
+    <item name="colorControlActivated">#F49800</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+  <style name="TextAppearance.ExpandedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <item name="android:textSize">@dimen/textSize1</item>
+  </style>
+
+  <style name="TextAppearance.CollapsedTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+    <item name="android:textSize">@dimen/textSize1</item>
+  </style>
+
+  <style name="toolbar_theme" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+    <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+    <item name="android:src">@mipmap/search</item>
+  </style>
+
+  <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow"></style>
+
+  <!--标题栏-->
+  <style name="OverFlowMenuTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:actionMenuTextColor">@android:color/white</item>
+  </style>
+
+  <!--分类栏按钮style-->
+  <style name="categoryBtStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">@dimen/textSize6</item>
+    <item name="android:layout_marginTop">2dp</item>
+    <item name="android:textColor">@color/color1</item>
+    <item name="android:background">@android:color/transparent</item>
+  </style>
+
+  <!--个人中心按钮style-->
+  <style name="personBtStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">2dp</item>
+    <item name="android:textSize">@dimen/textSize5</item>
+    <item name="android:textColor">@color/color1</item>
+    <item name="android:background">@android:color/transparent</item>
+  </style>
+
+  <style name="Base.Widget.AppCompat.Toolbar" parent="android:Widget">
+    <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title</item>
+    <item name="subtitleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle
+    </item>
+    <item name="android:minHeight">?attr/actionBarSize</item>
+    <item name="titleMargins">4dp</item>
+    <item name="maxButtonHeight">56dp</item>
+    <item name="collapseIcon">?attr/homeAsUpIndicator</item>
+    <item name="collapseContentDescription">@string/abc_toolbar_collapse_description</item>
+    <item name="contentInsetStart">0.0dp</item>
+  </style>
+
+  <style name="detail_text1">
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textSize">@dimen/textSize4</item>
+    <item name="android:layout_marginLeft">5dp</item>
+  </style>
+
+  <style name="detail_text2">
+    <item name="android:paddingLeft">7dp</item>
+    <item name="android:paddingRight">7dp</item>
+    <item name="android:layout_margin">5dp</item>
+    <item name="android:paddingTop">2dp</item>
+    <item name="android:paddingBottom">2dp</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textSize">@dimen/textSize4</item>
+    <item name="android:background">@drawable/text_game_category</item>
+  </style>
+
+  <style name="seach_text">
+    <item name="android:paddingLeft">7dp</item>
+    <item name="android:paddingRight">7dp</item>
+    <item name="android:layout_margin">5dp</item>
+    <item name="android:paddingTop">2dp</item>
+    <item name="android:paddingBottom">2dp</item>
+    <item name="android:textColor">@color/color6</item>
+    <item name="android:textSize">@dimen/textSize4</item>
+    <item name="android:background">@drawable/shape_download_btn</item>
+  </style>
+
+
+  <!--搜索界面EditText 下划线颜色-->
+  <style name="SreachEditText" parent="Theme.AppCompat.Light">
+    <item name="colorControlNormal">@android:color/transparent</item>
+    <item name="colorControlActivated">@android:color/transparent</item>
+    <item name="android:background">@null</item>
+    <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
+  </style>
+
+
+  <!--自定义dialog背景全透明无边框theme -->
+  <style name="LoadingDialog" parent="android:style/Theme.Dialog">
+    <!--背景颜色及和透明程度-->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <!--是否去除标题 -->
+    <item name="android:windowNoTitle">true</item>
+    <!--是否去除边框-->
+    <item name="android:windowFrame">@null</item>
+    <!--是否浮现在activity之上-->
+    <item name="android:windowIsFloating">true</item>
+    <!--是否模糊-->
+    <item name="android:backgroundDimEnabled">false</item>
+  </style>
+
+  <style name="loginEditTextStyle">
+    <item name="android:gravity">start|center</item>
+    <item name="android:textSize">@dimen/textSize6</item>
+    <item name="android:paddingStart">24dp</item>
+    <item name="android:paddingEnd">24dp</item>
+    <item name="android:drawablePadding">24dp</item>
+    <item name="android:background">@null</item>
+    <item name="colorControlNormal">@android:color/transparent</item>
+    <item name="colorControlActivated">@android:color/transparent</item>
+    <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
+  </style>
+
+  <style name="rencentDownloadTextStyle">
+    <item name="android:textSize">@dimen/textSize7</item>
+    <item name="android:textColor">@color/color6</item>
+  </style>
+</resources>

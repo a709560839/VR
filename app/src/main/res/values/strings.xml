@@ -1,0 +1,99 @@
+<resources>
+  <string name="app_name">奇惑VR</string>
+
+  <!--自动安装-->
+  <string name="uninstall">卸载</string>
+  <string name="install">安装</string>
+  <string name="continue_install">继续安装</string>
+  <string name="done">完成</string>
+  <string name="open">打开</string>
+  <string name="next">下一步</string>
+  <string name="confirm">确定</string>
+  <string name="force_stop">强行停止</string>
+  <string name="search_hint">大家都在搜：奇惑VR</string>
+  <string name="top_games">热门游戏</string>
+  <string name="top_videos">热门视频</string>
+  <string name="hint_game_name">游戏名字</string>
+  <string name="hint_game_download">下载</string>
+  <string name="hint_game_smmary">概要</string>
+  <string name="hint_game_type">类型</string>
+  <string name="hint_game_size">游戏大小</string>
+  <string name="hint_video_name">母鸡</string>
+  <string name="hint_download_progress">下载进度</string>
+  <string name="hint_download_speed">下载速度</string>
+  <string name="title_activity_game_detail">GameDetailActivity</string>
+  <string name="game_pic_share_name">gamePicShare</string>
+  <string name="game_introduce">游戏介绍</string>
+  <string name="game_intro_detail">《王者荣耀》是腾讯第一5V5英雄公平对战手游，于10月28日开启不限号测试！5V5王者峡谷（含迷雾模式）、5V5深渊大乱斗、以及3V3、1V1等多样模式一键体验，热血竞技尽享快感！海量英雄随心选择，精妙配合默契作战！10秒实时跨区匹配，与好友组队登顶最强王者！操作简单易上手，一血、五杀、超神，极致还原经典体验！实力操作公平对战，回归MOBA初心！
+  我们拥有5V5经典地图，使用三路推塔核心玩法，呈现出最原滋原味的MOBA游戏对战体验！在王者荣耀里，我们根据英雄玩法使用不同的策略，根据英雄特色组建完美阵容，默契配合成就最强王者！</string>
+
+  <string name="loading">正在加载</string>
+
+  <string name="game_category_action">动作</string>
+  <string name="game_category_dream">梦幻</string>
+  <string name="game_category_risk">冒险</string>
+  <string name="game_category_science">科幻</string>
+  <string name="hint_search">请输入搜索内容</string>
+
+
+  <string name="game">游戏</string>
+  <string name="ranking">排行</string>
+  <string name="video">视频</string>
+  <string name="hint_search_name">名字</string>
+  <string name="text_cancel_download">取消下载</string>
+  <string name="back">返回</string>
+  <string name="home">首页</string>
+  <string name="person">我的</string>
+  <string name="person_hot">热门</string>
+  <string name="title_activity_login">LoginActivity</string>
+
+
+  <string name="login">登录</string>
+  <string name="registered">注册</string>
+  <string name="account_hint">手机号码/用户名</string>
+  <string name="password_hint">请输入密码</string>
+  <string name="verification_code_hint">请输入验证码</string>
+  <string name="registered_password_hint">6-20位不能全数字，不含特殊符号</string>
+  <string name="register">注册</string>
+  <string name="forgot_password">忘记密码</string>
+  <string name="third_login">第三方登录</string>
+  <string name="qq_login_description">qq快捷登录</string>
+  <string name="wechat_login_description">wechat快捷登录</string>
+  <string name="back_login_description">登录界面返回键</string>
+  <string name="back_registered_description">注册界面返回键</string>
+  <string name="back_forgot_pw_description">忘记密码界面返回键</string>
+  <string name="has_account_to_continue">已有账号？继续</string>
+  <string name="set_confrim">确认</string>
+  <string name="logo_description">商标</string>
+  <string name="get_verification_code">获取验证码</string>
+  <string name="press_again_exit">再按一次退出</string>
+
+  <!--设置-->
+  <string name="setting">设置</string>
+  <string name="setting_wifi_auto_update_key">wifi_anto_update_preference</string>
+  <string name="setting_wifi_auto_update_summary">仅在Wi-Fi网络下自动下载并更新应用程序</string>
+  <string name="setting_wifi_auto_upda_title">Wi-Fi自动更新</string>
+  <string name="setting_message_remind_key">message_remind_preference</string>
+  <string name="setting_message_remind_summary">桌面图标显示应用更新提示</string>
+  <string name="setting_message_remind_title">讯息提醒</string>
+  <string name="setting_check_update_key">check_update_perference</string>
+  <string name="setting_version_now_summary">当前版本:1.0.0</string>
+  <string name="setting_check_update_title">检查更新</string>
+
+  <!--个人中心页-->
+  <string name="person_download_manage">下载管理</string>
+  <string name="person_app_uninstall">应用卸载</string>
+  <string name="person_download_recent_download">最近的下载</string>
+  <string name="person_download_continue_download">继续下载</string>
+  <string name="person_download_delete_all">全部删除</string>
+  <string name="person_settings">设置</string>
+  <string name="person_login">点我登录</string>
+  <string name="person_account">账号：</string>
+  <string name="person_registered_time">注册时间：</string>
+  <string name="person_game_manager">下载管理</string>
+  <string name="app_manage_uninstall">卸载</string>
+  <string name="soaring_list">飙升榜</string>
+  <string name="news_list">新品榜</string>
+  <string name="download_list">下载榜</string>
+  <string name="tip_no_download">下载的东西不见啦！（=´口｀=）</string>
+</resources>

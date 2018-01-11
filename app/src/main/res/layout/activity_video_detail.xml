@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:descendantFocusability="blocksDescendants"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context="com.daydvr.store.view.video.VideoDetailActivity"
+  >
+
+  <include layout="@layout/item_toolbar" />
+
+  <TextView
+    android:id="@+id/_vr_player"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:text="我是播放器"
+    android:gravity="center"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/cl_global"
+    app:layout_constraintDimensionRatio="16:9"/>
+
+  <com.daydvr.store.view.custom.AppNestedScrollView
+    android:id="@+id/ansv_video_detail"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/_vr_player">
+
+    <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+        android:id="@+id/tv_video_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@mipmap/game_intro_icon"
+        android:text="  视频介绍"
+        android:textStyle="bold"
+        android:textColor="@color/color8"
+        android:textSize="@dimen/textSize5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+        android:id="@+id/tv_video_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_below="@+id/tv_video_intro"
+        android:text="@string/game_intro_detail"
+        android:textColor="@color/color8"
+        android:textSize="@dimen/textSize6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_video_intro" />
+
+      <TextView
+        android:id="@+id/tv_video_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:drawableStart="@mipmap/game_intro_icon"
+        android:text="  猜你喜欢"
+        android:textStyle="bold"
+        android:textColor="#414141"
+        android:textSize="@dimen/textSize5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_video_detail" />
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_video_like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_video_like" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+  </com.daydvr.store.view.custom.AppNestedScrollView>
+
+</android.support.constraint.ConstraintLayout>

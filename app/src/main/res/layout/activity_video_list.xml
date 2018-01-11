@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/video_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground"
+    android:descendantFocusability="blocksDescendants">
+
+    <include
+        layout="@layout/item_toolbar"/>
+
+    <com.daydvr.store.view.custom.AppNestedScrollView
+        android:id="@+id/ansv_video_scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_global">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.daydvr.store.view.custom.BannerLayout
+                android:id="@+id/bl_video_list_ad"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:autoPlayDuration="3000"
+                app:layout_constraintDimensionRatio="100:66"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:scrollDuration="1100"
+                app:selectedIndicatorColor="@color/color6"
+                app:selectedIndicatorHeight="6dp"
+                app:selectedIndicatorWidth="6dp"
+                app:unSelectedIndicatorColor="@color/color2"
+                app:unSelectedIndicatorHeight="6dp"
+                app:unSelectedIndicatorWidth="6dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_video_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bl_video_list_ad"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </com.daydvr.store.view.custom.AppNestedScrollView>
+
+
+
+</android.support.constraint.ConstraintLayout>

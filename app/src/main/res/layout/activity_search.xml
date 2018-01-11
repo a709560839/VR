@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/rl_search_global"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/color6"
+    android:focusableInTouchMode="true"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:popupTheme="@style/Base.Widget.AppCompat.Toolbar" >
+
+    <com.daydvr.store.view.custom.XEditText
+      android:id="@+id/et_search"
+      android:background="@drawable/shape_search2"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:textSize="@dimen/textSize7"
+      android:paddingStart="6dp"
+      android:paddingEnd="6dp"
+      android:layout_marginStart="6dp"
+      android:layout_marginEnd="6dp"
+      android:hint="VR女友"
+      android:drawableStart="@mipmap/back"
+      android:drawableEnd="@mipmap/search"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"/>
+
+  </android.support.v7.widget.Toolbar>
+
+  <View
+    android:id="@+id/v_shadow"
+    android:layout_width="match_parent"
+    android:layout_height="4dp"
+    android:background="@drawable/tool_bar_shadow"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+  <LinearLayout
+    android:id="@+id/ll_type"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal"
+    app:layout_constraintTop_toBottomOf="@+id/v_shadow">
+
+    <TextView
+      android:id="@+id/search_type_game"
+      style="@style/seach_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="游戏" />
+
+    <TextView
+      android:id="@+id/search_type_video"
+      style="@style/seach_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="视频" />
+
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/rv_search_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/ll_type"
+    app:layout_constraintTop_toBottomOf="@+id/ll_type" />
+
+</android.support.constraint.ConstraintLayout>

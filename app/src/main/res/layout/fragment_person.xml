@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/appBackground">
+
+  <android.support.constraint.Guideline
+    android:id="@+id/guideline"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.33" />
+
+  <android.support.constraint.Guideline
+    android:id="@+id/guideline2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.66" />
+
+  <ImageView
+    android:id="@+id/iv_person_bg"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@mipmap/person_bg"
+    app:layout_constraintDimensionRatio="100:60"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/constraintLayout"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/iv_person_bg"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <com.daydvr.store.view.custom.RoundImageView
+      android:id="@+id/riv_person"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:scaleType="fitXY"
+      android:src="@mipmap/ic_launcher_round"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:type="circle" />
+
+    <TextView
+      android:id="@+id/tv_person_login"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="@string/person_login"
+      android:textColor="@android:color/white"
+      app:layout_constraintEnd_toEndOf="@+id/riv_person"
+      app:layout_constraintStart_toStartOf="@+id/riv_person"
+      app:layout_constraintTop_toBottomOf="@+id/riv_person" />
+
+    <com.daydvr.store.view.custom.RoundImageView
+      android:id="@+id/riv_person_logined"
+      android:layout_width="60dp"
+      android:layout_height="60dp"
+      android:layout_marginTop="48dp"
+      android:layout_marginStart="8dp"
+      android:scaleType="fitXY"
+      android:src="@mipmap/ic_launcher_round"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:type="circle" />
+
+    <TextView
+      android:id="@+id/tv_user_id"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="10dp"
+      android:layout_marginStart="8dp"
+      android:text="@string/person_account"
+      android:textColor="@color/color7"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@+id/riv_person_logined"
+      app:layout_constraintTop_toTopOf="@+id/riv_person_logined" />
+
+    <TextView
+      android:id="@+id/tv_registered_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginStart="8dp"
+      android:text="@string/person_registered_time"
+      android:textColor="@color/color7"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/riv_person_logined"
+      app:layout_constraintStart_toEndOf="@+id/riv_person_logined" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <!--  <Space
+      android:id="@+id/space"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintDimensionRatio="100:54"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />-->
+
+  <!--<View
+    android:id="@+id/v_person_bg"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@mipmap/shadow_background"
+    app:layout_constraintDimensionRatio="100:23"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/space" />
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_person_hot"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/v_person_bg"
+    app:layout_constraintEnd_toEndOf="@+id/guideline"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/v_person_bg">
+
+    <android.support.constraint.Guideline
+      android:id="@+id/guideline4"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.60" />
+
+    <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="12dp"
+      android:src="@mipmap/person_hot"
+      app:layout_constraintBottom_toBottomOf="@+id/guideline4"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/textView"
+      style="@style/personBtStyle"
+      android:text="@string/person_hot"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/guideline4" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_person_game"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/v_person_bg"
+    app:layout_constraintEnd_toEndOf="@+id/guideline2"
+    app:layout_constraintStart_toStartOf="@+id/guideline"
+    app:layout_constraintTop_toTopOf="@+id/v_person_bg">
+
+    <android.support.constraint.Guideline
+      android:id="@+id/guideline5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.60" />
+
+    <ImageView
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="12dp"
+      android:src="@mipmap/vr_game_home"
+      app:layout_constraintBottom_toBottomOf="@+id/guideline5"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      style="@style/personBtStyle"
+      android:text="@string/game"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/guideline5" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_person_video"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/v_person_bg"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/guideline2"
+    app:layout_constraintTop_toTopOf="@+id/v_person_bg">
+
+    <android.support.constraint.Guideline
+      android:id="@+id/guideline6"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_percent="0.60" />
+
+    <ImageView
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginTop="12dp"
+      android:src="@mipmap/vr_video_home"
+      app:layout_constraintBottom_toBottomOf="@+id/guideline6"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      style="@style/personBtStyle"
+      android:text="@string/video"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/guideline6" />
+
+  </android.support.constraint.ConstraintLayout>-->
+
+  <View
+    android:id="@+id/v_person_bg1"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginEnd="6dp"
+    android:background="@drawable/shape_round"
+    app:layout_constraintDimensionRatio="100:28"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/iv_person_bg" />
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_person_download"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@drawable/selector_view_click"
+    app:layout_constraintDimensionRatio="100:14"
+    app:layout_constraintEnd_toEndOf="@+id/v_person_bg1"
+    app:layout_constraintStart_toStartOf="@+id/v_person_bg1"
+    app:layout_constraintTop_toTopOf="@+id/v_person_bg1">
+
+    <ImageView
+      android:id="@+id/iv_download"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:padding="12dp"
+      android:src="@mipmap/person_download"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:drawableEnd="@mipmap/person_enter"
+      android:gravity="center_vertical"
+      android:text="@string/person_download_manage"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/iv_download"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <View
+    android:id="@+id/view3"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:background="@color/gray"
+    app:layout_constraintEnd_toEndOf="@+id/v_person_bg1"
+    app:layout_constraintStart_toStartOf="@+id/v_person_bg1"
+    app:layout_constraintTop_toBottomOf="@+id/cl_person_download" />
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_person_applist"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@drawable/selector_view_click"
+    app:layout_constraintBottom_toBottomOf="@+id/v_person_bg1"
+    app:layout_constraintEnd_toEndOf="@+id/v_person_bg1"
+    app:layout_constraintStart_toStartOf="@+id/v_person_bg1"
+    app:layout_constraintTop_toBottomOf="@+id/cl_person_download">
+
+    <ImageView
+      android:id="@+id/iv_help"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:padding="12dp"
+      android:src="@mipmap/person_uninstall"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:drawableEnd="@mipmap/person_enter"
+      android:gravity="center_vertical"
+      android:text="@string/person_app_uninstall"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/iv_help"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/cl_person_setting"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/selector_click_round"
+    app:layout_constraintDimensionRatio="100:14"
+    app:layout_constraintEnd_toEndOf="@+id/v_person_bg1"
+    app:layout_constraintStart_toStartOf="@+id/v_person_bg1"
+    app:layout_constraintTop_toBottomOf="@+id/v_person_bg1">
+
+    <ImageView
+      android:id="@+id/iv_setting"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:padding="12dp"
+      android:src="@mipmap/person_setting"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintDimensionRatio="1:1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:drawableEnd="@mipmap/person_enter"
+      android:gravity="center_vertical"
+      android:text="@string/person_settings"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/iv_setting"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <include layout="@layout/item_search_toolbar"/>
+
+</android.support.constraint.ConstraintLayout>

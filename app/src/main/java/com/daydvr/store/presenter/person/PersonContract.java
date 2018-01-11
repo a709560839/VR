@@ -1,0 +1,54 @@
+package com.daydvr.store.presenter.person;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+
+import com.daydvr.store.base.IBasePresenter;
+import com.daydvr.store.base.IBaseView;
+
+/**
+ * @author LoSyc
+ * @version Created on 2018/1/5. 20:22
+ */
+
+public class PersonContract {
+    public interface View extends IBaseView<Presenter> {
+        void showPersonalMessage(Intent intent);
+
+        void jumpLogin();
+
+        void jumpRecommend();
+
+        void jumpGameList();
+
+        void jumpVideoList();
+
+        void jumpSetting();
+
+        void jumpAppList();
+
+        void jumpDownloadManager();
+
+        Context getViewContext();
+    }
+
+    public interface Presenter extends IBasePresenter {
+        void initUtils(Activity activity);
+
+        void intoLogin();
+
+        void intoRecommend();
+
+        void intoGameList();
+
+        void intoVideoList();
+
+        void intoSetting();
+
+        void intoAppList();
+
+        void intoDownloadManager();
+    }
+}
+

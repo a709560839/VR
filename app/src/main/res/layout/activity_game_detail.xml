@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fitsSystemWindows="true"
+  tools:context=".view.game.GameDetailActivity">
+
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/apl_game_detail"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.CollapsingToolbarLayout
+      android:id="@+id/ctl_game_detail"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:collapsedTitleGravity="center"
+      app:collapsedTitleTextAppearance="@style/TextAppearance.CollapsedTitle"
+      app:contentScrim="@android:color/white"
+      app:expandedTitleGravity="center"
+      app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed"
+      app:statusBarScrim="@android:color/white">
+
+      <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/test" />
+
+      <RelativeLayout
+        android:id="@+id/rl_game_detail_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+          android:id="@+id/ll_1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="115dp"
+          android:layout_alignParentTop="true"
+          android:layout_centerHorizontal="true"
+          android:gravity="center"
+          android:orientation="horizontal">
+
+          <RatingBar
+            android:id="@+id/rb_game_rating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
+            android:rating="4.2"
+            android:theme="@style/RatingBar_Custom_Color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_app_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+          <TextView
+            style="@style/detail_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="120M" />
+
+          <View
+            android:layout_width="0.5dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/white" />
+
+          <TextView
+            style="@style/detail_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100万下载" />
+        </LinearLayout>
+
+        <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/ll_1"
+          android:layout_centerHorizontal="true"
+          android:orientation="horizontal">
+
+          <TextView
+            style="@style/detail_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="格斗" />
+
+          <TextView
+            style="@style/detail_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="冒险" />
+
+          <TextView
+            style="@style/detail_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="动作" />
+        </LinearLayout>
+      </RelativeLayout>
+
+      <com.daydvr.store.view.custom.CommonToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="-5dp"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@mipmap/search"
+        app:popupTheme="@style/Base.Widget.AppCompat.Toolbar" />
+
+    </android.support.design.widget.CollapsingToolbarLayout>
+
+  </android.support.design.widget.AppBarLayout>
+
+  <android.support.v4.widget.NestedScrollView
+    android:id="@+id/nsv_game_pic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_game_pic_detail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:scrollbars="none" />
+
+      <ImageView
+        android:id="@+id/iv_game_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/rcv_game_pic_detail"
+        android:src="@mipmap/game_intro_icon" />
+
+      <TextView
+        android:id="@+id/tv_game_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="5dp"
+        android:layout_below="@+id/rcv_game_pic_detail"
+        android:layout_toEndOf="@+id/iv_game_intro"
+        android:text="游戏介绍"
+        android:textColor="@color/color8"
+        android:textSize="@dimen/textSize5" />
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tv_game_intro"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/game_intro_detail"
+        android:textColor="@color/color8"
+        android:textSize="@dimen/textSize6" />
+    </RelativeLayout>
+
+  </android.support.v4.widget.NestedScrollView>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_gravity="bottom"
+    android:background="@color/color7">
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:layout_alignParentTop="true"
+      android:background="@color/color9" />
+
+    <com.daydvr.store.view.custom.FlikerProgressBar
+      android:id="@+id/fg_game_download"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="40dp"
+      android:layout_marginRight="40dp"
+      android:layout_centerVertical="true"
+      app:pbRadius="20dp"
+      app:progressColor="@color/color6"
+      app:textSize="@dimen/textSize7" />
+  </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
