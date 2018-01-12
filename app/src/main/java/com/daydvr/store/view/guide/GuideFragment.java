@@ -146,6 +146,7 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
         } else {
             mGameAdapter.notifyItemRangeInserted(start, count);
         }
+        dismissLoadingDialog();
     }
 
     @Override

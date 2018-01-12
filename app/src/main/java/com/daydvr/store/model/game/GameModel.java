@@ -25,8 +25,16 @@ public class GameModel {
     private LoaderHandler mHandler;
 
     private static List<GameListBean> mGameDatas = new ArrayList<>();
+    private static List<GameListBean> mSoaringRankingDatas = new ArrayList<>();
+    private static List<GameListBean> mNewsRankingDatas = new ArrayList<>();
+    private static List<GameListBean> mDownloadRankingDatas = new ArrayList<>();
 
     public void getGameListDatas(int page) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<GameListBean> datas = new ArrayList<>();
         for (int start = (page - 1) * 15; start < 15 * page; start++) {
             GameListBean bean = new GameListBean();
@@ -65,10 +73,18 @@ public class GameModel {
     }
 
     public void getDownloadRankingDatas(int page) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<GameListBean> datas = new ArrayList<>();
         for (GameListBean bean : mGameDatas) {
             if (bean.getId() % 2 == 0) {
-                datas.add(bean);
+                if (!mDownloadRankingDatas.contains(bean)) {
+                    mDownloadRankingDatas.add(bean);
+                    datas.add(bean);
+                }
             }
         }
         if (mHandler != null) {
@@ -78,10 +94,18 @@ public class GameModel {
     }
 
     public void getNewsRankingDatas(int page) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<GameListBean> datas = new ArrayList<>();
         for (GameListBean bean : mGameDatas) {
             if (bean.getId() % 3 == 0) {
-                datas.add(bean);
+                if (!mNewsRankingDatas.contains(bean)) {
+                    mNewsRankingDatas.add(bean);
+                    datas.add(bean);
+                }
             }
         }
         if (mHandler != null) {
@@ -91,10 +115,18 @@ public class GameModel {
     }
 
     public void getSoaringRankingDatas(int page) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<GameListBean> datas = new ArrayList<>();
         for (GameListBean bean : mGameDatas) {
             if (bean.getId() % 4 == 0) {
-                datas.add(bean);
+                if (!mSoaringRankingDatas.contains(bean)) {
+                    mSoaringRankingDatas.add(bean);
+                    datas.add(bean);
+                }
             }
         }
         if (mHandler != null) {
@@ -104,6 +136,11 @@ public class GameModel {
     }
 
     public void getHotGameListDatas() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<GameListBean> datas = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             GameListBean bean = new GameListBean();
@@ -126,6 +163,11 @@ public class GameModel {
     }
 
     public void getGameDetailData() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         GameBean bean = new GameBean();
         if (mHandler != null) {
             Message msg = mHandler.createMessage(GAME_LOADER_OK, GAME_DETAIL_OK, 0, bean);
@@ -134,6 +176,11 @@ public class GameModel {
     }
 
     public void getGamePicDatas(){
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<String> data = new ArrayList<>();
         data.add("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3596752690,1143575717&fm=27&gp=0.jpg");
         data.add("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1598489765,1705985192&fm=27&gp=0.jpg");

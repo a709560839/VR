@@ -66,9 +66,10 @@ public class DownloadRankingPresenter extends BaseGameRankingPresenter {
     void handleUIMessage(Message msg) {
         if (msg != null) {
             if (msg.what == DOWNLOAD_RANKING_LOADER_OK) {
-                mDatas = (List<GameListBean>) msg.obj;
+                int start = mDatas.size();
+                mDatas.addAll((List<GameListBean>) msg.obj);
                 if (mView != null) {
-                    mView.showRanking(mDatas);
+                    mView.showRanking(mDatas, start, ((List<GameListBean>) msg.obj).size());
                 }
             }
         }

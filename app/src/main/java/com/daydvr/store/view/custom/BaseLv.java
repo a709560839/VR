@@ -83,6 +83,7 @@ public abstract class BaseLv extends View {
 
             }
         });
+
         valueAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -159,6 +160,7 @@ public abstract class BaseLv extends View {
     }
 
     private LoadingDialog loadingDialog;
+
     public void setDialogDismiss(LoadingDialog dialog){
         loadingDialog = dialog;
     }

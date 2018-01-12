@@ -27,6 +27,7 @@ import com.daydvr.store.view.adapter.GameListAdapter;
 import com.daydvr.store.util.DensityUtil;
 
 import com.daydvr.store.view.custom.AppNestedScrollView;
+import com.daydvr.store.view.custom.LoadingDialog;
 import com.daydvr.store.view.search.SearchActivity;
 
 import java.util.List;
@@ -39,6 +40,7 @@ public abstract class BaseFragment extends Fragment {
     private boolean isReuseView;
     private boolean isFirstVisible;
     private View mRootView;
+
 
     /**
      * Created by dasu on 2016/9/27.
@@ -142,6 +144,7 @@ public abstract class BaseFragment extends Fragment {
      * 最后在 onFragmentVisibleChange() 里根据数据下载状态来控制下载进度ui控件的显示与隐藏
      */
     protected void onFragmentFirstVisible() {
+        showLoadingDialog();
     }
 
     protected boolean isFragmentVisible() {
@@ -163,6 +166,14 @@ public abstract class BaseFragment extends Fragment {
             });
         }
 
+    }
+
+    protected void showLoadingDialog(){
+        ((BaseActivity)getActivity()).showLoadingDialog();
+    }
+
+    protected void dismissLoadingDialog(){
+        ((BaseActivity)getActivity()).dismissLoadingDialog();
     }
 
     /**

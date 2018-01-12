@@ -79,6 +79,7 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
 
     private void initView() {
 
+        showLoadingDialog();
         mToolbar = findViewById(R.id.toolbar);
         mGameCollapsingToolbarLayout = findViewById(R.id.ctl_game_detail);
         mProgressBar = findViewById(R.id.fg_game_download);
@@ -121,6 +122,22 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
         alph.setDuration(500);
         animationSet.addAnimation(scale);
         animationSet.addAnimation(alph);
+        animationSet.setAnimationListener(new AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                 dismissLoadingDialog();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         mRatingLinearLayout.startAnimation(animationSet);
         mCategoryLinearLayout.startAnimation(animationSet);
         

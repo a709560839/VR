@@ -147,8 +147,10 @@ public class GameListFragment extends BaseNotifyDatasFragment implements GameLis
             mGameAdapter.setListener(mItemListener);
             mGameRecyclerView.setAdapter(mGameAdapter);
             mGameAdapter.setDatas((ArrayList<GameListBean>) beans);
+        } else {
+            mGameAdapter.notifyItemRangeInserted(start, count);
         }
-        mGameAdapter.notifyItemRangeInserted(start, count);
+        dismissLoadingDialog();
     }
 
     @Override

@@ -20,12 +20,10 @@ import com.daydvr.store.view.custom.LoadingDialog;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-//    protected abstract int getContentViewId();
-//
-//    protected abstract int setFragmentContentId();
+    private LoadingDialog mLoadingDialog;
 
     private DensityUtil mDensityUtil = new DensityUtil();
-    private LoadingDialog mLoadingDialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +31,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         ActivityManager.getManager().pushOneActivity(this);
         mDensityUtil.setImmerseState(this);
         mDensityUtil.statusBarLightMode(this);
-        mLoadingDialog = new LoadingDialog(this);
-
     }
 
     @Override
@@ -55,30 +51,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
-//    protected void addDisplayerFragment(BaseFragment fragment) {
-//        if (fragment != null) {
-//            getFragmentManager().beginTransaction()
-//                    .add(setFragmentContentId(), fragment)
-//                    .addToBackStack(fragment.toString())
-//                    .commit();
-//        }
-//    }
-
-//    protected void removeFragment() {
-//        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-//            getSupportFragmentManager().popBackStack();
-//        } else {
-//            finish();
-//        }
-//    }
-
-    public void showLoadingDialog(){
+    protected void showLoadingDialog(){
+        mLoadingDialog = new LoadingDialog(this);
         mLoadingDialog.show();
         mLoadingDialog.setCanceledOnTouchOutside(false);
         mLoadingDialog.startAnim();
     }
 
-    public void dismissLoadingDialog(){
-        mLoadingDialog.dismiss();
+    protected void dismissLoadingDialog(){
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) {
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
     }
 }

@@ -55,14 +55,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, App
     }
 
     private void initView() {
-//        mSearchView = findViewById(R.id.cl_search);
         mTabLayout = findViewById(R.id.tl_base);
 
         configComponent();
     }
 
     private void configComponent() {
-//        mSearchView.setOnClickListener(mOnClickListener);
     }
 
     private void initDatas() {

@@ -117,9 +117,9 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
                     }
                     break;
 
-                case R.id.cl_person_hot:
+                /*case R.id.cl_person_hot:
                     mPresenter.intoRecommend();
-                    break;
+                    break;*/
 
                /*case R.id.cl_person_game:
                     mPresenter.intoGameList();

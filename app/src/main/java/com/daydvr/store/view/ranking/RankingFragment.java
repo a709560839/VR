@@ -45,6 +45,13 @@ public class RankingFragment extends BaseNotifyDatasFragment {
     }
 
     @Override
+    protected void onFragmentFirstVisible() {
+        /**
+         * 空实现，避免调用加载动画
+         */
+    }
+
+    @Override
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
             mAdapter = fragments.get(mViewPager.getCurrentItem()).getListAdapter();

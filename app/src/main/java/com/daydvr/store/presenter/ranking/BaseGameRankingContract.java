@@ -3,7 +3,6 @@ package com.daydvr.store.presenter.ranking;
 import android.content.Context;
 import com.daydvr.store.base.BaseDownloadPresenter;
 import com.daydvr.store.base.IBaseDownloadView;
-import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
 
 public abstract class BaseGameRankingContract {
     public interface View extends IBaseDownloadView<Presenter> {
-        <T> void showRanking(List<T> beans);
+        <T> void showRanking(List<T> beans, int start, int count);
 
         void jumpGameDetail(int apkId);
 
