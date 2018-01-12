@@ -12,12 +12,10 @@ import com.daydvr.store.view.adapter.GameListAdapter;
 public abstract class TestThread extends Thread{
     private GameListAdapter.ViewHolder holder;
     private GameListBean bean;
-    private LoaderHandler handler;
 
-    public TestThread(GameListAdapter.ViewHolder holder, GameListBean bean, LoaderHandler handler) {
+    public TestThread(GameListAdapter.ViewHolder holder, GameListBean bean) {
         this.holder = holder;
         this.bean = bean;
-        this.handler = handler;
     }
 
     public GameListAdapter.ViewHolder getHolder() {
@@ -34,13 +32,5 @@ public abstract class TestThread extends Thread{
 
     public void setBean(GameListBean bean) {
         this.bean = bean;
-    }
-
-    public LoaderHandler getHandler() {
-        return handler;
-    }
-
-    public void setHandler(LoaderHandler handler) {
-        this.handler = handler;
     }
 }

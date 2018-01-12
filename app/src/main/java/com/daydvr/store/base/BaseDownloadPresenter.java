@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.daydvr.store.base.BaseConstant.NOTIFY_ALL;
 import static com.daydvr.store.base.GameConstant.DOWNLOADING;
+import static com.daydvr.store.base.GameConstant.INSTALLABLE;
 import static com.daydvr.store.base.GameConstant.PAUSED;
 
 /**
@@ -32,20 +33,19 @@ public abstract class BaseDownloadPresenter implements IBasePresenter {
 
     public abstract void setIsCanceled(boolean flag);
 
-    public ArrayList<Integer> notifyDownloadDatas() {
-        ArrayList<Integer> ids = new ArrayList<>();
+    public void notifyDownloadDatas(IBaseDownloadView view) {
         if (getIsCanceled()) {
-            ids.add(NOTIFY_ALL);
+            view.getListAdapter().notifyDataSetChanged();
             setIsCanceled(false);
-            return ids;
+            return;
         }
         if (getListBean() != null) {
             for (GameListBean bean : getListBean()) {
-                if (bean.getStatus() == DOWNLOADING || bean.getStatus() == PAUSED) {
-                    ids.add(getListBean().indexOf(bean));
+                if (bean.getStatus() == DOWNLOADING || bean.getStatus() == PAUSED
+                        || bean.getStatus() == INSTALLABLE) {
+                    view.getListAdapter().notifyItemChanged(getListBean().indexOf(bean), bean.getStatus());
                 }
             }
         }
-        return ids;
     }
 }

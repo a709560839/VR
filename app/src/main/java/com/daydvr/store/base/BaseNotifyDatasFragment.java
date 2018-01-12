@@ -1,10 +1,6 @@
 package com.daydvr.store.base;
 
-import com.daydvr.store.view.adapter.GameListAdapter;
-
-import java.util.List;
-
-import static com.daydvr.store.base.BaseConstant.NOTIFY_ALL;
+import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
 
 /**
  * @author LoSyc
@@ -12,24 +8,37 @@ import static com.daydvr.store.base.BaseConstant.NOTIFY_ALL;
  */
 
 public abstract class BaseNotifyDatasFragment extends BaseFragment {
+
+    protected abstract int getCurrentUiView();
+
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            List<Integer> list = getDownloadDatas();
-            if (getListAdapter() != null && list.size() > 0) {
-                if (list.get(0) == NOTIFY_ALL) {
-                    getListAdapter().notifyDataSetChanged();
-                    return;
-                }
-                for (int position : list) {
-                    getListAdapter().notifyItemChanged(position);
-                }
+    protected void onFragmentFirstVisible() {
+        super.onFragmentFirstVisible();
+        if (getCurrentUiView() > 99) {
+            CURRENT_UPDTAE_UI = getCurrentUiView();
+        }
+    }
+
+    @Override
+    protected void onFragmentVisibleChange(boolean isVisible) {
+        super.onFragmentVisibleChange(isVisible);
+        if (isVisible) {
+            if (getCurrentUiView() > 99) {
+                CURRENT_UPDTAE_UI = getCurrentUiView();
             }
         }
     }
 
-    abstract protected List<Integer> getDownloadDatas();
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (getCurrentUiView() > 99) {
+                CURRENT_UPDTAE_UI = getCurrentUiView();
+            }
+            notifyDatasForPresenter();
+        }
+    }
 
-    public abstract GameListAdapter getListAdapter();
+    abstract protected void notifyDatasForPresenter();
 }

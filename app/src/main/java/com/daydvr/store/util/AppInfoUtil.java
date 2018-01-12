@@ -13,6 +13,7 @@ import android.os.Looper;
 
 import android.os.Message;
 import android.util.SparseArray;
+
 import com.daydvr.store.R;
 import com.daydvr.store.base.GameConstant;
 import com.daydvr.store.bean.GameListBean;
@@ -21,18 +22,15 @@ import com.daydvr.store.manager.GameUriManager;
 import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.view.adapter.GameListAdapter.ViewHolder;
 import com.daydvr.store.view.person.DownloadManagerActivity;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
-import static com.daydvr.store.base.BaseConstant.DOWNLOAD_RANKING_UI_UPDATE;
-import static com.daydvr.store.base.BaseConstant.GAME_LIST_UI_UPDATE;
-import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_UI_UPDATE;
-import static com.daydvr.store.base.BaseConstant.GUIDE_UI_UPDATE;
-import static com.daydvr.store.base.BaseConstant.NEWS_RANKING_UI_UPDATE;
-import static com.daydvr.store.base.BaseConstant.SOARING_RANKING_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
+import static com.daydvr.store.base.BaseConstant.UI_UPDATE_INSTALLABLE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADING;
 import static com.daydvr.store.base.GameConstant.INSTALLABLE;
@@ -47,7 +45,7 @@ public class AppInfoUtil {
 
     private WeakReference<Context> mContext;
     private PackageManager mPackageManager;
-    private static SparseArray<NotifyUtil> mNotifyArray=new SparseArray<>();
+    private static SparseArray<NotifyUtil> mNotifyArray = new SparseArray<>();
 
     public AppInfoUtil(Context context) {
         mContext = new WeakReference<Context>(context);
@@ -60,6 +58,7 @@ public class AppInfoUtil {
      * 如果没有安装该软件则返回 -1
      *
      * @param packagerName 已安装的Apk的包名
+     *
      * @return Apk版本代码，不存在则为-1
      */
     public int getApkVesionCode(String packagerName) {
@@ -77,6 +76,7 @@ public class AppInfoUtil {
      * 如果没找到相应信息，则返回空串
      *
      * @param apkPath
+     *
      * @return Apk包名，不存在则为空串
      */
     public String getApkPackageName(String apkPath) {
@@ -94,6 +94,7 @@ public class AppInfoUtil {
      * 如果没找到相应信息，则返回空串
      *
      * @param applicationInfo
+     *
      * @return Apk包名，不存在则为空串
      */
     public String getApkPackageName(ApplicationInfo applicationInfo) {
@@ -109,6 +110,7 @@ public class AppInfoUtil {
      * 如果没找到相应信息，则返回空串
      *
      * @param apkPath
+     *
      * @return Apk名字，不存在则为空串
      */
     public String getApkName(String apkPath) {
@@ -129,6 +131,7 @@ public class AppInfoUtil {
      *             flag = 1     系统应用
      *             flag = 0     用户应用
      *             默认 所有应用
+     *
      * @return
      */
     public List<ApplicationInfo> getApps(int flag) {
@@ -160,6 +163,7 @@ public class AppInfoUtil {
      * 如果没有安装该软件则返回 -1
      *
      * @param packagerName
+     *
      * @return
      */
     public int getApkVesionName(String packagerName) {
@@ -176,6 +180,7 @@ public class AppInfoUtil {
      * 获取APP图片
      *
      * @param info
+     *
      * @return
      */
     public Drawable getAppIcon(ApplicationInfo info) {
@@ -184,7 +189,9 @@ public class AppInfoUtil {
 
     /**
      * 获取App 名字
+     *
      * @param info
+     *
      * @return
      */
     public String getAppName(ApplicationInfo info) {
@@ -193,7 +200,9 @@ public class AppInfoUtil {
 
     /**
      * 获取App大小
+     *
      * @param info
+     *
      * @return
      */
     public String getAppSizes(ApplicationInfo info) {
@@ -201,7 +210,7 @@ public class AppInfoUtil {
         //获取应用数据大小
         Long length = new File(dir).length();
         //转换为 M
-        float size = length*1f/1024/1024;
+        float size = length * 1f / 1024 / 1024;
         return (float) (Math.round(size * 100)) / 100 + "M";
     }
 
@@ -212,6 +221,7 @@ public class AppInfoUtil {
      * 若是版本号 -1 代表游戏没安装
      *
      * @param bean
+     *
      * @return
      */
     public byte getApplicationStatus(GameListBean bean) {
@@ -287,6 +297,7 @@ public class AppInfoUtil {
      * 判断机身内存与网络状态是否适合下载
      *
      * @param bean
+     *
      * @return
      */
     public boolean checkMemoryAndNet(final GameListBean bean) {
@@ -337,99 +348,104 @@ public class AppInfoUtil {
         return true;
     }
 
-    public static void notifyDownloadAppProgress(Context context,int id,String appName){
+    public static void notifyDownloadAppProgress(Context context, int id, String appName) {
         Intent intent = new Intent(context, DownloadManagerActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent mPendIntent = PendingIntent.getActivity(context,
                 id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         int smallIcon = R.mipmap.download_icon;
         String ticker = "游戏正在下载";
-        NotifyUtil notify = new NotifyUtil(context,id);
-        mNotifyArray.append(id,notify);
-        notify.notify_progress(mPendIntent,smallIcon,ticker,"下载  "+appName,"正在下载中...",false,false,false);
+        NotifyUtil notify = new NotifyUtil(context, id);
+        mNotifyArray.append(id, notify);
+        notify.notify_progress(mPendIntent, smallIcon, ticker, "下载  " + appName, "正在下载中...", false, false, false);
     }
 
-    public static void notifyUpdateDownloadAppProgress(int id,int max,int progress){
+    public static void notifyUpdateDownloadAppProgress(int id, int max, int progress) {
         NotifyUtil notify = mNotifyArray.get(id);
-        if(null==notify){
+        if (null == notify) {
             Logger.d("the notify is null.");
             return;
         }
-        notify.getBuilder().setContentText("正在下载中...").setProgress(max,progress,false);
+        notify.getBuilder().setContentText("正在下载中...").setProgress(max, progress, false);
         notify.send();
     }
 
     public static void notifyClearAll(){
         if(mNotifyArray.size()>0){
-            for (int i = 0; i < mNotifyArray.size(); i++) {
+            for (int i = 0; i < mNotifyArray.size(); ++i) {
                 int key = mNotifyArray.keyAt(i);
                 NotifyUtil notify = mNotifyArray.get(key);
-                notify.clear();
+                notify.cancelById();
+                Logger.d("notify",i+"id:"+key);
             }
         }
     }
 
-    public static void notifyCompleteDownloadAppProgress(int id){
+    public static void notifyCancelById(int id){
+        if(mNotifyArray.size()>0){
+            for (int i = 0; i < mNotifyArray.size(); ++i) {
+                int key = mNotifyArray.keyAt(i);
+                NotifyUtil notify = mNotifyArray.get(key);
+                if(key == id){
+                    notify.cancelById(id);
+                    Logger.d("notify",i+"cancelById:"+key);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void notifyCompleteDownloadAppProgress(int id) {
         NotifyUtil notify = mNotifyArray.get(id);
-        if(null==notify){
+        if (null == notify) {
             Logger.d("the notify is null.");
             return;
         }
-        notify.getBuilder().setContentText("下载完成").setProgress(0,0,false);
+        notify.getBuilder().setContentText("下载完成").setProgress(0, 0, false);
         notify.send();
     }
 
-    public static void notifyPauseDownloadAppProgress(int id){
+    public static void notifyPauseDownloadAppProgress(int id) {
         NotifyUtil notify = mNotifyArray.get(id);
-        if(null==notify){
+        if (null == notify) {
             Logger.d("the notify is null.");
             return;
         }
-        notify.getBuilder().setContentText("下载已暂停").setProgress(0,0,false);
+        notify.getBuilder().setContentText("下载已暂停").setProgress(0, 0, false);
         notify.send();
     }
 
-    public static void setHolderDownloadProgress(final GameListBean bean, final ViewHolder holder,
-            final LoaderHandler mHandler) {
+    public static void setHolderDownloadProgress(final GameListBean bean, final ViewHolder holder) {
         if (holder.getDownloadProgress() == 0) {
             if (threadTest.get(bean.getId()) == null) {
-                threadTest.put(bean.getId(), new TestThread(holder, bean, mHandler) {
+                threadTest.put(bean.getId(), new TestThread(holder, bean) {
                     @Override
                     public void run() {
-                        for (int i = 1; i <= 300 && !Thread.currentThread().isInterrupted(); ) {
-                            try {
+                        try {
+                            for (int i = 1; i <= 100 && !Thread.currentThread().isInterrupted(); ) {
                                 if (threadTest.get(bean.getId()) != null) {
                                     if (threadTest.get(bean.getId()).getHolder().getFlag() == DOWNLOADING) {
-                                        threadTest.get(bean.getId()).getHolder().setDownloadProgress(this.getBean(), (int) (this.getBean().getSize() * i / 300));
-                                        i++;
+                                        threadTest.get(bean.getId()).getHolder().setDownloadProgress(this.getBean(), (int) (this.getBean().getSize() * i / 100));
                                         AppInfoUtil
-                                                .notifyUpdateDownloadAppProgress(bean.getId(),300,i);
+                                                .notifyUpdateDownloadAppProgress(bean.getId(),100,i);
+                                        i++;
                                     } else if (threadTest.get(bean.getId()).getHolder().getFlag() != PAUSED) {
-                                        break;
+                                        threadTest.remove(bean.getId());
+                                        Thread.currentThread().interrupt();
                                     }
-                                    if (i == 300 && this.getHandler().equals(mHandler)) {
-                                        Message msg = threadTest.get(bean.getId()).getHandler().createMessage(GAME_LIST_UI_UPDATE, 0, 0, this.getHolder());
-                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg);
-                                        Message msg1 = threadTest.get(bean.getId()).getHandler().createMessage(GUIDE_UI_UPDATE, 0, 0, this.getHolder());
-                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg1);
-                                        Message msg2 = threadTest.get(bean.getId()).getHandler().createMessage(DOWNLOAD_RANKING_UI_UPDATE, 0, 0, this.getHolder());
-                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg2);
-                                        Message msg3 = threadTest.get(bean.getId()).getHandler().createMessage(SOARING_RANKING_UI_UPDATE, 0, 0, this.getHolder());
-                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg3);
-                                        Message msg4 = threadTest.get(bean.getId()).getHandler().createMessage(NEWS_RANKING_UI_UPDATE, 0, 0, this.getHolder());
-                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg4);
-                                        Message msg5 = threadTest.get(bean.getId()).getHandler().createMessage(GAME_MANAGER_UI_UPDATE, 0, 0, this.getHolder());
-                                        threadTest.get(bean.getId()).getHandler().sendMessage(msg5);
+                                    if (i == 100) {
+                                        Message msg = UpdateUiHandler.createMessage(CURRENT_UPDTAE_UI, UI_UPDATE_INSTALLABLE, 0, this.getHolder());
+                                        UpdateUiHandler.sendMessageForUiHandler(msg);
+
                                         AppInfoUtil.notifyCompleteDownloadAppProgress(bean.getId());
                                         break;
                                     }
                                     Thread.sleep(100);
                                 }
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
                             }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                        return;
                     }
                 });
             }

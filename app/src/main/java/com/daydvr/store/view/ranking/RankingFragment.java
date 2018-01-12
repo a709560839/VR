@@ -1,7 +1,6 @@
 package com.daydvr.store.view.ranking;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.daydvr.store.R;
-import com.daydvr.store.base.BaseFragment;
 import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.view.adapter.GameListAdapter;
 import com.daydvr.store.view.adapter.RankingPagerAdapter;
@@ -57,13 +55,9 @@ public class RankingFragment extends BaseNotifyDatasFragment {
     }
 
     @Override
-    protected List<Integer> getDownloadDatas() {
-        return fragments.get(mViewPager.getCurrentItem()).getCurrentItemPresenter().notifyDownloadDatas();
-    }
-
-    @Override
-    public GameListAdapter getListAdapter() {
-        return mAdapter;
+    protected void notifyDatasForPresenter() {
+        BaseRankingNotifyDatasFragment fragment = fragments.get(mViewPager.getCurrentItem());
+        fragment.getCurrentItemPresenter().notifyDownloadDatas(fragment);
     }
 
     private void initView() {
@@ -84,6 +78,11 @@ public class RankingFragment extends BaseNotifyDatasFragment {
 
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected int getCurrentUiView() {
+        return -1;
     }
 
     @Override

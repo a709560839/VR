@@ -1,12 +1,9 @@
 package com.daydvr.store.view.ranking;
 
-import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.CATEGORY_SOARING;
 import static com.daydvr.store.base.BaseConstant.SOARING_RANKING_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.APK_ID;
-import static com.daydvr.store.base.GameConstant.DOWNLOADING;
 import static com.daydvr.store.base.GameConstant.INSTALLABLE;
-import static com.daydvr.store.base.GameConstant.PAUSED;
 import static com.daydvr.store.base.GameConstant.TEXT_INSTALL;
 import static com.daydvr.store.base.LoginConstant.threadTest;
 
@@ -22,9 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.daydvr.store.R;
-import com.daydvr.store.base.BaseFragment;
 import com.daydvr.store.bean.GameListBean;
-import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.presenter.ranking.BaseGameRankingContract;
 import com.daydvr.store.presenter.ranking.BaseGameRankingPresenter;
 import com.daydvr.store.presenter.ranking.SoaringRankingPresenter;
@@ -41,16 +36,12 @@ import java.util.List;
  * @version Created on 2018/1/9. 15:27
  */
 
-public class SoaringRankingFragment extends BaseRankingNotifyDatasFragment implements BaseGameRankingContract.View {
+public class SoaringRankingFragment extends BaseRankingNotifyDatasFragment {
 
     private View mRootView;
     private RecyclerView mRecyclerView;
     private BaseGameRankingPresenter mPresenter;
     private GameListAdapter mGameAdapter;
-
-    private LoaderHandler mHandler;
-    private LoaderListener mHandlerListener;
-
 
     @Nullable
     @Override
@@ -66,8 +57,8 @@ public class SoaringRankingFragment extends BaseRankingNotifyDatasFragment imple
     }
 
     @Override
-    protected List<Integer> getDownloadDatas() {
-        return mPresenter.notifyDownloadDatas();
+    protected void notifyDatasForPresenter() {
+        mPresenter.notifyDownloadDatas(this);
     }
 
     @Override
@@ -76,24 +67,17 @@ public class SoaringRankingFragment extends BaseRankingNotifyDatasFragment imple
     }
 
     @Override
+    protected int getCurrentUiView() {
+        return SOARING_RANKING_UI_UPDATE;
+    }
+
+    @Override
     protected void onFragmentFirstVisible() {
         initDatas();
     }
 
-    @Override
-    protected void onFragmentVisibleChange(boolean isVisible) {
-        super.onFragmentVisibleChange(isVisible);
-        Logger.d("daydvr.SoaringRankingFragment", "   isVisible:   " + isVisible);
-        if (isVisible) {
-            if (mGameAdapter != null ) {
-                mGameAdapter.notifyDataSetChanged();
-            }
-        }
-    }
-
     private void initHandler() {
-        mHandler = new LoaderHandler();
-        mHandlerListener = new LoaderListener();
+
     }
 
     private void initView() {
@@ -103,8 +87,6 @@ public class SoaringRankingFragment extends BaseRankingNotifyDatasFragment imple
     }
 
     private void configComponent() {
-        mHandler.setListener(mHandlerListener);
-
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(
@@ -155,39 +137,17 @@ public class SoaringRankingFragment extends BaseRankingNotifyDatasFragment imple
         public void onButtonClick(final View view, final GameListBean bean) {
             final GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) mRecyclerView.getChildViewHolder(view);
             mPresenter.downloadManager(holder, bean);
-            AppInfoUtil.setHolderDownloadProgress(bean, holder,mHandler);
+            AppInfoUtil.setHolderDownloadProgress(bean, holder);
         }
 
         @Override
         public void onCancelButtonClick(View view, GameListBean bean) {
-            if (threadTest.get(bean.getId()) != null) {
-                threadTest.get(bean.getId()).interrupt();
-                threadTest.remove(bean.getId());
-            }
+
         }
     };
 
     @Override
     protected BaseGameRankingPresenter getCurrentItemPresenter() {
         return mPresenter;
-    }
-
-    class LoaderListener implements LoaderHandler.LoaderHandlerListener {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SOARING_RANKING_UI_UPDATE:
-                    GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) msg.obj;
-                    if (holder.getAdapterPosition() != -1) {
-                        holder.setInitViewVisibility();
-                        holder.setDownloadButtonText(TEXT_INSTALL);
-                        holder.setFlag(holder.getAdapterPosition(), INSTALLABLE);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
     }
 }

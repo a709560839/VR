@@ -28,6 +28,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
+import android.widget.LinearLayout;
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseActivity;
 import com.daydvr.store.bean.GameBean;
@@ -51,8 +58,9 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
     private GamePicApdapter mGamePicApdapter;
     private AppBarLayout mGameAppBarLayout;
     private CollapsingToolbarLayout mGameCollapsingToolbarLayout;
-    private NestedScrollView mGameNestedScrollView;
     private FlikerProgressBar mProgressBar;
+    private LinearLayout mRatingLinearLayout;
+    private LinearLayout mCategoryLinearLayout;
     private Thread downLoadThread;
 
     @Override
@@ -63,16 +71,20 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
 
         initView();
         configComponent();
+        animationStart();
         initDatas();
 
     }
 
+
     private void initView() {
+
         mToolbar = findViewById(R.id.toolbar);
         mGameCollapsingToolbarLayout = findViewById(R.id.ctl_game_detail);
         mProgressBar = findViewById(R.id.fg_game_download);
         mGameAppBarLayout = findViewById(R.id.apl_game_detail);
-
+        mRatingLinearLayout = findViewById(R.id.ll_game_detail_1);
+        mCategoryLinearLayout = findViewById(R.id.ll_game_detail_2);
     }
 
     private void configComponent() {
@@ -81,30 +93,39 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
         mProgressBar.setOnClickListener(this);
         mProgressBar.setState(DOWNLOADABLE);
         mProgressBar.setMax(100);
-        mGameNestedScrollView = findViewById(R.id.nsv_game_pic);
         final MenuItem menuItem = mToolbar.getMenu().findItem(R.id.action_search);
         mGameAppBarLayout.addOnOffsetChangedListener(new OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset == 0) {
-                    invalidateOptionsMenu();
-                    mToolbar.setNavigationIcon(R.mipmap.back_white);
-                    menuItem.setIcon(R.mipmap.search_white);
-                } else {
-                    invalidateOptionsMenu();
-                    mToolbar.setNavigationIcon(R.mipmap.back);
-                    menuItem.setIcon(R.mipmap.search);
-                }
+                invalidateOptionsMenu();
+                mToolbar.setNavigationIcon(R.mipmap.back_white);
+                menuItem.setIcon(R.mipmap.search_white);
             }
         });
         mGameCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-        mGameCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
+        mGameCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
         mGameCollapsingToolbarLayout.setTitle("奇惑VR");
         mRecyclerView = findViewById(R.id.rcv_game_pic_detail);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }
+
+    private void animationStart() {
+
+        AnimationSet animationSet = new AnimationSet(true);
+        Animation scale=new ScaleAnimation(0, 1, 0, 1,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        scale.setDuration(500);
+        scale.setInterpolator(new DecelerateInterpolator());
+        AlphaAnimation alph=new AlphaAnimation(0.1f, 1.0f);
+        alph.setDuration(500);
+        animationSet.addAnimation(scale);
+        animationSet.addAnimation(alph);
+        mRatingLinearLayout.startAnimation(animationSet);
+        mCategoryLinearLayout.startAnimation(animationSet);
+        
+    }
+
 
     private void initDatas() {
         Intent intent = getIntent();
@@ -114,6 +135,7 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
 
         mPresenter.loadGameDetailPic();
     }
+
 
     @Override
     public void onClick(View v) {

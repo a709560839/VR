@@ -35,7 +35,7 @@ public class GameModel {
             bean.setPackageName("游戏：" + start);
             bean.setIconUrl("https://img.tapimg.com/market/lcs/a74d23d8f38335d04d25317cbf44349e_360.png");
             bean.setVersion(1);
-            bean.setRating((int) (Math.random() * 2) + 3);
+            bean.setRating((int) (Math.random() * 3) + 3);
             bean.setSummary("概要：" + start);
             bean.setType("类型：" + start);
             bean.setSize((long) (Math.random() * 100 + 100));

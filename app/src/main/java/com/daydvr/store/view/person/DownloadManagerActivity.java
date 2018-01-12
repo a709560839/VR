@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseActivity;
 import com.daydvr.store.bean.GameListBean;
-import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.presenter.person.DownloadManagerContract;
 import com.daydvr.store.presenter.person.DownloadManagerPresenter;
 import com.daydvr.store.util.AppInfoUtil;
@@ -28,12 +27,10 @@ import com.daydvr.store.view.game.GameDetailActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
+import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
 import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.APK_ID;
-import static com.daydvr.store.base.GameConstant.DOWNLOADING;
 import static com.daydvr.store.base.GameConstant.INSTALLABLE;
-import static com.daydvr.store.base.GameConstant.PAUSED;
 import static com.daydvr.store.base.GameConstant.TEXT_INSTALL;
 import static com.daydvr.store.base.LoginConstant.threadTest;
 import static com.daydvr.store.util.AppInfoUtil.notifyClearAll;
@@ -55,9 +52,6 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     private TextView mContinueDownloadTextView;
     private TextView mCancelAllTextView;
 
-    private LoaderHandler mHandler;
-    private DownloadManagerActivity.LoaderListener mHandlerListener;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +63,14 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
         initData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CURRENT_UPDTAE_UI = GAME_MANAGER_UI_UPDATE;
+    }
+
     private void initHandler() {
-        mHandler = new LoaderHandler();
-        mHandlerListener = new DownloadManagerActivity.LoaderListener();
+
     }
 
     private void initView() {
@@ -89,7 +88,6 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
         mToolbar.initmToolBar(this);
         mToolbar.setCenterTitle(R.string.person_game_manager);
         mToolbar.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0);
-        mHandler.setListener(mHandlerListener);
         mContinueDownloadTextView.setOnClickListener(this);
         mCancelAllTextView.setOnClickListener(this);
 
@@ -153,11 +151,11 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
 
         @Override
         public void onButtonClick(final View view, final GameListBean bean) {
-            final GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) mDownloadManagerRecyclerView
+            GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) mDownloadManagerRecyclerView
                     .getChildViewHolder(view);
             mPresenter.downloadManager(holder, bean);
 
-            AppInfoUtil.setHolderDownloadProgress(bean, holder, mHandler);
+            AppInfoUtil.setHolderDownloadProgress(bean, holder);
         }
 
         @Override
@@ -171,8 +169,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
                 mRecentDownloadConstraintLayout.setVisibility(View.GONE);
             }
             if (threadTest.get(bean.getId()) != null) {
-                threadTest.get(bean.getId()).interrupt();
-                threadTest.remove(bean.getId());
+
             }
         }
     };
@@ -181,8 +178,8 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_cancel_all:
-                mPresenter.cancelAll();
                 notifyClearAll();
+                mPresenter.cancelAll();
                 break;
 
             case R.id.tv_continue_download:
@@ -191,26 +188,6 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
 
             default:
                 break;
-        }
-    }
-
-    class LoaderListener implements LoaderHandler.LoaderHandlerListener {
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case GAME_MANAGER_UI_UPDATE:
-                    GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) msg.obj;
-                    if (holder.getAdapterPosition() != -1) {
-                        holder.setInitViewVisibility();
-                        holder.setDownloadButtonText(TEXT_INSTALL);
-                        holder.setFlag(holder.getAdapterPosition(), INSTALLABLE);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
         }
     }
 }

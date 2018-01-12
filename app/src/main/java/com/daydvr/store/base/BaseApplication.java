@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.daydvr.store.util.ThreadPoolUtil;
 
+import com.daydvr.store.util.UpdateUiHandler;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.util.concurrent.ExecutorService;
@@ -24,12 +25,18 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        SingleThreadPool = ThreadPoolUtil.getSingleThreadPool(SingleThreadPool);
-        MultiThreadPool = ThreadPoolUtil.getMuiltThreadPool(MultiThreadPool);
 
-        LeakCanary.install(this);
+        initUtils();
 
         loginTest.put("123", "123456");
+    }
+
+    private void initUtils() {
+        LeakCanary.install(this);
+
+        SingleThreadPool = ThreadPoolUtil.getSingleThreadPool(SingleThreadPool);
+        MultiThreadPool = ThreadPoolUtil.getMuiltThreadPool(MultiThreadPool);
+        UpdateUiHandler.newInstance();
     }
 
     public static BaseApplication getApplication() {

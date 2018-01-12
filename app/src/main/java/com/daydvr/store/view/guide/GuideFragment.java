@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.daydvr.store.R;
-import com.daydvr.store.base.BaseFragment;
 import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.bean.VideoListBean;
@@ -23,7 +22,6 @@ import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.presenter.guide.GuideContract;
 import com.daydvr.store.presenter.guide.GuidePresenter;
 import com.daydvr.store.util.AppInfoUtil;
-import com.daydvr.store.util.LoaderHandler;
 import com.daydvr.store.util.Logger;
 import com.daydvr.store.view.adapter.GameListAdapter;
 
@@ -41,14 +39,11 @@ import com.daydvr.store.view.video.VideoListActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.GAME_LIST_FRAGEMNT_ITEM;
+import static com.daydvr.store.base.BaseConstant.GUIDE_FRAGEMNT_ITEM;
 import static com.daydvr.store.base.BaseConstant.GUIDE_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.APK_ID;
-import static com.daydvr.store.base.GameConstant.DOWNLOADING;
-import static com.daydvr.store.base.GameConstant.INSTALLABLE;
-import static com.daydvr.store.base.GameConstant.PAUSED;
-import static com.daydvr.store.base.GameConstant.TEXT_INSTALL;
+import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
 import static com.daydvr.store.base.LoginConstant.threadTest;
 
 
@@ -66,8 +61,6 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
     private AppNestedScrollView mAppNestedScrollView;
     private ScrollViewListener mScrollViewListener;
 
-    private LoaderHandler mHandler;
-    private LoaderListener mHandlerListener;
     private GuidePresenter mPresenter;
 
     @Override
@@ -84,9 +77,6 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
     }
 
     private void initHandler() {
-        mHandler = new LoaderHandler();
-        mHandlerListener = new LoaderListener();
-
         mScrollViewListener = new ScrollViewListener();
     }
 
@@ -107,7 +97,6 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
         mBannerLayout.setImageLoader(new GlideImageLoader());
         mVRGameConstraintLayout.setOnClickListener(mOnClickListener);
         mVRVideoConstraintLayout.setOnClickListener(mOnClickListener);
-        mHandler.setListener(mHandlerListener);
 
         mGameRecyclerView.setHasFixedSize(true);
         mGameRecyclerView.setNestedScrollingEnabled(false);
@@ -240,47 +229,28 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
         public void onButtonClick(final View view, final GameListBean bean) {
             final GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) mGameRecyclerView.getChildViewHolder(view);
             mPresenter.downloadManager(holder, bean);
-            AppInfoUtil.setHolderDownloadProgress(bean, holder,mHandler);
+            AppInfoUtil.setHolderDownloadProgress(bean, holder);
         }
 
         @Override
         public void onCancelButtonClick(View view, GameListBean bean) {
-            if (threadTest.get(bean.getId()) != null) {
-                Logger.d("TAG", bean.toString());
-                TestThread testThread = threadTest.get(bean.getId());
-                testThread.interrupt();
-                threadTest.remove(bean.getId());
-            }
+
         }
     };
 
     @Override
-    protected List<Integer> getDownloadDatas() {
-        return mPresenter.notifyDownloadDatas();
+    protected int getCurrentUiView() {
+        return GUIDE_UI_UPDATE;
+    }
+
+    @Override
+    protected void notifyDatasForPresenter() {
+        mPresenter.notifyDownloadDatas(this);
     }
 
     @Override
     public GameListAdapter getListAdapter() {
         return mGameAdapter;
-    }
-
-    class LoaderListener implements LoaderHandler.LoaderHandlerListener {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case GUIDE_UI_UPDATE:
-                    GameListAdapter.ViewHolder holder = (GameListAdapter.ViewHolder) msg.obj;
-                    if (holder.getAdapterPosition() != -1) {
-                        holder.setInitViewVisibility();
-                        holder.setDownloadButtonText(TEXT_INSTALL);
-                        holder.setFlag(holder.getAdapterPosition(), INSTALLABLE);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
     }
 
     class ScrollViewListener extends BaseScrollViewLisenter {

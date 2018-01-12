@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.daydvr.store.base.BaseDownloadPresenter;
+import com.daydvr.store.base.IBaseDownloadView;
 import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 public class GuideContract {
-    public interface View extends IBaseView<Presenter> {
+    public interface View extends IBaseDownloadView<Presenter> {
         <T> void showGameRecommend(List<T> beans, int start, int count);
 
         <T> void showVideoRecommend(List<T> beans, int start, int count);

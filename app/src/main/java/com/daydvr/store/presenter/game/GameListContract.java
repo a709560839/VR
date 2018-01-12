@@ -3,6 +3,7 @@ package com.daydvr.store.presenter.game;
 import android.content.Context;
 
 import com.daydvr.store.base.BaseDownloadPresenter;
+import com.daydvr.store.base.IBaseDownloadView;
 import com.daydvr.store.base.IBaseView;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 public class GameListContract {
-    public interface View extends IBaseView<Presenter> {
+    public interface View extends IBaseDownloadView<Presenter> {
         <T> void showAD(List<T> beans);
 
         <T> void showGame(List<T> beans, int start, int count);

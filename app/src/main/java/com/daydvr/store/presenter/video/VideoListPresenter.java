@@ -73,7 +73,9 @@ public class VideoListPresenter implements VideoListContract.Presenter {
 
     @Override
     public void intoVideoDetail(int videoId) {
-        mView.jumpVideoDetail(videoId);
+        if (mView != null) {
+            mView.jumpVideoDetail(videoId);
+        }
     }
 
     private LoaderHandler.LoaderHandlerListener mHandleListener = new LoaderHandler.LoaderHandlerListener() {

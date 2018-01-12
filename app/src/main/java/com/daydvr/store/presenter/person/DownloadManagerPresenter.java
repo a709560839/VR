@@ -79,16 +79,18 @@ public class DownloadManagerPresenter extends DownloadManagerContract.Presenter 
         setIsCanceled(true);
         RecyclerView view = mView.getListView();
         int size = mDatas.size();
+        int item = 0;
         for (int i = 0; i < size; i++) {
             GameListAdapter.ViewHolder holder =
-                    (GameListAdapter.ViewHolder) view.getChildViewHolder(view.getChildAt(i));
+                    (GameListAdapter.ViewHolder) view.getChildViewHolder(view.getChildAt(item));
 
             if (holder.getFlag() != INSTALLABLE) {
                 holder.setInitViewVisibility();
-                holder.setFlag(i, DOWNLOADABLE);
-                GameManager.removeGameDownloadStatus(mDatas.get(i));
-                i--;
+                holder.setFlag(item, DOWNLOADABLE);
+                GameManager.removeGameDownloadStatus(mDatas.get(item));
+                item--;
             }
+            item++;
         }
         mView.showDownloadGame(mDatas);
     }

@@ -21,7 +21,10 @@ public class BaseConstant {
     public static int GUIDE_FRAGEMNT_ITEM = 0;
     public static int GAME_LIST_FRAGEMNT_ITEM = 1;
     public static int RANKING_LIST_FRAGEMNT_ITEM = 2;
-    public static int PERSON_FRAGEMNT_ITEM = 3;
+    public static int SOARING_RANKING_FRAGEMNT_ITEM = 3;
+    public static int NEWS_RANKING_FRAGEMNT_ITEM = 4;
+    public static int DOWNLOAD_RANKING_FRAGEMNT_ITEM = 5;
+    public static int PERSON_FRAGEMNT_ITEM = 6;
 
     public static final int AD_LOADER_OK = 1;
     public static final int GAME_LOADER_OK = 2;
@@ -48,6 +51,9 @@ public class BaseConstant {
     public static final int NEWS_RANKING_UI_UPDATE = 104;
     public static final int DOWNLOAD_RANKING_UI_UPDATE = 105;
 
+    public static int CURRENT_UPDTAE_UI = GUIDE_UI_UPDATE;
+
+    public static final int UI_UPDATE_INSTALLABLE = 1;
 
     public static final int NORMAL = 0;
     public static final int CATEGORY = 1;

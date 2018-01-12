@@ -2,7 +2,6 @@ package com.daydvr.store.view.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -166,6 +165,8 @@ public class MainActivity extends BaseActivity implements MainContract.View, App
 
     @Override
     public void onTabClick(AppTabItem tabItem) {
-        setShowFragment(mPresenter.getIndexOf(tabItem));
+        if (mPresenter.getFragment(mCurrentPosition).isVisible()) {
+            setShowFragment(mPresenter.getIndexOf(tabItem));
+        }
     }
 }

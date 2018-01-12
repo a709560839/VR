@@ -19,11 +19,12 @@
       android:layout_height="match_parent"
       app:collapsedTitleGravity="center"
       app:collapsedTitleTextAppearance="@style/TextAppearance.CollapsedTitle"
-      app:contentScrim="@android:color/white"
-      app:expandedTitleGravity="center"
+      app:contentScrim="@color/color6"
+      app:expandedTitleGravity="top|center_horizontal"
+      app:expandedTitleMarginTop="60dp"
       app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
       app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:statusBarScrim="@android:color/white">
+      app:statusBarScrim="@color/color6">
 
       <ImageView
         android:layout_width="match_parent"
@@ -32,16 +33,21 @@
         android:scaleType="centerCrop"
         android:src="@mipmap/test" />
 
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_game_detail_masked"/>
+
       <RelativeLayout
         android:id="@+id/rl_game_detail_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-          android:id="@+id/ll_1"
+          android:id="@+id/ll_game_detail_1"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="115dp"
+          android:layout_marginTop="110dp"
           android:layout_alignParentTop="true"
           android:layout_centerHorizontal="true"
           android:gravity="center"
@@ -52,8 +58,6 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-            android:layout_centerVertical="true"
             android:rating="4.2"
             android:theme="@style/RatingBar_Custom_Color"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,9 +84,11 @@
         </LinearLayout>
 
         <LinearLayout
+          android:id="@+id/ll_game_detail_2"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_below="@+id/ll_1"
+          android:layout_below="@+id/ll_game_detail_1"
+          android:layout_marginTop="5dp"
           android:layout_centerHorizontal="true"
           android:orientation="horizontal">
 

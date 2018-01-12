@@ -89,12 +89,16 @@ public class SearchPresenter implements SearchContract.Presenter {
 
     @Override
     public void intoGameDetail(int apkId) {
-        mView.jumpGameDetail(apkId);
+        if (mView != null) {
+            mView.jumpGameDetail(apkId);
+        }
     }
 
     @Override
     public void intoVideoDetail() {
-        mView.jumpVideoDetail(null);
+        if (mView != null) {
+            mView.jumpVideoDetail(null);
+        }
     }
 
     @Override
