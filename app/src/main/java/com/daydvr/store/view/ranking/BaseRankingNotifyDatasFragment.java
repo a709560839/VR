@@ -7,6 +7,9 @@ import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.presenter.ranking.BaseGameRankingContract;
 import com.daydvr.store.presenter.ranking.BaseGameRankingPresenter;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+
 /**
  * @author LoSyc
  * @version Created on 2018/1/11. 20:01
@@ -35,9 +38,9 @@ public abstract class BaseRankingNotifyDatasFragment extends BaseNotifyDatasFrag
                 totalItemCount = recyclerView.getAdapter().getItemCount();
             }
             int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            int lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition();
             int visibleItemCount = recyclerView.getChildCount();
-            int position = lastVisibleItemPosition - 2;
+            int position = lastVisibleItemPosition - 1;
             if (newState == RecyclerView.SCROLL_STATE_IDLE
                     && lastVisibleItemPosition == totalItemCount - 1
                     && visibleItemCount > 0) {

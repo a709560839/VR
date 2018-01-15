@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.daydvr.store.view.custom.ParticleView
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/pv_guide"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/color6"
-  app:pv_background_color="@color/color6"
-  app:pv_text_color="@android:color/white"
-  app:pv_host_text="X-VRDOF"
-  app:pv_host_text_anim_time="1500"
-  app:pv_host_text_size="40sp"
-  app:pv_particle_text="VR"
-  app:pv_particle_text_size="20sp"
-  app:pv_spread_anim_time="750"
-  app:pv_text_anim_time="750" />
+  tools:context="com.daydvr.store.view.guide.GuideActivity">
+
+  <com.daydvr.store.view.custom.bgabanner.BGAGuideLinkageLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.daydvr.store.view.custom.bgabanner.BGABanner
+      android:id="@+id/banner_guide_background"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:banner_pageChangeDuration="1000"
+      app:banner_pointAutoPlayAble="false"
+      app:banner_pointContainerBackground="@android:color/transparent"
+      app:banner_pointDrawable="@drawable/bga_banner_selector_point_hollow"
+      app:banner_pointTopBottomMargin="15dp"
+      app:banner_transitionEffect="fade" />
+
+    <com.daydvr.store.view.custom.bgabanner.BGABanner
+      android:id="@+id/banner_guide_foreground"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:banner_pageChangeDuration="1000"
+      app:banner_pointAutoPlayAble="false"
+      app:banner_pointContainerBackground="@android:color/transparent"
+      app:banner_pointDrawable="@drawable/bga_banner_selector_point_hollow"
+      app:banner_pointTopBottomMargin="15dp"
+      app:banner_transitionEffect="alpha" />
+
+  </com.daydvr.store.view.custom.bgabanner.BGAGuideLinkageLayout>
+
+  <TextView
+    android:id="@+id/tv_guide_skip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="4dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="24dp"
+    android:text="@string/guide_skip"
+    android:textColor="@android:color/white"
+    android:textSize="@dimen/textSize5"/>
+</android.support.constraint.ConstraintLayout>

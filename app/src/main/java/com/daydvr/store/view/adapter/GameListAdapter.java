@@ -25,6 +25,9 @@ import com.daydvr.store.util.Logger;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
+import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_UI_UPDATE;
+import static com.daydvr.store.base.BaseConstant.GUIDE_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
 import static com.daydvr.store.base.GameConstant.DOWNLOADING;
 import static com.daydvr.store.base.GameConstant.INSTALLABLE;
@@ -112,6 +115,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
 
                 case PAUSED:
                     holder.setAfterDownloadViewVisibility();
+                    holder.gameProgressBar.setProgress(bean.getProgress());
                     threadTest.get(bean.getId()).setBean(bean);
                     threadTest.get(bean.getId()).setHolder(holder);
                     text = TEXT_CONTINUE;
@@ -143,13 +147,13 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             if (mDatas.size() % mPerPageCount != 0) {
                 holder.gameLoadTipTextView.setText("已经到底了！");
             }
-        } else if (mDatas.size() < mPerPageCount) {
+        } else if (CURRENT_UPDTAE_UI == GUIDE_UI_UPDATE ||
+                CURRENT_UPDTAE_UI == GAME_MANAGER_UI_UPDATE) {
             holder.itemView.setVisibility(View.GONE);
             ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(0, 0);
             holder.itemView.setLayoutParams(params);
         }
     }
-
 
     @Override
     public int getItemCount() {
@@ -218,6 +222,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
 
             case PAUSED:
                 holder.setAfterDownloadViewVisibility();
+                holder.gameProgressBar.setProgress(bean.getProgress());
                 threadTest.get(bean.getId()).setBean(bean);
                 threadTest.get(bean.getId()).setHolder(holder);
                 text = TEXT_CONTINUE;

@@ -36,6 +36,7 @@ public class DownloadRankingFragment extends BaseRankingNotifyDatasFragment {
     private RecyclerView mRecyclerView;
     private BaseGameRankingPresenter mPresenter;
     private GameListAdapter mGameAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Nullable
     @Override
@@ -84,9 +85,8 @@ public class DownloadRankingFragment extends BaseRankingNotifyDatasFragment {
     private void configComponent() {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setLayoutManager(
-                new LinearLayoutManager(mRootView.getContext(), LinearLayoutManager.VERTICAL,
-                        false));
+        mLinearLayoutManager = new LinearLayoutManager(mRootView.getContext(), LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.addOnScrollListener(mScrollListener);
     }
 

@@ -186,8 +186,8 @@ public class GuidePresenter extends GuideContract.Presenter {
                     break;
 
                 case GAME_LOADER_OK:
-                    mGameDatas = (List<GameListBean>) msg.obj;
                     int gameStart = mGameDatas.size();
+                    mGameDatas = (List<GameListBean>) msg.obj;
                     if (mGameDatas != null && mView != null) {
                         mView.showGameRecommend(mGameDatas, gameStart, ((List<GameListBean>) msg.obj).size());
                     }

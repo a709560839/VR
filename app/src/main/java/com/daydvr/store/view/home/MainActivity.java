@@ -2,8 +2,11 @@ package com.daydvr.store.view.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,7 +19,10 @@ import com.daydvr.store.manager.ActivityManager;
 import com.daydvr.store.presenter.home.MainContract;
 import com.daydvr.store.presenter.home.MainPresenter;
 import com.daydvr.store.bean.AppTabItem;
+import com.daydvr.store.util.Logger;
 import com.daydvr.store.view.custom.AppTabLayout;
+import com.daydvr.store.view.guide.GuideActivity;
+import com.daydvr.store.view.guide.SplashActivity;
 import com.daydvr.store.view.search.SearchActivity;
 
 import java.util.ArrayList;
@@ -44,19 +50,53 @@ public class MainActivity extends BaseActivity implements MainContract.View, App
     private boolean mIsFirstShow = true;
 
     @Override
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        checkFirstOpen();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPresenter = new MainPresenter(this);
-
         initView();
         initDatas();
     }
 
+    private void checkFirstOpen() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences(getResources().getString(R.string.config), MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("isFirstRun", true);
+        Editor editor = sharedPreferences.edit();
+        if (isFirstRun)
+        {
+            intoGuide();
+            editor.putBoolean("isFirstRun", false);
+            editor.apply();
+        } else
+        {
+            intoSplash();
+        }
+    }
+
+    private void intoGuide() {
+        Intent i = new Intent(this, GuideActivity.class);
+        startActivity(i);
+    }
+
+    private void intoSplash() {
+        Intent i = new Intent(this, SplashActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    protected void onStart() {
+        Logger.d("onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        Logger.d("onResume");
+        super.onResume();
+    }
+
     private void initView() {
         mTabLayout = findViewById(R.id.tl_base);
-
         configComponent();
     }
 
@@ -64,6 +104,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, App
     }
 
     private void initDatas() {
+        mPresenter = new MainPresenter(this);
         mPresenter.loadFragment();
     }
 

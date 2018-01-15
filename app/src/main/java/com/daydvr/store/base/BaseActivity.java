@@ -31,6 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         ActivityManager.getManager().pushOneActivity(this);
         mDensityUtil.setImmerseState(this);
         mDensityUtil.statusBarLightMode(this);
+        mLoadingDialog = new LoadingDialog(this);
     }
 
     @Override

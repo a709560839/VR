@@ -17,14 +17,14 @@ public class GlideImageLoader implements BannerLayout.ImageLoader {
 
     @Override
     public void displayImage(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().placeholder(R.drawable.image_loading)
-                .error(R.drawable.image_loading).crossFade().into(imageView);
+        Glide.with(context).load(path).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().placeholder(R.mipmap.image_loading)
+                .error(R.mipmap.image_loading).crossFade().into(imageView);
     }
 
     public static DrawableTypeRequest<String> commonLoader(Context context, String imageUrl, ImageView imageView) {
         DrawableTypeRequest<String> request = Glide.with(context).load(imageUrl);
-        request.diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.image_loading)
-                .error(R.drawable.image_loading).crossFade().into(imageView);
+        request.diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.mipmap.image_loading)
+                .error(R.mipmap.image_loading).crossFade().into(imageView);
         return request;
     }
 }

@@ -60,6 +60,7 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
     private ViewGroup mVRGameConstraintLayout, mVRVideoConstraintLayout;
     private AppNestedScrollView mAppNestedScrollView;
     private ScrollViewListener mScrollViewListener;
+    private LinearLayoutManager mLinearLayoutManager;
 
     private GuidePresenter mPresenter;
 
@@ -101,8 +102,8 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
         mGameRecyclerView.setHasFixedSize(true);
         mGameRecyclerView.setNestedScrollingEnabled(false);
         mGameRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mGameRecyclerView.setLayoutManager(
-                new LinearLayoutManager(mRootView.getContext(), LinearLayoutManager.VERTICAL, false));
+        mLinearLayoutManager = new LinearLayoutManager(mRootView.getContext(), LinearLayoutManager.VERTICAL, false);
+        mGameRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         mVideoRecyclerView.setHasFixedSize(true);
         mVideoRecyclerView.setNestedScrollingEnabled(false);
@@ -143,6 +144,7 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
             mGameAdapter.setDatas((ArrayList<GameListBean>) beans);
             mGameAdapter.setListener(mGameItemListener);
             mGameRecyclerView.setAdapter(mGameAdapter);
+            mGameAdapter.notifyDataSetChanged();
         } else {
             mGameAdapter.notifyItemRangeInserted(start, count);
         }

@@ -10,6 +10,13 @@
     <item name="windowActionBar">false</item>
   </style>
 
+  <!-- Base application theme. -->
+  <style name="AppTheme2" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="android:windowBackground">@color/color6</item>
+  </style>
+
   <style name="RatingBar_Custom_Color">
     <!--Background Color-->
     <item name="colorControlNormal">#D7D7D7</item>
@@ -35,7 +42,7 @@
     <item name="android:src">@mipmap/search</item>
   </style>
 
-  <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow"></style>
+  <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow"/>
 
   <!--标题栏-->
   <style name="OverFlowMenuTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -142,4 +149,5 @@
     <item name="android:textSize">@dimen/textSize7</item>
     <item name="android:textColor">@color/color6</item>
   </style>
+
 </resources>

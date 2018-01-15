@@ -1,5 +1,8 @@
 <resources>
   <string name="app_name">奇惑VR</string>
+  <string name="app_english_name">X-VRDOF</string>
+  <string name="vr">VR</string>
+  <string name="config">sharePreference</string>
 
   <!--自动安装-->
   <string name="uninstall">卸载</string>
@@ -89,11 +92,16 @@
   <string name="person_settings">设置</string>
   <string name="person_login">点我登录</string>
   <string name="person_account">账号：</string>
-  <string name="person_registered_time">注册时间：</string>
+  <string name="person_integral">积分：</string>
   <string name="person_game_manager">下载管理</string>
   <string name="app_manage_uninstall">卸载</string>
   <string name="soaring_list">飙升榜</string>
   <string name="news_list">新品榜</string>
   <string name="download_list">下载榜</string>
   <string name="tip_no_download">下载的东西不见啦！（=´口｀=）</string>
+  <string name="person_sign">签到</string>
+
+  <!--Guide-->
+  <string name="guide_into_main">进入主页</string>
+  <string name="guide_skip">跳过>></string>
 </resources>

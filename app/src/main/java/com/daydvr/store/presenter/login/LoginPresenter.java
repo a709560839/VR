@@ -3,9 +3,7 @@ package com.daydvr.store.presenter.login;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Message;
-import android.support.annotation.RequiresApi;
 
 import com.daydvr.store.util.LoaderHandler;
 
@@ -17,7 +15,7 @@ import static com.daydvr.store.base.BaseConstant.LOGIN_REQUEST_OK;
 import static com.daydvr.store.base.LoginConstant.LOGIN_OK;
 import static com.daydvr.store.base.LoginConstant.USER_HEAD_URL;
 import static com.daydvr.store.base.LoginConstant.USER_NAME;
-import static com.daydvr.store.base.LoginConstant.USER_REGISTERED_TIME;
+import static com.daydvr.store.base.LoginConstant.USER_INTEGRAL;
 import static com.daydvr.store.base.LoginConstant.loginTest;
 
 /**
@@ -55,11 +53,9 @@ public class LoginPresenter implements LoginContract.Presenter {
                 intent.putExtra(USER_NAME, user);
                 intent.putExtra(USER_HEAD_URL, "https://img.tapimg.com/market/lcs/9e1328b55fab10aa59af1dd3273ee401_360.png");
 
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date curDate = new Date(System.currentTimeMillis());
-                String str = formatter.format(curDate);
+                String str = "1024";
 
-                intent.putExtra(USER_REGISTERED_TIME, str);
+                intent.putExtra(USER_INTEGRAL, str);
                 Message msg = mHandler.createMessage(LOGIN_REQUEST_OK, 0, 0, intent);
                 mHandler.sendMessage(msg);
                 return;

@@ -225,7 +225,6 @@ public class ParticleView extends View {
         AnimatorSet set = new AnimatorSet();
         set.playTogether(animList);
         set.start();
-
         set.addListener(new AnimListener() {
             @Override
             public void onAnimationEnd(Animator animation) {

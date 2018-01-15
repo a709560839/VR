@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daydvr.store.R;
@@ -48,6 +49,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     private CommonToolbar mToolbar;
     private RecyclerView mDownloadManagerRecyclerView;
     private TextView mTipTextView;
+    private ImageView mTipImageView;
     private ConstraintLayout mRecentDownloadConstraintLayout;
     private TextView mContinueDownloadTextView;
     private TextView mCancelAllTextView;
@@ -76,6 +78,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     private void initView() {
         mToolbar = findViewById(R.id.toolbar);
         mTipTextView = findViewById(R.id.tv_tip_download_manager);
+        mTipImageView = findViewById(R.id.iv_tip_download_manager);
         mDownloadManagerRecyclerView = findViewById(R.id.rv_download_manager_list);
         mRecentDownloadConstraintLayout = findViewById(R.id.cl_recent_download);
         mContinueDownloadTextView = findViewById(R.id.tv_continue_download);
@@ -114,13 +117,16 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
             mGameAdapter.setListener(mItemListener);
             mDownloadManagerRecyclerView.setAdapter(mGameAdapter);
             mGameAdapter.setDatas((ArrayList<GameListBean>) beans);
+        } else {
+            mGameAdapter.notifyDataSetChanged();
         }
-        mGameAdapter.notifyDataSetChanged();
         if (beans.size() > 0) {
             mTipTextView.setVisibility(View.GONE);
+            mTipImageView.setVisibility(View.GONE);
             mRecentDownloadConstraintLayout.setVisibility(View.VISIBLE);
         } else {
             mTipTextView.setVisibility(View.VISIBLE);
+            mTipImageView.setVisibility(View.VISIBLE);
             mRecentDownloadConstraintLayout.setVisibility(View.GONE);
         }
     }
@@ -163,9 +169,11 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
             mGameAdapter.notifyDataSetChanged();
             if (mPresenter.getDatasSize() > 0) {
                 mTipTextView.setVisibility(View.GONE);
+                mTipImageView.setVisibility(View.GONE);
                 mRecentDownloadConstraintLayout.setVisibility(View.VISIBLE);
             } else {
                 mTipTextView.setVisibility(View.VISIBLE);
+                mTipImageView.setVisibility(View.VISIBLE);
                 mRecentDownloadConstraintLayout.setVisibility(View.GONE);
             }
             if (threadTest.get(bean.getId()) != null) {

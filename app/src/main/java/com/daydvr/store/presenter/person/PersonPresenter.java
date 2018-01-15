@@ -74,4 +74,11 @@ public class PersonPresenter implements PersonContract.Presenter {
             mView.jumpDownloadManager();
         }
     }
+
+    @Override
+    public void intoSign() {
+        if (mView != null) {
+            mView.jumpSign();
+        }
+    }
 }

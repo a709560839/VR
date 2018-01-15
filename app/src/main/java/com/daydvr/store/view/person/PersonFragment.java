@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daydvr.store.R;
@@ -29,7 +30,7 @@ import static com.daydvr.store.base.LoginConstant.LOGIN_OK;
 import static com.daydvr.store.base.LoginConstant.LOGIN_REQUEST_CODE;
 import static com.daydvr.store.base.LoginConstant.USER_HEAD_URL;
 import static com.daydvr.store.base.LoginConstant.USER_NAME;
-import static com.daydvr.store.base.LoginConstant.USER_REGISTERED_TIME;
+import static com.daydvr.store.base.LoginConstant.USER_INTEGRAL;
 import static com.daydvr.store.base.LoginConstant.isLogin;
 
 /**
@@ -46,10 +47,12 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     private ViewGroup mAppListViewGroup;
     private RoundImageView mHeadRoundImageView;
     private TextView mUserNameTextView;
-    private TextView mRegisteredTextView;
+    private TextView mIntegralTextView;
     private RoundImageView mLoginedRoundImageView;
     private ConstraintLayout mSettingConstraintLayout;
     private TextView mHeadTextView;
+    private TextView mSignTextView;
+    private ImageView mSignImageView;
     private ViewGroup mDownloadManagerViewGroup;
     private ScrollViewListener mScrollViewListener;
 
@@ -81,9 +84,11 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     private void initView() {
         mLoginedRoundImageView = mRootView.findViewById(R.id.riv_person_logined);
         mHeadTextView = mRootView.findViewById(R.id.tv_person_login);
+        mSignTextView = mRootView.findViewById(R.id.tv_person_sign);
+        mSignImageView = mRootView.findViewById(R.id.iv_person_sign);
         //mHotViewGroup = mRootView.findViewById(R.id.cl_person_hot);
         mUserNameTextView = mRootView.findViewById(R.id.tv_user_id);
-        mRegisteredTextView = mRootView.findViewById(R.id.tv_registered_time);
+        mIntegralTextView = mRootView.findViewById(R.id.tv_person_integral);
         //mGameViewGroup = mRootView.findViewById(R.id.cl_person_game);
         //mVideoViewGroup = mRootView.findViewById(R.id.cl_person_video);
         mHeadRoundImageView = mRootView.findViewById(R.id.riv_person);
@@ -141,6 +146,11 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
                     mPresenter.intoDownloadManager();
                     break;
 
+                case R.id.tv_person_sign:
+                case R.id.iv_person_sign:
+                    mPresenter.intoSign();
+                    break;
+
                 default:
                     break;
 
@@ -164,17 +174,19 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     public void showPersonalMessage(Intent intent) {
         String name = intent.getStringExtra(USER_NAME);
         String headUrl = intent.getStringExtra(USER_HEAD_URL);
-        String registeredTime = intent.getStringExtra(USER_REGISTERED_TIME);
+        String registeredTime = intent.getStringExtra(USER_INTEGRAL);
 
         mHeadTextView.setVisibility(View.GONE);
         mHeadRoundImageView.setVisibility(View.GONE);
 
+        mSignImageView.setVisibility(View.VISIBLE);
+        mSignTextView.setVisibility(View.VISIBLE);
         mLoginedRoundImageView.setVisibility(View.VISIBLE);
         mUserNameTextView.setVisibility(View.VISIBLE);
-        mRegisteredTextView.setVisibility(View.VISIBLE);
+        mIntegralTextView.setVisibility(View.VISIBLE);
 
         mUserNameTextView.setText(getString(R.string.person_account) + name);
-        mRegisteredTextView.setText(getString(R.string.person_registered_time) + registeredTime);
+        mIntegralTextView.setText(getString(R.string.person_integral) + registeredTime);
         GlideImageLoader.commonLoader(mRootView.getContext(),headUrl,mLoginedRoundImageView);
     }
 
@@ -215,6 +227,12 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     public void jumpDownloadManager() {
         Intent intent = new Intent(getActivity(), DownloadManagerActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void jumpSign() {
+//        Intent intent = new Intent(getActivity(), .class);
+//        startActivity(intent);
     }
 
     @Override

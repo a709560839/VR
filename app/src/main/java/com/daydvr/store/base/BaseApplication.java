@@ -2,6 +2,7 @@ package com.daydvr.store.base;
 
 import android.app.Application;
 
+import android.content.SharedPreferences;
 import com.daydvr.store.util.ThreadPoolUtil;
 
 import com.daydvr.store.util.UpdateUiHandler;
@@ -32,8 +33,6 @@ public class BaseApplication extends Application {
     }
 
     private void initUtils() {
-        LeakCanary.install(this);
-
         SingleThreadPool = ThreadPoolUtil.getSingleThreadPool(SingleThreadPool);
         MultiThreadPool = ThreadPoolUtil.getMuiltThreadPool(MultiThreadPool);
         UpdateUiHandler.newInstance();

@@ -30,6 +30,8 @@ public class PersonContract {
 
         void jumpDownloadManager();
 
+        void jumpSign();
+
         Context getViewContext();
     }
 
@@ -49,6 +51,8 @@ public class PersonContract {
         void intoAppList();
 
         void intoDownloadManager();
+
+        void intoSign();
     }
 }
 

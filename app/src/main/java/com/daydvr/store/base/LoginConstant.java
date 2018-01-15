@@ -26,7 +26,7 @@ public class LoginConstant {
 
     public static final String USER_NAME = "user_name";
     public static final String USER_HEAD_URL = "user_head_url";
-    public static final String USER_REGISTERED_TIME = "user_registered_time";
+    public static final String USER_INTEGRAL = "user_integral";
 
     public static final int LOGIN_REQUEST_CODE = 100;
     public static final int REGISTERED_REQUEST_CODE = 200;

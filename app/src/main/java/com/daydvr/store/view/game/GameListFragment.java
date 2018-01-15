@@ -55,6 +55,7 @@ public class GameListFragment extends BaseNotifyDatasFragment implements GameLis
     private ConstraintLayout mDreamConstraintLayout;
     private AppNestedScrollView mAppNestedScrollView;
     private ScrollViewListener mScrollViewListener;
+    private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -122,7 +123,10 @@ public class GameListFragment extends BaseNotifyDatasFragment implements GameLis
         mGameRecyclerView.setHasFixedSize(true);
         mGameRecyclerView.setNestedScrollingEnabled(false);
         mGameRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mGameRecyclerView.setLayoutManager(new LinearLayoutManager(mRootView.getContext(), LinearLayoutManager.VERTICAL, false));
+        mLinearLayoutManager = new LinearLayoutManager(mRootView.getContext(), LinearLayoutManager.VERTICAL, false);
+        mLinearLayoutManager.setSmoothScrollbarEnabled(true);
+        mLinearLayoutManager.setAutoMeasureEnabled(true);
+        mGameRecyclerView.setLayoutManager(mLinearLayoutManager);
     }
 
     private void initDatas() {
