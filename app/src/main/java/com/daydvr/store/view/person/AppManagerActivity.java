@@ -17,7 +17,6 @@ import com.daydvr.store.presenter.appmanager.AppManagerContract.Presenter;
 import com.daydvr.store.presenter.appmanager.AppManagerPresenter;
 import com.daydvr.store.recevice.ApkStautsBroadCast;
 import com.daydvr.store.util.BroadCallBack;
-import com.daydvr.store.util.DensityUtil;
 import com.daydvr.store.util.Logger;
 import com.daydvr.store.view.adapter.AppListAdapter;
 import com.daydvr.store.view.custom.CommonToolbar;
@@ -59,7 +58,7 @@ public class AppManagerActivity extends BaseActivity implements AppManagerContra
 
     private void configComponent() {
         mCommonToolbar.setCenterTitle(getString(R.string.person_app_uninstall));
-        mCommonToolbar.initmToolBar(this);
+        mCommonToolbar.initmToolBar(this, true);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));

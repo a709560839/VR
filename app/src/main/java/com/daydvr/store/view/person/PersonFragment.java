@@ -19,19 +19,15 @@ import com.daydvr.store.presenter.person.PersonContract;
 import com.daydvr.store.presenter.person.PersonPresenter;
 import com.daydvr.store.util.GlideImageLoader;
 import com.daydvr.store.view.custom.RoundImageView;
-import com.daydvr.store.view.home.MainActivity;
 import com.daydvr.store.view.login.LoginActivity;
 import com.daydvr.store.view.setting.SettingActivity;
-import com.daydvr.store.view.video.VideoListActivity;
 
-import static com.daydvr.store.base.BaseConstant.GAME_LIST_FRAGEMNT_ITEM;
-import static com.daydvr.store.base.BaseConstant.GUIDE_FRAGEMNT_ITEM;
-import static com.daydvr.store.base.LoginConstant.LOGIN_OK;
-import static com.daydvr.store.base.LoginConstant.LOGIN_REQUEST_CODE;
-import static com.daydvr.store.base.LoginConstant.USER_HEAD_URL;
-import static com.daydvr.store.base.LoginConstant.USER_NAME;
-import static com.daydvr.store.base.LoginConstant.USER_INTEGRAL;
-import static com.daydvr.store.base.LoginConstant.isLogin;
+import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
+import static com.daydvr.store.base.PersonConstant.LOGIN_REQUEST_CODE;
+import static com.daydvr.store.base.PersonConstant.USER_HEAD_URL;
+import static com.daydvr.store.base.PersonConstant.USER_NAME;
+import static com.daydvr.store.base.PersonConstant.USER_INTEGRAL;
+import static com.daydvr.store.base.PersonConstant.isLogin;
 
 /**
  * @author a79560839
@@ -86,11 +82,8 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
         mHeadTextView = mRootView.findViewById(R.id.tv_person_login);
         mSignTextView = mRootView.findViewById(R.id.tv_person_sign);
         mSignImageView = mRootView.findViewById(R.id.iv_person_sign);
-        //mHotViewGroup = mRootView.findViewById(R.id.cl_person_hot);
         mUserNameTextView = mRootView.findViewById(R.id.tv_user_id);
         mIntegralTextView = mRootView.findViewById(R.id.tv_person_integral);
-        //mGameViewGroup = mRootView.findViewById(R.id.cl_person_game);
-        //mVideoViewGroup = mRootView.findViewById(R.id.cl_person_video);
         mHeadRoundImageView = mRootView.findViewById(R.id.riv_person);
         mSettingConstraintLayout = mRootView.findViewById(R.id.cl_person_setting);
         mAppListViewGroup = mRootView.findViewById(R.id.cl_person_applist);
@@ -102,12 +95,13 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     private void configComponent() {
         mHeadRoundImageView.setOnClickListener(mOnClickListener);
         mHeadTextView.setOnClickListener(mOnClickListener);
-        //mHotViewGroup.setOnClickListener(mOnClickListener);
-        //mGameViewGroup.setOnClickListener(mOnClickListener);
-        //mVideoViewGroup.setOnClickListener(mOnClickListener);
         mSettingConstraintLayout.setOnClickListener(mOnClickListener);
         mDownloadManagerViewGroup.setOnClickListener(mOnClickListener);
         mAppListViewGroup.setOnClickListener(mOnClickListener);
+        mLoginedRoundImageView.setOnClickListener(mOnClickListener);
+        mSignImageView.setOnClickListener(mOnClickListener);
+        mSignTextView.setOnClickListener(mOnClickListener);
+
     }
 
     private OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -122,17 +116,9 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
                     }
                     break;
 
-                /*case R.id.cl_person_hot:
-                    mPresenter.intoRecommend();
-                    break;*/
-
-               /*case R.id.cl_person_game:
-                    mPresenter.intoGameList();
-                    break;*/
-
-                /*case R.id.cl_person_video:
-                    mPresenter.intoVideoList();
-                    break;*/
+                case R.id.riv_person_logined:
+                    mPresenter.intoPersonMessage();
+                    break;
 
                 case R.id.cl_person_setting:
                     mPresenter.intoSetting();
@@ -197,18 +183,8 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     }
 
     @Override
-    public void jumpRecommend() {
-        ((MainActivity) getActivity()).setShowFragment(GUIDE_FRAGEMNT_ITEM);
-    }
-
-    @Override
-    public void jumpGameList() {
-        ((MainActivity) getActivity()).setShowFragment(GAME_LIST_FRAGEMNT_ITEM);
-    }
-
-    @Override
-    public void jumpVideoList() {
-        Intent intent = new Intent(getActivity(), VideoListActivity.class);
+    public void jumpPersonMessage() {
+        Intent intent = new Intent(getActivity(), PersonMessageActivity.class);
         startActivity(intent);
     }
 
@@ -231,8 +207,8 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
 
     @Override
     public void jumpSign() {
-//        Intent intent = new Intent(getActivity(), .class);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), SignActivity.class);
+        startActivity(intent);
     }
 
     @Override

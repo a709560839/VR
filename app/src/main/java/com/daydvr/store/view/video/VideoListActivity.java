@@ -65,7 +65,7 @@ public class VideoListActivity extends BaseActivity implements VideoListContract
     }
 
     private void configComponent() {
-        mToolbar.initmToolBar(this);
+        mToolbar.initmToolBar(this, true);
         mToolbar.setCenterTitle(R.string.video);
         mBannerLayout.setImageLoader(new GlideImageLoader());
         mAppNestedScrollView.setNestedScrollViewListener(mScrollViewLisenter);

@@ -18,6 +18,7 @@
   <color name="color8">#414141</color>
   <color name="color9">#e2dddd</color>
   <color name="color10">#ff9800</color>
+  <color name="color11">#dcdcdc</color>
 
   <color name="appBackground">#f0f0f0</color>
   <color name="backgroundControl">#ffffff</color>
@@ -27,5 +28,7 @@
   <color name="ranking_first">#cb0202</color>
   <color name="ranking_secondtothird">#d07f15</color>
 
+  <color name="btn_cancel_color">#999999</color>
+  <color name="btn_confirm_color">#303F9F</color>
 
 </resources>

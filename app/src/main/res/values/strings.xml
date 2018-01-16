@@ -99,9 +99,36 @@
   <string name="news_list">新品榜</string>
   <string name="download_list">下载榜</string>
   <string name="tip_no_download">下载的东西不见啦！（=´口｀=）</string>
+
+  <string name="person_msg_head">显示头像</string>
+  <string name="person_msg_sex">性别</string>
+  <string name="person_msg_birthday">生日</string>
+  <string name="person_msg_phone">手机号码</string>
+  <string name="person_msg_change_password">修改密码</string>
+  <string name="person_msg_logout">退出登录</string>
+  <string name="person_sex_noset">未设定</string>
+  <string name="person_birthday">1990-8-2</string>
+  <string name="person_msg_phone_tip">134****6889</string>
+
   <string name="person_sign">签到</string>
 
   <!--Guide-->
   <string name="guide_into_main">进入主页</string>
   <string name="guide_skip">跳过>></string>
+  <string name="person_determine">确定</string>
+  <string name="person_message">个人信息</string>
+  <string name="cancel">取消</string>
+  <string name="camera">相机</string>
+  <string name="gallery">图库</string>
+
+  <!--签到-->
+  <string name="sign_everyday">每日签到</string>
+  <string name="sign">签到</string>
+  <string name="sign_had">已签到</string>
+  <string name="sign_continue_sign">已连续签到?天 ，签到得10积分</string>
+  <string name="sign_time1">第1~2天</string>
+  <string name="sign_time2">第3~4天</string>
+  <string name="sign_time3">第5~6天</string>
+  <string name="sign_time4">第7天</string>
+
 </resources>

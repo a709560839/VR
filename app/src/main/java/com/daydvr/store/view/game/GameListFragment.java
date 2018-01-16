@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,13 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.presenter.game.GameListContract;
 import com.daydvr.store.presenter.game.GameListPresenter;
 import com.daydvr.store.util.AppInfoUtil;
-import com.daydvr.store.util.LoaderHandler;
 import com.daydvr.store.view.adapter.GameListAdapter;
 import com.daydvr.store.view.custom.AppNestedScrollView;
 import com.daydvr.store.view.custom.BannerLayout;
@@ -31,7 +30,6 @@ import java.util.List;
 
 import static com.daydvr.store.base.BaseConstant.GAME_LIST_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.APK_ID;
-import static com.daydvr.store.base.LoginConstant.threadTest;
 
 /**
  * @author LoSyc
@@ -142,6 +140,14 @@ public class GameListFragment extends BaseNotifyDatasFragment implements GameLis
     @Override
     public <T> void showAD(List<T> beans) {
         mBannerLayout.setViewUrls((ArrayList<String>) beans);
+//        List<View> testList = new ArrayList<>();
+//        ImageView imageView1 = new ImageView(mRootView.getContext());
+//        imageView1.setImageResource(R.mipmap.test3);
+//        ImageView imageView2 = new ImageView(mRootView.getContext());
+//        imageView2.setImageResource(R.mipmap.test2);
+//        testList.add(imageView1);
+//        testList.add(imageView2);
+//        mBannerLayout.setViews(testList);
     }
 
     @Override

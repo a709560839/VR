@@ -155,7 +155,7 @@
     app:layout_constraintStart_toStartOf="@+id/tv_game_detail" />
 
   <View
-    android:id="@+id/view"
+    android:id="@+id/v_bg"
     android:layout_width="match_parent"
     android:layout_height="1dp"
     android:layout_marginStart="8dp"

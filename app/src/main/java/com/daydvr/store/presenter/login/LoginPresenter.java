@@ -7,16 +7,14 @@ import android.os.Message;
 
 import com.daydvr.store.util.LoaderHandler;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import static com.daydvr.store.base.BaseConstant.LOGIN_REQUEST_OK;
-import static com.daydvr.store.base.LoginConstant.LOGIN_OK;
-import static com.daydvr.store.base.LoginConstant.USER_HEAD_URL;
-import static com.daydvr.store.base.LoginConstant.USER_NAME;
-import static com.daydvr.store.base.LoginConstant.USER_INTEGRAL;
-import static com.daydvr.store.base.LoginConstant.loginTest;
+import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
+import static com.daydvr.store.base.PersonConstant.USER_HEAD_URL;
+import static com.daydvr.store.base.PersonConstant.USER_NAME;
+import static com.daydvr.store.base.PersonConstant.USER_INTEGRAL;
+import static com.daydvr.store.base.PersonConstant.loginTest;
 
 /**
  * @author LoSyc

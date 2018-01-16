@@ -18,11 +18,7 @@ public class PersonContract {
 
         void jumpLogin();
 
-        void jumpRecommend();
-
-        void jumpGameList();
-
-        void jumpVideoList();
+        void jumpPersonMessage();
 
         void jumpSetting();
 
@@ -40,11 +36,7 @@ public class PersonContract {
 
         void intoLogin();
 
-        void intoRecommend();
-
-        void intoGameList();
-
-        void intoVideoList();
+        void intoPersonMessage();
 
         void intoSetting();
 

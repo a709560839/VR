@@ -13,9 +13,9 @@ import static com.daydvr.store.base.BaseConstant.CHANGE_REQUEST_OK;
 import static com.daydvr.store.base.BaseConstant.VERIFYCODE_REQUEST_OK;
 import static com.daydvr.store.base.BaseConstant.VERIFYCODE_REQUEST_TIME;
 import static com.daydvr.store.base.BaseConstant.VERIFYCODE_TIMECHANGE_OK;
-import static com.daydvr.store.base.LoginConstant.IsAllowRequestCode;
-import static com.daydvr.store.base.LoginConstant.flagVerifyCode;
-import static com.daydvr.store.base.LoginConstant.loginTest;
+import static com.daydvr.store.base.PersonConstant.isAllowRequestCode;
+import static com.daydvr.store.base.PersonConstant.flagVerifyCode;
+import static com.daydvr.store.base.PersonConstant.loginTest;
 
 /**
  * @author LoSyc
@@ -47,7 +47,7 @@ public class ForgotPasswordPresenter implements ForgotPasswordContract.Presenter
 
     @Override
     public void getVerifyCode() {
-        if (IsAllowRequestCode) {
+        if (isAllowRequestCode) {
             flagVerifyCode = String.valueOf((int) (Math.random() * 1000000));
             while (flagVerifyCode.length() < 6) {
                 flagVerifyCode = "0" + flagVerifyCode;
@@ -122,7 +122,7 @@ public class ForgotPasswordPresenter implements ForgotPasswordContract.Presenter
                             }
                         }
                     });
-                    IsAllowRequestCode = false;
+                    isAllowRequestCode = false;
                     break;
 
                 case VERIFYCODE_TIMECHANGE_OK:
@@ -132,7 +132,7 @@ public class ForgotPasswordPresenter implements ForgotPasswordContract.Presenter
                             mView.changeVerifyStatus(i + "s");
                         }
                     } else {
-                        IsAllowRequestCode = true;
+                        isAllowRequestCode = true;
                         if (mView != null) {
                             mView.changeVerifyStatus("获取验证码");
                         }

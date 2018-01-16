@@ -37,7 +37,7 @@ import static com.daydvr.store.base.GameConstant.INSTALLABLE;
 import static com.daydvr.store.base.GameConstant.INSTALLED;
 import static com.daydvr.store.base.GameConstant.PAUSED;
 import static com.daydvr.store.base.GameConstant.UPDATE;
-import static com.daydvr.store.base.LoginConstant.threadTest;
+import static com.daydvr.store.base.PersonConstant.threadTest;
 
 public class AppInfoUtil {
 

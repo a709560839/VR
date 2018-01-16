@@ -42,7 +42,7 @@
     <item name="android:src">@mipmap/search</item>
   </style>
 
-  <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow"/>
+  <style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow" />
 
   <!--标题栏-->
   <style name="OverFlowMenuTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -148,6 +148,31 @@
   <style name="rencentDownloadTextStyle">
     <item name="android:textSize">@dimen/textSize7</item>
     <item name="android:textColor">@color/color6</item>
+  </style>
+
+  <style name="FadeInPopWin">
+    <item name="android:backgroundDimEnabled">true</item>
+    <item name="android:windowEnterAnimation">@anim/pop_win_content_fade_in</item>
+    <item name="android:windowExitAnimation">@anim/pop_win_content_fade_out</item>
+  </style>
+
+  <style name="signRound">
+    <item name="android:padding">0dp</item>
+    <item name="android:gravity">center</item>
+    <item name="android:textSize">@dimen/textSize7</item>
+    <item name="android:textColor">@android:color/white</item>
+  </style>
+
+  <style name="signTextBelowRound">
+    <item name="android:layout_marginTop">5dp</item>
+    <item name="android:layout_centerHorizontal">true</item>
+    <item name="android:textColor">@android:color/white</item>
+    <item name="android:textSize">@dimen/textSize9</item>
+  </style>
+
+  <style name="popup_anim_style">
+    <item name="android:windowEnterAnimation">@anim/menushow</item>
+    <item name="android:windowExitAnimation">@anim/menudiss</item>
   </style>
 
 </resources>

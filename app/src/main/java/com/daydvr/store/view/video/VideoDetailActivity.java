@@ -50,7 +50,7 @@ public class VideoDetailActivity extends BaseActivity implements VideoDetailCont
 
     private void configComponent() {
         mToolbar.setPadding(0, DensityUtil.getStatusBarHeight(this),0,0);
-        mToolbar.initmToolBar(this);
+        mToolbar.initmToolBar(this, true);
         mToolbar.setCenterTitle(R.string.video);
 
         mVideoRecyclerView.setHasFixedSize(true);

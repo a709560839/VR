@@ -27,7 +27,7 @@ public class SettingActivity extends BaseActivity {
     private void configComponent() {
         mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this),0,0);
         mToolBar.setCenterTitle(getResources().getString(R.string.setting));
-        mToolBar.initmToolBar(this);
+        mToolBar.initmToolBar(this, true);
     }
 
 }

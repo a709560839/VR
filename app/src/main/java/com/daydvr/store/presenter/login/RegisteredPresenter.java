@@ -9,16 +9,16 @@ import com.daydvr.store.util.LoaderHandler;
 import com.daydvr.store.util.Logger;
 
 import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
-import static com.daydvr.store.base.LoginConstant.IsAllowRequestCode;
+import static com.daydvr.store.base.PersonConstant.isAllowRequestCode;
 import static com.daydvr.store.base.BaseConstant.REGISTERED_REQUEST_OK;
 import static com.daydvr.store.base.BaseConstant.VERIFYCODE_REQUEST_OK;
 import static com.daydvr.store.base.BaseConstant.VERIFYCODE_REQUEST_TIME;
 import static com.daydvr.store.base.BaseConstant.VERIFYCODE_TIMECHANGE_OK;
-import static com.daydvr.store.base.LoginConstant.LOGIN_OK;
-import static com.daydvr.store.base.LoginConstant.USER_ACCOUNT;
-import static com.daydvr.store.base.LoginConstant.USER_PASSWORD;
-import static com.daydvr.store.base.LoginConstant.loginTest;
-import static com.daydvr.store.base.LoginConstant.flagVerifyCode;
+import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
+import static com.daydvr.store.base.PersonConstant.USER_ACCOUNT;
+import static com.daydvr.store.base.PersonConstant.USER_PASSWORD;
+import static com.daydvr.store.base.PersonConstant.loginTest;
+import static com.daydvr.store.base.PersonConstant.flagVerifyCode;
 
 /**
  * @author LoSyc
@@ -50,7 +50,7 @@ public class RegisteredPresenter implements RegisteredContract.Presenter {
 
     @Override
     public void getVerifyCode() {
-        if (IsAllowRequestCode) {
+        if (isAllowRequestCode) {
             flagVerifyCode = String.valueOf((int) (Math.random() * 1000000));
             while (flagVerifyCode.length() < 6) {
                 flagVerifyCode = "0" + flagVerifyCode;
@@ -109,7 +109,7 @@ public class RegisteredPresenter implements RegisteredContract.Presenter {
                             }
                         }
                     });
-                    IsAllowRequestCode = false;
+                    isAllowRequestCode = false;
                     break;
 
                 case VERIFYCODE_TIMECHANGE_OK:
@@ -119,7 +119,7 @@ public class RegisteredPresenter implements RegisteredContract.Presenter {
                                 mView.changeVerifyStatus(i +"s");
                             }
                         } else {
-                            IsAllowRequestCode = true;
+                            isAllowRequestCode = true;
                             if (mView != null) {
                                 mView.changeVerifyStatus("获取验证码");
                             }

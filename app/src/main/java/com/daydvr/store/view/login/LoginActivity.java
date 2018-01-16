@@ -14,11 +14,11 @@ import com.daydvr.store.R;
 import com.daydvr.store.presenter.login.LoginContract;
 import com.daydvr.store.presenter.login.LoginPresenter;
 
-import static com.daydvr.store.base.LoginConstant.LOGIN_OK;
-import static com.daydvr.store.base.LoginConstant.REGISTERED_REQUEST_CODE;
-import static com.daydvr.store.base.LoginConstant.USER_ACCOUNT;
-import static com.daydvr.store.base.LoginConstant.USER_PASSWORD;
-import static com.daydvr.store.base.LoginConstant.isLogin;
+import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
+import static com.daydvr.store.base.PersonConstant.REGISTERED_REQUEST_CODE;
+import static com.daydvr.store.base.PersonConstant.USER_ACCOUNT;
+import static com.daydvr.store.base.PersonConstant.USER_PASSWORD;
+import static com.daydvr.store.base.PersonConstant.isLogin;
 
 public class LoginActivity extends BaseForLoginActivity implements LoginContract.View, OnClickListener {
 

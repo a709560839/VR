@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.daydvr.store.view.person.SignActivity">
+
+  <com.daydvr.store.view.custom.CommonToolbar
+    android:id="@+id/toolbar"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@color/color6"
+    android:fitsSystemWindows="true"
+    android:focusable="false"
+    app:contentInsetStartWithNavigation="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="@mipmap/back_white"
+    app:titleTextColor="@android:color/white" >
+  </com.daydvr.store.view.custom.CommonToolbar>
+
+  <RelativeLayout
+    android:id="@+id/rl_sign"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="#77c9ef"
+    app:layout_constraintBottom_toTopOf="@id/gl_1"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+    <com.daydvr.store.view.custom.SignIntegralLayout
+      android:id="@+id/sil_cus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="30dp" />
+
+    <Button
+      android:id="@+id/bt_sign"
+      android:layout_width="match_parent"
+      android:layout_height="30dp"
+      android:layout_marginBottom="30dp"
+      android:layout_marginStart="40dp"
+      android:layout_marginEnd="40dp"
+      android:layout_alignParentBottom="true"
+      android:background="@drawable/shape_login_btn"
+      android:text="@string/sign"
+      android:textColor="@android:color/white" />
+
+    <TextView
+      android:id="@+id/tv_sign_continue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="70dp"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:textColor="@android:color/white"
+      android:textSize="@dimen/textSize7" />
+  </RelativeLayout>
+
+  <TextView
+    android:id="@+id/tv_sign_year_month"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
+    android:textColor="@color/color6"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/gl_1" />
+
+  <View
+    android:id="@+id/v_line"
+    android:layout_width="0dp"
+    android:layout_height="0.5dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@color/color9"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_sign_year_month" />
+
+    <com.daydvr.store.view.custom.SignView
+      android:id="@+id/sv_sign"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/v_line"/>
+
+  <android.support.constraint.Guideline
+    android:id="@+id/gl_1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    app:layout_constraintGuide_percent="0.4" />
+
+</android.support.constraint.ConstraintLayout>

@@ -21,7 +21,6 @@ import android.os.Message;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.AppBarLayout.OnOffsetChangedListener;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -90,7 +89,7 @@ public class GameDetailActivity extends BaseActivity implements OnClickListener,
 
     private void configComponent() {
 
-        mToolbar.initmToolBar(this);
+        mToolbar.initmToolBar(this, true);
         mProgressBar.setOnClickListener(this);
         mProgressBar.setState(DOWNLOADABLE);
         mProgressBar.setMax(100);

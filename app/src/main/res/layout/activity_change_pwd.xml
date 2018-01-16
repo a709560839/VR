@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/appBackground"
+  tools:context="com.daydvr.store.view.person.ChangePwdActivity">
+
+  <TextView
+    android:id="@+id/hint"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginStart="24dp"
+    android:hint="密码由6-12位数字、字母组成，不含特殊符号"
+    android:textSize="@dimen/textSize7"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_global" />
+
+  <View
+    android:id="@+id/v_bg"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/shape_round"
+    app:layout_constraintDimensionRatio="100:42"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/hint" />
+
+  <EditText
+    android:id="@+id/ed_person_old_pwd"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:background="@null"
+    android:textSize="@dimen/textSize5"
+    android:hint="请输入旧密码"
+    app:layout_constraintDimensionRatio="100:14"
+    app:layout_constraintStart_toStartOf="@id/v_bg"
+    app:layout_constraintEnd_toEndOf="@id/v_bg"
+    app:layout_constraintTop_toTopOf="@id/v_bg"
+    />
+
+  <View
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:background="@color/gray"
+    app:layout_constraintStart_toStartOf="@id/v_bg"
+    app:layout_constraintEnd_toEndOf="@id/v_bg"
+    app:layout_constraintBottom_toBottomOf="@id/ed_person_old_pwd"
+    />
+
+  <EditText
+    android:id="@+id/ed_person_new_pwd"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:background="@null"
+    android:textSize="@dimen/textSize5"
+    android:hint="请输入新密码"
+    app:layout_constraintDimensionRatio="100:14"
+    app:layout_constraintStart_toStartOf="@id/ed_person_old_pwd"
+    app:layout_constraintEnd_toEndOf="@id/ed_person_old_pwd"
+    app:layout_constraintTop_toBottomOf="@id/ed_person_old_pwd" />
+
+  <View
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:background="@color/gray"
+    app:layout_constraintStart_toStartOf="@id/v_bg"
+    app:layout_constraintEnd_toEndOf="@id/v_bg"
+    app:layout_constraintBottom_toBottomOf="@id/ed_person_new_pwd"
+    />
+
+  <EditText
+    android:id="@+id/ed_person_check_pwd"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:background="@null"
+    android:textSize="@dimen/textSize5"
+    android:hint="请确认新密码"
+    app:layout_constraintDimensionRatio="100:14"
+    app:layout_constraintStart_toStartOf="@id/ed_person_new_pwd"
+    app:layout_constraintEnd_toEndOf="@id/ed_person_new_pwd"
+    app:layout_constraintTop_toBottomOf="@id/ed_person_new_pwd" />
+
+  <Button
+    android:id="@+id/bt_determine"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/shape_person_save_btn"
+    android:text="@string/person_determine"
+    android:textColor="@android:color/white"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/v_bg"/>
+
+  <include layout="@layout/item_toolbar" />
+
+</android.support.constraint.ConstraintLayout>

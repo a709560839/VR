@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.support.annotation.ColorInt;
@@ -23,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.daydvr.store.R;
-import com.daydvr.store.util.DensityUtil;
 import com.daydvr.store.view.search.SearchActivity;
 
 /**
@@ -48,7 +46,6 @@ public class CommonToolbar extends Toolbar {
      * 居中标题的文本
      */
     private CharSequence mCenterTitle;
-
 
     public CommonToolbar(Context context) {
         this(context, null);
@@ -248,27 +245,29 @@ public class CommonToolbar extends Toolbar {
         return layoutParams;
     }
 
-    public void initmToolBar(final Activity activity) {
-        this.inflateMenu(R.menu.menu_search);
+    public void initmToolBar(final Activity activity, boolean hasSearch) {
+        if (hasSearch) {
+            this.inflateMenu(R.menu.menu_search);
+            this.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.action_search:
+                            Intent intent = new Intent(activity, SearchActivity.class);
+                            activity.startActivity(intent);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    return false;
+                }
+            });
+        }
         this.setNavigationOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.finish();
-            }
-        });
-        this.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_search:
-                        Intent intent = new Intent(activity, SearchActivity.class);
-                        activity.startActivity(intent);
-                        break;
-
-                    default:
-                        break;
-                }
-                return false;
             }
         });
     }

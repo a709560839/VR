@@ -38,5 +38,25 @@ public class PermissionUtil {
                         }
                     }).start();
         }
+        if (!AndPermission.hasPermission(activity, Permission.CAMERA)) {
+            AndPermission.with(activity)
+                    .requestCode(100)
+                    .permission(Permission.CAMERA)
+                    .callback(new PermissionListener() {
+                        @Override
+                        public void onSucceed(int requestCode, @NonNull List<String> grantPermissions) {
+                        }
+
+                        @Override
+                        public void onFailed(int requestCode, @NonNull List<String> deniedPermissions) {
+                            // 权限申请失败回调。
+
+                            if (AndPermission.hasAlwaysDeniedPermission(activity, deniedPermissions)) {
+                                // 第一种：用默认的提示语。
+                                AndPermission.defaultSettingDialog(activity, 300).show();
+                            }
+                        }
+                    }).start();
+        }
     }
 }

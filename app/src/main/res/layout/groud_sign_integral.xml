@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="60dp">
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="44dp"
+    android:layout_marginStart="70dp"
+    android:layout_marginEnd="70dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerVertical="true">
+
+    <ProgressBar
+      android:id="@+id/pb_sign"
+      style="@android:style/Widget.ProgressBar.Horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="6dp"
+      android:indeterminateOnly="false"
+      android:indeterminateDrawable="@color/color2"
+      android:progressDrawable="@drawable/progress"
+      />
+  </FrameLayout>
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+      <TextView
+        android:id="@+id/tv_sign_first_round"
+        style="@style/signRound"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_sign_integral_normal"
+        android:text="10" />
+
+      <TextView
+        style="@style/signTextBelowRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sign_first_round"
+        android:text="@string/sign_time1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+      <TextView
+        android:id="@+id/tv_sign_second_round"
+        style="@style/signRound"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_sign_integral_normal"
+        android:text="15" />
+
+      <TextView
+        style="@style/signTextBelowRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sign_second_round"
+        android:text="@string/sign_time2" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+      <TextView
+        android:id="@+id/tv_sign_third_round"
+        style="@style/signRound"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_sign_integral_normal"
+        android:text="20" />
+
+      <TextView
+        style="@style/signTextBelowRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sign_third_round"
+        android:text="@string/sign_time3" />
+    </RelativeLayout>
+
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+      <TextView
+        android:id="@+id/tv_sign_fourth_round"
+        style="@style/signRound"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_sign_integral_normal"
+        android:text="25" />
+
+      <TextView
+        style="@style/signTextBelowRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sign_fourth_round"
+        android:text="@string/sign_time4" />
+    </RelativeLayout>
+  </LinearLayout>
+</RelativeLayout>

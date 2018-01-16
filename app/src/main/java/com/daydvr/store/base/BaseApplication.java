@@ -3,14 +3,14 @@ package com.daydvr.store.base;
 import android.app.Application;
 
 import android.content.SharedPreferences;
+import com.daydvr.store.util.ResolutionUtil;
 import com.daydvr.store.util.ThreadPoolUtil;
 
 import com.daydvr.store.util.UpdateUiHandler;
-import com.squareup.leakcanary.LeakCanary;
 
 import java.util.concurrent.ExecutorService;
 
-import static com.daydvr.store.base.LoginConstant.loginTest;
+import static com.daydvr.store.base.PersonConstant.loginTest;
 
 /**
  * @author LoSyc
@@ -36,6 +36,7 @@ public class BaseApplication extends Application {
         SingleThreadPool = ThreadPoolUtil.getSingleThreadPool(SingleThreadPool);
         MultiThreadPool = ThreadPoolUtil.getMuiltThreadPool(MultiThreadPool);
         UpdateUiHandler.newInstance();
+        ResolutionUtil.getInstance().init(this);
     }
 
     public static BaseApplication getApplication() {

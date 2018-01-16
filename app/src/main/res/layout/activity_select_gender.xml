@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/appBackground"
+  tools:context="com.daydvr.store.view.person.SelectGenderActivity">
+
+  <RadioGroup
+    android:id="@+id/radioGroup"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:background="@drawable/shape_round"
+    app:layout_constraintDimensionRatio="100:28"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_global">
+
+    <RadioButton
+      android:id="@+id/man"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:background="@android:color/transparent"
+      android:button="@null"
+      android:drawableEnd="@drawable/selector_person_rb"
+      android:checked="true"
+      android:text="男" />
+
+    <RadioButton
+      android:id="@+id/woman"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:background="@android:color/transparent"
+      android:button="@null"
+      android:drawableEnd="@drawable/selector_person_rb"
+      android:text="女" />
+
+  </RadioGroup>
+
+  <Button
+    android:id="@+id/bt_determine"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:background="@drawable/shape_person_save_btn"
+    android:text="@string/person_determine"
+    android:textColor="@android:color/white"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+
+  <include layout="@layout/item_toolbar" />
+
+</android.support.constraint.ConstraintLayout>

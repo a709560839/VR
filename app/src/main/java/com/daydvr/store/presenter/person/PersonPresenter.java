@@ -34,23 +34,9 @@ public class PersonPresenter implements PersonContract.Presenter {
     }
 
     @Override
-    public void intoRecommend() {
+    public void intoPersonMessage() {
         if (mView != null) {
-            mView.jumpRecommend();
-        }
-    }
-
-    @Override
-    public void intoGameList() {
-        if (mView != null) {
-            mView.jumpGameList();
-        }
-    }
-
-    @Override
-    public void intoVideoList() {
-        if (mView != null) {
-            mView.jumpVideoList();
+            mView.jumpPersonMessage();
         }
     }
 

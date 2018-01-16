@@ -3,7 +3,6 @@ package com.daydvr.store.view.person;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,7 +19,6 @@ import com.daydvr.store.presenter.person.DownloadManagerContract;
 import com.daydvr.store.presenter.person.DownloadManagerPresenter;
 import com.daydvr.store.util.AppInfoUtil;
 import com.daydvr.store.util.DensityUtil;
-import com.daydvr.store.util.LoaderHandler;
 import com.daydvr.store.view.adapter.GameListAdapter;
 import com.daydvr.store.view.custom.CommonToolbar;
 import com.daydvr.store.view.game.GameDetailActivity;
@@ -31,9 +29,7 @@ import java.util.List;
 import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
 import static com.daydvr.store.base.BaseConstant.GAME_MANAGER_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.APK_ID;
-import static com.daydvr.store.base.GameConstant.INSTALLABLE;
-import static com.daydvr.store.base.GameConstant.TEXT_INSTALL;
-import static com.daydvr.store.base.LoginConstant.threadTest;
+import static com.daydvr.store.base.PersonConstant.threadTest;
 import static com.daydvr.store.util.AppInfoUtil.notifyClearAll;
 
 /**
@@ -88,7 +84,7 @@ public class DownloadManagerActivity extends BaseActivity implements DownloadMan
     }
 
     private void configComponent() {
-        mToolbar.initmToolBar(this);
+        mToolbar.initmToolBar(this, true);
         mToolbar.setCenterTitle(R.string.person_game_manager);
         mToolbar.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0);
         mContinueDownloadTextView.setOnClickListener(this);

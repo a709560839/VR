@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,11 +17,9 @@ import com.daydvr.store.R;
 import com.daydvr.store.base.BaseNotifyDatasFragment;
 import com.daydvr.store.bean.GameListBean;
 import com.daydvr.store.bean.VideoListBean;
-import com.daydvr.store.model.game.TestThread;
 import com.daydvr.store.presenter.guide.GuideContract;
 import com.daydvr.store.presenter.guide.GuidePresenter;
 import com.daydvr.store.util.AppInfoUtil;
-import com.daydvr.store.util.Logger;
 import com.daydvr.store.view.adapter.GameListAdapter;
 
 import com.daydvr.store.view.adapter.VideoListAdapter;
@@ -40,11 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.daydvr.store.base.BaseConstant.GAME_LIST_FRAGEMNT_ITEM;
-import static com.daydvr.store.base.BaseConstant.GUIDE_FRAGEMNT_ITEM;
 import static com.daydvr.store.base.BaseConstant.GUIDE_UI_UPDATE;
 import static com.daydvr.store.base.GameConstant.APK_ID;
-import static com.daydvr.store.base.BaseConstant.CURRENT_UPDTAE_UI;
-import static com.daydvr.store.base.LoginConstant.threadTest;
 
 
 public class GuideFragment extends BaseNotifyDatasFragment implements GuideContract.View {
@@ -69,6 +63,7 @@ public class GuideFragment extends BaseNotifyDatasFragment implements GuideContr
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_guide, container, false);
         mPresenter = new GuidePresenter(this);
+        mPresenter.initUtils(getActivity());
 
         initHandler();
         initView();

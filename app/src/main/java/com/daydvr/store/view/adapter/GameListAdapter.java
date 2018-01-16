@@ -2,7 +2,6 @@ package com.daydvr.store.view.adapter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,7 @@ import static com.daydvr.store.base.GameConstant.TEXT_OPEN;
 import static com.daydvr.store.base.GameConstant.TEXT_PAUSE;
 import static com.daydvr.store.base.GameConstant.TEXT_UPDATE;
 import static com.daydvr.store.base.GameConstant.UPDATE;
-import static com.daydvr.store.base.LoginConstant.threadTest;
+import static com.daydvr.store.base.PersonConstant.threadTest;
 
 /**
  * @author LoSyc
