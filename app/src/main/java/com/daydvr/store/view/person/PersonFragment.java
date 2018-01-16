@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseFragment;
-import com.daydvr.store.bean.PersonBean;
+import com.daydvr.store.bean.UserBean;
 import com.daydvr.store.presenter.person.PersonContract;
 import com.daydvr.store.presenter.person.PersonPresenter;
 import com.daydvr.store.util.GlideImageLoader;
@@ -52,6 +52,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     private TextView mSignTextView;
     private ImageView mSignImageView;
     private ViewGroup mDownloadManagerViewGroup;
+    private ViewGroup mRecodrViewGroup;
 
 
     @Nullable
@@ -87,6 +88,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
         mSettingConstraintLayout = mRootView.findViewById(R.id.cl_person_setting);
         mAppListViewGroup = mRootView.findViewById(R.id.cl_person_applist);
         mDownloadManagerViewGroup = mRootView.findViewById(R.id.cl_person_download);
+        mRecodrViewGroup = mRootView.findViewById(R.id.cl_person_record);
 
         configComponent();
     }
@@ -100,7 +102,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
         mLoginedRoundImageView.setOnClickListener(mOnClickListener);
         mSignImageView.setOnClickListener(mOnClickListener);
         mSignTextView.setOnClickListener(mOnClickListener);
-
+        mRecodrViewGroup.setOnClickListener(mOnClickListener);
     }
 
     private OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -136,6 +138,10 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
                     mPresenter.intoSign();
                     break;
 
+                case R.id.cl_person_record:
+                    mPresenter.intoRecord();
+                    break;
+
                 default:
                     break;
 
@@ -157,10 +163,6 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
 
     @Override
     public void showPersonalMessage(Intent intent) {
-        String name = intent.getStringExtra(USER_NAME);
-        String headUrl = intent.getStringExtra(USER_AVATAR_URL);
-        String registeredTime = intent.getStringExtra(USER_INTEGRAL);
-
         mHeadTextView.setVisibility(View.GONE);
         mHeadRoundImageView.setVisibility(View.GONE);
 
@@ -170,7 +172,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
         mUserNameTextView.setVisibility(View.VISIBLE);
         mIntegralTextView.setVisibility(View.VISIBLE);
 
-        PersonBean bean = intent.getParcelableExtra(USER_MESSGAE);
+        UserBean bean = intent.getParcelableExtra(USER_MESSGAE);
 
         mUserNameTextView.setText(getString(R.string.person_account) + bean.getUserName());
         mIntegralTextView.setText(getString(R.string.person_integral) + bean.getIntegral());
@@ -209,6 +211,12 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     @Override
     public void jumpSign() {
         Intent intent = new Intent(getActivity(), SignActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void jumpRecord() {
+        Intent intent = new Intent(getActivity(), ExchangeRecordsActivity.class);
         startActivity(intent);
     }
 

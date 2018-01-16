@@ -5,12 +5,15 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Message;
 
-import com.daydvr.store.bean.PersonBean;
+import com.daydvr.store.bean.UserBean;
+import com.daydvr.store.model.user.UserModel;
 import com.daydvr.store.util.LoaderHandler;
 
 import java.util.Map;
 
+import static com.daydvr.store.base.BaseApplication.MultiThreadPool;
 import static com.daydvr.store.base.BaseConstant.LOGIN_REQUEST_OK;
+import static com.daydvr.store.base.BaseConstant.USER_MSEEAGE_LOADER_OK;
 import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
 import static com.daydvr.store.base.PersonConstant.USER_AVATAR_URL;
 import static com.daydvr.store.base.PersonConstant.USER_MESSGAE;
@@ -27,12 +30,17 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private LoaderHandler mHandler;
 
+    private UserModel mUserModel;
+
     public LoginPresenter(LoginContract.View view) {
         mView = view;
         mView.setPresenter(this);
 
         mHandler = new LoaderHandler();
         mHandler.setListener(mHandleListener);
+
+        mUserModel = new UserModel();
+        mUserModel.setHandler(mHandler);
     }
 
     @Override
@@ -46,34 +54,13 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(String user, String password) {
-        for (Map.Entry<String, String> entry : loginTest.entrySet()) {
-            if (entry.getKey().equals(user) && entry.getValue().equals(password)) {
-                Intent intent = new Intent();
-                intent.putExtra(USER_NAME, user);
-                intent.putExtra(USER_AVATAR_URL, "https://img.tapimg.com/market/lcs/9e1328b55fab10aa59af1dd3273ee401_360.png");
-                intent.putExtra(USER_INTEGRAL, "1024");
-
-                PersonBean bean = PersonBean.getInstance();
-                bean.setId(123);
-                bean.setBirthday("7474-15-74");
-                bean.setGender(1);
-                bean.setTelephone("13333333333");
-                bean.setAvatarUrl("https://img.tapimg.com/market/lcs/9e1328b55fab10aa59af1dd3273ee401_360.png");
-                bean.setUserName("假的！");
-                bean.setIntegral(1024);
-
-                intent.putExtra(USER_MESSGAE, bean);
-
-                Message msg = mHandler.createMessage(LOGIN_REQUEST_OK, 0, 0, intent);
-                mHandler.sendMessage(msg);
-                return;
+    public void login(final String user, final String password) {
+        MultiThreadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                mUserModel.verifyLogin(user, password);
             }
-        }
-        new AlertDialog.Builder(mView.getViewContext())
-                .setMessage("请检查账号或者密码是否正确！")
-                .setPositiveButton("确定", null)
-                .show();
+        });
     }
 
     @Override
@@ -106,8 +93,29 @@ public class LoginPresenter implements LoginContract.Presenter {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case LOGIN_REQUEST_OK:
-                    Intent intent = (Intent) msg.obj;
+                    boolean flag = (boolean) msg.obj;
+                    if (flag) {
+                        if (mView != null) {
+                            MultiThreadPool.execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mUserModel.getUserMessage();
+                                }
+                            });
+                        }
+                    } else {
+                        new AlertDialog.Builder(mView.getViewContext())
+                                .setMessage("请检查账号或者密码是否正确！")
+                                .setPositiveButton("确定", null)
+                                .show();
+                    }
+                    break;
+
+                case USER_MSEEAGE_LOADER_OK:
+                    UserBean bean = (UserBean) msg.obj;
                     if (mView != null) {
+                        Intent intent = new Intent();
+                        intent.putExtra(USER_MESSGAE, bean);
                         mView.setLoginResult(LOGIN_OK, intent);
                     }
                     break;

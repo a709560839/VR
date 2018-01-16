@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.daydvr.store.R;
+import com.daydvr.store.view.person.IntegralRuleActivity;
 import com.daydvr.store.view.search.SearchActivity;
 
 /**
@@ -268,6 +269,25 @@ public class CommonToolbar extends Toolbar {
             @Override
             public void onClick(View v) {
                 activity.finish();
+            }
+        });
+    }
+
+    public void initRuleToolBar(final Activity activity){
+        this.inflateMenu(R.menu.menu_rule);
+        this.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_rule:
+                        Intent intent = new Intent(activity, IntegralRuleActivity.class);
+                        activity.startActivity(intent);
+                        break;
+
+                    default:
+                        break;
+                }
+                return false;
             }
         });
     }

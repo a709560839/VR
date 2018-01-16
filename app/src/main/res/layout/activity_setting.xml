@@ -7,7 +7,7 @@
   <include layout="@layout/item_toolbar" />
 
   <android.support.constraint.ConstraintLayout
-    android:id="@+id/content_frame"
+    android:id="@+id/content_frame_control"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
@@ -18,12 +18,19 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/cl_global">
 
-    <android.support.constraint.Guideline
-      android:id="@+id/gl_1"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="vertical"
-      app:layout_constraintGuide_percent="0.07" />
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/content_frame"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:background="@mipmap/shadow_background"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/content_frame_control">
+
   </android.support.constraint.ConstraintLayout>
 
 

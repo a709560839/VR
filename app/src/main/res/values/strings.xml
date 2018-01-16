@@ -82,6 +82,7 @@
   <string name="setting_check_update_key">check_update_perference</string>
   <string name="setting_version_now_summary">当前版本:1.0.0</string>
   <string name="setting_check_update_title">检查更新</string>
+  <string name="setting_controller_key">controller_perference</string>
 
   <!--个人中心页-->
   <string name="person_download_manage">下载管理</string>
@@ -99,6 +100,7 @@
   <string name="news_list">新品榜</string>
   <string name="download_list">下载榜</string>
   <string name="tip_no_download">下载的东西不见啦！（=´口｀=）</string>
+  <string name="tip_disdownload_integrel">积分不足</string>
 
   <!--个人信息页-->
   <string name="person_msg_head">显示头像</string>
@@ -120,6 +122,8 @@
   <string name="person_input_num">请输入手机号码</string>
   <string name="person_input_verification">请输入验证码</string>
   <string name="person_change_pwd">修改密码</string>
+  <string name="person_man">男</string>
+  <string name="person_woman">女</string>
 
   <!--Guide-->
   <string name="guide_into_main">进入主页</string>
@@ -140,4 +144,13 @@
   <string name="sign_time3">第5~6天</string>
   <string name="sign_time4">第7天</string>
 
+  <string name="controller">控制器</string>
+
+  <string name="integral_rule">1.连续签到1-2天，每天可获得10积分；\n\n2.连续签到3-4天，每天可获得15积分；\n\n3.连续签到5-6天，每天可获得20积分；\n\n4.连续签到7天以上，每天可获得25积分。\n\n如签到中途中断，从初始值开始计算。</string>
+  <string name="integral_rule_title">连续签到，每日可获取奖励</string>
+  <string name="integral_rule_toolbar">积分规则</string>
+  <string name="exchange_record">兑换记录</string>
+  <string name="exchange_succcess">兑换成功</string>
+
+  <string name="person_record">兑换记录</string>
 </resources>

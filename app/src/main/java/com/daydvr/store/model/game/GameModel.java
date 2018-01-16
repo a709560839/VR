@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.daydvr.store.base.BaseConstant.DOWNLOAD_RANKING_LOADER_OK;
+import static com.daydvr.store.base.BaseConstant.EXCHANGE_DATA_LOADER_OK;
 import static com.daydvr.store.base.BaseConstant.GAME_DETAIL_OK;
 import static com.daydvr.store.base.BaseConstant.GAME_DETAIL_PIC_OK;
 import static com.daydvr.store.base.BaseConstant.GAME_LOADER_OK;
@@ -28,6 +29,7 @@ public class GameModel {
     private static List<GameListBean> mSoaringRankingDatas = new ArrayList<>();
     private static List<GameListBean> mNewsRankingDatas = new ArrayList<>();
     private static List<GameListBean> mDownloadRankingDatas = new ArrayList<>();
+    private static List<GameListBean> mExchangeDatas = new ArrayList<>();
 
     public void getGameListDatas(int page) {
         try {
@@ -164,6 +166,36 @@ public class GameModel {
         mGameDatas.addAll(datas);
         if (mHandler != null) {
             Message msg = mHandler.createMessage(GAME_LOADER_OK, 0, 0, datas);
+            mHandler.sendMessage(msg);
+        }
+    }
+
+    public void getExchangeGameListDatas() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<GameListBean> datas = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            GameListBean bean = new GameListBean();
+            bean.setId(i);
+            bean.setName("游戏：" + i);
+            bean.setPackageName("游戏：" + i);
+            bean.setIconUrl("https://img.tapimg.com/market/lcs/a74d23d8f38335d04d25317cbf44349e_360.png");
+            bean.setVersion(1);
+            bean.setRating((int) (Math.random() * 2) + 3);
+            int integral = (int) (Math.random() * 100 + 123);
+            if (integral > 150) {
+                bean.setIntegral(integral);
+            }
+            bean.setType("类型：" + i);
+            bean.setSize((long) (Math.random() * 100 + 100));
+            datas.add(bean);
+        }
+        mExchangeDatas.addAll(datas);
+        if (mHandler != null) {
+            Message msg = mHandler.createMessage(EXCHANGE_DATA_LOADER_OK, 0, 0, datas);
             mHandler.sendMessage(msg);
         }
     }

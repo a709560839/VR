@@ -15,6 +15,7 @@ public class SettingActivity extends BaseActivity {
         setContentView(R.layout.activity_setting);
 
         initView();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame_control, new ControllerFragment()).commit();
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingFragment()).commit();
     }
 

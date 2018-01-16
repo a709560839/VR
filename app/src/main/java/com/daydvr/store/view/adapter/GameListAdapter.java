@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.daydvr.store.R;
 import com.daydvr.store.bean.GameListBean;
+import com.daydvr.store.bean.UserBean;
 import com.daydvr.store.manager.GameManager;
 import com.daydvr.store.util.AppInfoUtil;
 
@@ -129,7 +130,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 default:
                     break;
             }
-            holder.gameDetailTextView.setText(text);
+            holder.gameDownloadTextView.setText(text);
         }
     }
 
@@ -189,10 +190,19 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
 
     private void initItemView(ViewHolder holder, int position) {
         GameListBean bean = mDatas.get(position);
+        UserBean userBean = UserBean.getInstance();
         holder.gameNameTextView.setText(bean.getName());
         if (bean.getIntegral() > 0) {
             holder.gameIntegralTextView.setText(String.valueOf(bean.getIntegral()) + " 积分");
             holder.gameIntegralTextView.setTextColor(Color.RED);
+            if (userBean == null || bean.getIntegral() > userBean.getIntegral()) {
+                holder.gameDownloadTextView.setEnabled(false);
+                holder.gameDownloadTextView.setTextColor(Color.GRAY);
+                holder.gameIntegralTipTextView.setVisibility(View.VISIBLE);
+            }
+        } else {
+            holder.gameIntegralTextView.setText("免积分下载");
+            holder.gameIntegralTextView.setTextColor(Color.GRAY);
         }
         holder.gameRatingBar.setMax(5);
         holder.gameRatingBar.setRating(bean.getRating());
@@ -253,7 +263,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                 text = "";
                 break;
         }
-        holder.gameDetailTextView.setText(text);
+        holder.gameDownloadTextView.setText(text);
     }
 
     public void setDatas(List<GameListBean> datas) {
@@ -272,9 +282,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         private TextView gameTypeTextView;
         private TextView gameNameTextView;
         private TextView gameIntegralTextView;
+        private TextView gameIntegralTipTextView;
         private TextView gameSizeTextView;
         private RatingBar gameRatingBar;
-        private TextView gameDetailTextView;
+        private TextView gameDownloadTextView;
         private ProgressBar gameProgressBar;
         private TextView gameProgressTextView;
         private TextView gameSpeedTextView;
@@ -294,10 +305,11 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         private void initNormalView(final View itemView) {
             flag = this.getFlag();
             gameRankingTextView = itemView.findViewById(R.id.tv_rangking);
-            gameDetailTextView = itemView.findViewById(R.id.tv_game_detail);
+            gameDownloadTextView = itemView.findViewById(R.id.tv_game_detail);
             gameIconImageView = itemView.findViewById(R.id.iv_game_icon);
             gameNameTextView = itemView.findViewById(R.id.tv_game_name);
             gameIntegralTextView = itemView.findViewById(R.id.tv_game_integral);
+            gameIntegralTipTextView = itemView.findViewById(R.id.tv_disdownload_integrel);
             gameSizeTextView = itemView.findViewById(R.id.tv_game_size);
             gameRatingBar = itemView.findViewById(R.id.rb_game_rating);
             gameTypeTextView = itemView.findViewById(R.id.tv_game_type);
@@ -306,7 +318,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             gameSpeedTextView = itemView.findViewById(R.id.tv_download_speed);
             cancelDownloadTextView = itemView.findViewById(R.id.tv_cancel_download);
 
-            gameDetailTextView.setOnClickListener(new View.OnClickListener() {
+            gameDownloadTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     GameListBean bean = mDatas.get(getAdapterPosition());
@@ -315,7 +327,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
                         if (!mAppInfoUtil.checkMemoryAndNet(bean)) {
                             return;
                         }
-                        if (TEXT_DOWNLOAD.equals(gameDetailTextView.getText())) {
+                        if (TEXT_DOWNLOAD.equals(gameDownloadTextView.getText())) {
                             AppInfoUtil.notifyDownloadAppProgress(mRootView.getContext(), bean.getId(), bean.getName());
                             setAfterDownloadViewVisibility();
                         }
@@ -353,7 +365,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         }
 
         public void setInitViewVisibility() {
-            gameDetailTextView.setText(TEXT_DOWNLOAD);
+            gameDownloadTextView.setText(TEXT_DOWNLOAD);
             gameRatingBar.setVisibility(View.VISIBLE);
             gameSizeTextView.setVisibility(View.VISIBLE);
             gameIntegralTextView.setVisibility(View.VISIBLE);
@@ -377,7 +389,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         }
 
         public void setDownloadButtonText(CharSequence text) {
-            gameDetailTextView.setText(text);
+            gameDownloadTextView.setText(text);
         }
 
         public void setProgressTextView(GameListBean bean, CharSequence text) {

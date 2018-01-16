@@ -19,6 +19,9 @@
   <color name="color9">#e2dddd</color>
   <color name="color10">#ff9800</color>
   <color name="color11">#dcdcdc</color>
+  <color name="color12">#212121</color>
+  <color name="color13">#f1f0f0</color>
+  <color name="color14">#8A000000</color>
 
   <color name="appBackground">#f0f0f0</color>
   <color name="backgroundControl">#ffffff</color>

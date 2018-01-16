@@ -41,6 +41,8 @@ public class BaseConstant {
     public static final int NEWS_RANKING_LOADER_OK = 13;
     public static final int DOWNLOAD_RANKING_LOADER_OK  = 14;
     public static final int SIGN_DATA_LOADER_OK = 15;
+    public static final int EXCHANGE_DATA_LOADER_OK = 16;
+    public static final int USER_MSEEAGE_LOADER_OK = 17;
 
     public static final int GAME_DETAIL_OK = 51;
     public static final int GAME_DETAIL_PIC_OK = 52;

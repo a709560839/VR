@@ -6,12 +6,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 
+import com.daydvr.store.bean.UserBean;
 import com.daydvr.store.util.PhotoUtils;
 
 import java.io.File;
 
 import static com.daydvr.store.base.PersonConstant.CUT_PICKER_PHOTO_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.AVATAR_OUTPUT_FILE;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_AVATAR;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_BIRTHDAY;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_GENDER;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_TELEPHONE;
 import static com.daydvr.store.base.PersonConstant.PICKER_CAMERA_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.PICKER_PHOTO_REQUEST_CODE;
 
@@ -63,7 +68,24 @@ public class PersonMessagePresenter implements PersonMessageContract.Presenter {
 
     @Override
     public void loadDatas() {
+        UserBean bean = UserBean.getInstance();
+        Intent intent = new Intent();
+        intent.putExtra(PERSON_MSG_AVATAR, bean.getAvatarUrl());
+        if (bean.getGender() == 1) {
+            intent.putExtra(PERSON_MSG_GENDER, "男");
+        } else if (bean.getGender() == 2) {
+            intent.putExtra(PERSON_MSG_GENDER, "女");
+        }
+        intent.putExtra(PERSON_MSG_BIRTHDAY, bean.getBirthday());
+        String phoneStart = bean.getTelephone().substring(0, 3);
+        String phoneEnd = bean.getTelephone().substring(7, 11);
+        String phone = phoneStart + "****" + phoneEnd;
+        intent.putExtra(PERSON_MSG_TELEPHONE, phone);
 
+        mView.showAvatar(intent, false);
+        mView.showGender(intent);
+        mView.showBirthday(intent);
+        mView.showTelephone(intent);
     }
 
     @Override

@@ -2,9 +2,6 @@ package com.daydvr.store.base;
 
 import android.app.Application;
 
-import android.content.SharedPreferences;
-
-import com.daydvr.store.bean.PersonBean;
 import com.daydvr.store.util.ResolutionUtil;
 import com.daydvr.store.util.ThreadPoolUtil;
 

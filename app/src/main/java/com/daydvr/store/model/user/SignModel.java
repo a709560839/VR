@@ -1,4 +1,4 @@
-package com.daydvr.store.model.sign;
+package com.daydvr.store.model.user;
 /*
  * Copyright (C) 2018 3ivr. All rights reserved.
  *

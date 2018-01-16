@@ -12,7 +12,7 @@ import static com.daydvr.store.base.BaseConstant.SIGN_DATA_LOADER_OK;
 
 import android.os.Message;
 import com.daydvr.store.bean.SignEntity;
-import com.daydvr.store.model.sign.SignModel;
+import com.daydvr.store.model.user.SignModel;
 import com.daydvr.store.presenter.person.SignContract.Presenter;
 import com.daydvr.store.presenter.person.SignContract.View;
 import com.daydvr.store.util.LoaderHandler;

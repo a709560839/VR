@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/preference_electric_color_layout"
+  android:layout_width="match_parent"
+  android:layout_height="60dip"
+  android:gravity="center_vertical"
+  android:orientation="horizontal">
+
+  <TextView
+    android:id="@+id/preference_electric_title"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginStart="16dp"
+    android:text="@string/controller"
+    android:textSize="@dimen/textSize3"
+    android:gravity="center_vertical"
+    android:textColor="@color/color12"/>
+
+  <ImageView
+    android:id="@+id/preference_electric_go"
+    android:layout_width="30dip"
+    android:layout_height="30dip"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:src="@drawable/ic_person_msg_next"
+    android:layout_marginEnd="18dp"
+    />
+
+</RelativeLayout>

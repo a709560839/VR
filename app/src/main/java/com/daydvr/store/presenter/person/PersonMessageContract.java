@@ -21,7 +21,7 @@ public class PersonMessageContract {
 
         void showBirthday(Intent data);
 
-        void showPhone(Intent data);
+        void showTelephone(Intent data);
 
         void jumpPickerPhoto();
 

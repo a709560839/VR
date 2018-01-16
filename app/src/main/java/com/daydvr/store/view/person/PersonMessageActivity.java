@@ -159,9 +159,13 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
     }
 
     @Override
-    public void showPhone(Intent data) {
+    public void showTelephone(Intent data) {
         if (data != null) {
-            mTelephoneTextView.setText(data.getStringExtra(PERSON_MSG_TELEPHONE));
+            String originNum = data.getStringExtra(PERSON_MSG_TELEPHONE);
+            String phoneStart = originNum.substring(0, 3);
+            String phoneEnd = originNum.substring(7, 11);
+            String phone = phoneStart + "****" + phoneEnd;
+            mTelephoneTextView.setText(phone);
         }
     }
 
@@ -179,13 +183,13 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
     @Override
     public void jumpChangeBirthday() {
         Intent intent = new Intent(this, SelectBirthdayActivity.class);
+        intent.putExtra(PERSON_MSG_BIRTHDAY, mBirthdayTextView.getText());
         startActivityForResult(intent, CHANGE_BIRTHDAY_REQUEST_CODE);
     }
 
     @Override
     public void jumpChangePhone() {
         Intent intent = new Intent(this, VerifyNumActivity.class);
-        intent.putExtra("phoneNum", mTelephoneTextView.getText());
         startActivityForResult(intent, CHANGE_PHONE_REQUEST_CODE);
     }
 
@@ -257,7 +261,7 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
 
                 case CHANGE_PHONE_REQUEST_CODE:
                     if (data != null) {
-                        showPhone(data);
+                        showTelephone(data);
                     }
                     break;
 

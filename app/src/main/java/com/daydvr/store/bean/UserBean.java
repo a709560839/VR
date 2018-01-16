@@ -1,6 +1,5 @@
 package com.daydvr.store.bean;
 
-import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,8 +8,8 @@ import android.os.Parcelable;
  * @version Created on 2018/1/16. 15:37
  */
 
-public class PersonBean implements Parcelable {
-        private static PersonBean user;
+public class UserBean implements Parcelable {
+        private static UserBean user;
 
     private int _id;
     private String avatarUrl;
@@ -20,7 +19,7 @@ public class PersonBean implements Parcelable {
     private String telephone;
     private int integral;
 
-    protected PersonBean(Parcel in) {
+    protected UserBean(Parcel in) {
         _id = in.readInt();
         avatarUrl = in.readString();
         birthday = in.readString();
@@ -30,15 +29,15 @@ public class PersonBean implements Parcelable {
         integral = in.readInt();
     }
 
-    public static final Creator<PersonBean> CREATOR = new Creator<PersonBean>() {
+    public static final Creator<UserBean> CREATOR = new Creator<UserBean>() {
         @Override
-        public PersonBean createFromParcel(Parcel in) {
-            return new PersonBean(in);
+        public UserBean createFromParcel(Parcel in) {
+            return new UserBean(in);
         }
 
         @Override
-        public PersonBean[] newArray(int size) {
-            return new PersonBean[size];
+        public UserBean[] newArray(int size) {
+            return new UserBean[size];
         }
     };
 
@@ -58,13 +57,13 @@ public class PersonBean implements Parcelable {
         dest.writeInt(integral);
     }
 
-    private PersonBean() {
+    private UserBean() {
 
     }
 
-    public static PersonBean getInstance() {
+    public static UserBean getInstance() {
         if (user == null) {
-            user = new PersonBean();
+            user = new UserBean();
         }
         return user;
     }

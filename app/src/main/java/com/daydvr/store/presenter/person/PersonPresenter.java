@@ -67,4 +67,11 @@ public class PersonPresenter implements PersonContract.Presenter {
             mView.jumpSign();
         }
     }
+
+    @Override
+    public void intoRecord() {
+        if (mView != null) {
+            mView.jumpRecord();
+        }
+    }
 }

@@ -9,7 +9,7 @@
   tools:context="com.daydvr.store.view.person.SelectGenderActivity">
 
   <RadioGroup
-    android:id="@+id/radioGroup"
+    android:id="@+id/change_gender_radiogroup"
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:layout_marginTop="6dp"
@@ -24,25 +24,32 @@
     app:layout_constraintTop_toBottomOf="@id/cl_global">
 
     <RadioButton
-      android:id="@+id/man"
+        android:id="@+id/change_male"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:checked="true"
+        android:background="@null"
+        android:button="@null"
+        android:drawableEnd="@drawable/selector_person_rb"
+        android:text="@string/person_man"
+        android:textColor="@color/color14"/>
+
+    <View
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:background="@android:color/transparent"
-      android:button="@null"
-      android:drawableEnd="@drawable/selector_person_rb"
-      android:checked="true"
-      android:text="男" />
+      android:layout_height="1dp"
+      android:background="@color/gray" />
 
     <RadioButton
-      android:id="@+id/woman"
+      android:id="@+id/change_female"
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_weight="1"
-      android:background="@android:color/transparent"
+      android:background="@null"
       android:button="@null"
       android:drawableEnd="@drawable/selector_person_rb"
-      android:text="女" />
+      android:text="@string/person_woman"
+      android:textColor="@color/color14"/>
 
   </RadioGroup>
 
@@ -58,7 +65,7 @@
     android:textColor="@android:color/white"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+    app:layout_constraintTop_toBottomOf="@id/change_gender_radiogroup"/>
 
   <include layout="@layout/item_toolbar" />
 

@@ -103,6 +103,15 @@
     <activity
       android:name=".view.person.SignActivity"
       android:screenOrientation="portrait" />
+    <activity
+      android:name=".view.person.VerifyNumActivity"
+      android:screenOrientation="portrait" />
+    <activity
+      android:name=".view.person.IntegralRuleActivity"
+      android:screenOrientation="portrait" />
+
+    <activity android:name=".view.person.ExchangeRecordsActivity"
+      android:screenOrientation="portrait"/>
 
     <provider
       android:authorities="com.daydvr.store.fileProvider"
@@ -114,7 +123,6 @@
         android:resource="@xml/provider_paths" />
     </provider>
 
-    <activity android:name=".view.person.VerifyNumActivity"></activity>
   </application>
 
 </manifest>

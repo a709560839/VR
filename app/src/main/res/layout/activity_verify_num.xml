@@ -20,14 +20,18 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_global" />
 
-  <TextView
+  <EditText
     android:id="@+id/ed_person_verify_num"
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:gravity="center_vertical"
+    android:singleLine="true"
+    android:inputType="number"
+    android:maxLength="11"
+    android:background="@null"
     android:textSize="@dimen/textSize5"
+    android:hint="@string/person_input_num"
     app:layout_constraintDimensionRatio="100:14"
     app:layout_constraintStart_toStartOf="@id/v_bg"
     app:layout_constraintEnd_toEndOf="@id/v_bg"
@@ -52,6 +56,7 @@
     android:layout_height="0dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
+    android:inputType="number"
     android:maxLength="6"
     android:background="@null"
     android:textSize="@dimen/textSize5"

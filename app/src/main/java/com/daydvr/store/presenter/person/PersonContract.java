@@ -28,6 +28,8 @@ public class PersonContract {
 
         void jumpSign();
 
+        void jumpRecord();
+
         Context getViewContext();
     }
 
@@ -45,6 +47,8 @@ public class PersonContract {
         void intoDownloadManager();
 
         void intoSign();
+
+        void intoRecord();
     }
 }
 

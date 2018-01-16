@@ -58,6 +58,7 @@ public class SignActivity extends BaseActivity implements SignContract.View{
         mSignView.setAdapter(signAdapter);
         mToolBar.setCenterTitle(getResources().getString(R.string.sign_everyday));
         mToolBar.initmToolBar(this,false);
+        mToolBar.initRuleToolBar(this);
         mSignIntegralLayout.setSignDay(mPresenter.getContinueSignDay());
         setSignContinueText(mPresenter.getContinueSignDay());
         mSignButton.setOnClickListener(new OnClickListener() {

@@ -1,5 +1,10 @@
 package com.daydvr.store.view.person;
 
+import static com.daydvr.store.base.PersonConstant.CHANGE_OK;
+import static com.daydvr.store.base.PersonConstant.CHANGE_PHONE_REQUEST_CODE;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_BIRTHDAY;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_TELEPHONE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,16 +24,11 @@ public class VerifyNumActivity extends BaseActivity implements OnClickListener {
     private CommonToolbar mToolBar;
 
     private Button mDetermineButton;
-    private TextView mNumTextView;
-    private String num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_num);
-
-        Intent intent = getIntent();
-        num = intent.getStringExtra("phoneNum");
 
         initView();
     }
@@ -36,7 +36,6 @@ public class VerifyNumActivity extends BaseActivity implements OnClickListener {
     private void initView() {
         mToolBar = findViewById(R.id.toolbar);
 
-        mNumTextView = findViewById(R.id.ed_person_verify_num);
         mDetermineButton = findViewById(R.id.bt_determine);
 
         configComponent();
@@ -47,9 +46,31 @@ public class VerifyNumActivity extends BaseActivity implements OnClickListener {
         mToolBar.setCenterTitle(getResources().getString(R.string.person_verify_num));
         mToolBar.initmToolBar(this,false);
 
-        mNumTextView.setText(num);
-
         mDetermineButton.setOnClickListener(this);
+    }
+
+    private void setReturnResult(String data) {
+        Intent intent = new Intent();
+        intent.putExtra(PERSON_MSG_TELEPHONE,data);
+        setResult(CHANGE_OK, intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == CHANGE_OK) {
+            switch (requestCode) {
+                case CHANGE_PHONE_REQUEST_CODE:
+                    if (data != null) {
+                        setReturnResult(data.getStringExtra(PERSON_MSG_TELEPHONE));
+                        finish();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
 
     @Override
@@ -57,8 +78,7 @@ public class VerifyNumActivity extends BaseActivity implements OnClickListener {
         switch (view.getId()) {
             case R.id.bt_determine:
                 Intent intent = new Intent(VerifyNumActivity.this, ChangeNumActivity.class);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent,CHANGE_PHONE_REQUEST_CODE);
                 break;
 
             default:

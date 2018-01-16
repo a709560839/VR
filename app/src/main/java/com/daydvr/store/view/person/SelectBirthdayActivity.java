@@ -1,5 +1,9 @@
 package com.daydvr.store.view.person;
 
+import static com.daydvr.store.base.PersonConstant.CHANGE_OK;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_BIRTHDAY;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
@@ -14,16 +18,24 @@ import com.daydvr.store.view.custom.datepicker.DatePickerPopWin;
 /**
  * @author a79560839
  */
-public class SelectBirthdayActivity extends BaseActivity {
+public class SelectBirthdayActivity extends BaseActivity implements IdleHandler {
 
     private CommonToolbar mToolBar;
+    private String birthday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_birthday);
 
+        initIntent();
+
         initView();
+    }
+
+    private void initIntent() {
+        Intent intent = getIntent();
+        birthday = intent.getStringExtra(PERSON_MSG_BIRTHDAY);
     }
 
     private void initView() {
@@ -33,35 +45,48 @@ public class SelectBirthdayActivity extends BaseActivity {
     }
 
     private void configComponent() {
-        mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this),0,0);
+        mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0);
         mToolBar.setCenterTitle(getResources().getString(R.string.person_select_birthday));
-        mToolBar.initmToolBar(this,false);
+        mToolBar.initmToolBar(this, false);
 
-        Looper.myQueue().addIdleHandler(new IdleHandler() {
-            @Override
-            public boolean queueIdle() {
-                initDatePicker();
-                return false;
-            }
-        });
+        Looper.myQueue().addIdleHandler(this);
     }
 
-    private void initDatePicker(){
-        DatePickerPopWin pickerPopWin = new DatePickerPopWin.Builder(SelectBirthdayActivity.this, new DatePickerPopWin.OnDatePickedListener() {
-            @Override
-            public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
-                Toast.makeText(SelectBirthdayActivity.this, dateDesc, Toast.LENGTH_SHORT).show();
-            }
-        }).textConfirm("确定") //text of confirm button
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void initDatePicker() {
+        DatePickerPopWin pickerPopWin = new DatePickerPopWin.Builder(SelectBirthdayActivity.this,
+                new DatePickerPopWin.OnDatePickedListener() {
+                    @Override
+                    public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
+                        setReturnResult(dateDesc);
+                        finish();
+                    }
+                }).textConfirm("确定")
                 .textCancel(" ")
-                .btnTextSize(16) // button text size
-                .viewTextSize(25) // pick view text size
-                .colorCancel(Color.parseColor("#999999")) //color of cancel button
-                .colorConfirm(Color.parseColor("#0ca4ea"))//color of confirm button
-                .minYear(1900) //min year in loop
-                .maxYear(2019) // max year in loop
-                .dateChose("2018-1-1") // date chose when init popwindow
+                .btnTextSize(16)
+                .viewTextSize(25)
+                .colorCancel(Color.parseColor("#999999"))
+                .colorConfirm(Color.parseColor("#0ca4ea"))
+                .minYear(1900)
+                .maxYear(2019)
+                .dateChose(birthday)
                 .build();
         pickerPopWin.showPopWin(SelectBirthdayActivity.this);
+    }
+
+    private void setReturnResult(String data) {
+        Intent intent = new Intent();
+        intent.putExtra(PERSON_MSG_BIRTHDAY, data);
+        setResult(CHANGE_OK, intent);
+    }
+
+    @Override
+    public boolean queueIdle() {
+        initDatePicker();
+        return false;
     }
 }
