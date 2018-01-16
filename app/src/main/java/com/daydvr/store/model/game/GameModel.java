@@ -44,7 +44,10 @@ public class GameModel {
             bean.setIconUrl("https://img.tapimg.com/market/lcs/a74d23d8f38335d04d25317cbf44349e_360.png");
             bean.setVersion(1);
             bean.setRating((int) (Math.random() * 3) + 3);
-            bean.setSummary("概要：" + start);
+            int integral = (int) (Math.random() * 100 + 123);
+            if (integral > 150) {
+                bean.setIntegral(integral);
+            }
             bean.setType("类型：" + start);
             bean.setSize((long) (Math.random() * 100 + 100));
 
@@ -150,7 +153,10 @@ public class GameModel {
             bean.setIconUrl("https://img.tapimg.com/market/lcs/a74d23d8f38335d04d25317cbf44349e_360.png");
             bean.setVersion(1);
             bean.setRating((int) (Math.random() * 2) + 3);
-            bean.setSummary("概要：" + i);
+            int integral = (int) (Math.random() * 100 + 123);
+            if (integral > 150) {
+                bean.setIntegral(integral);
+            }
             bean.setType("类型：" + i);
             bean.setSize((long) (Math.random() * 100 + 100));
             datas.add(bean);

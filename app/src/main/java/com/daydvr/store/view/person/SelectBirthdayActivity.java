@@ -34,7 +34,7 @@ public class SelectBirthdayActivity extends BaseActivity {
 
     private void configComponent() {
         mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this),0,0);
-        mToolBar.setCenterTitle(getResources().getString(R.string.setting));
+        mToolBar.setCenterTitle(getResources().getString(R.string.person_select_birthday));
         mToolBar.initmToolBar(this,false);
 
         Looper.myQueue().addIdleHandler(new IdleHandler() {

@@ -20,16 +20,14 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_global" />
 
-  <EditText
-    android:id="@+id/ed_person_change_num"
+  <TextView
+    android:id="@+id/ed_person_verify_num"
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:maxLength="11"
-    android:background="@null"
+    android:gravity="center_vertical"
     android:textSize="@dimen/textSize5"
-    android:hint="@string/person_input_num"
     app:layout_constraintDimensionRatio="100:14"
     app:layout_constraintStart_toStartOf="@id/v_bg"
     app:layout_constraintEnd_toEndOf="@id/v_bg"
@@ -49,7 +47,7 @@
     />
 
   <EditText
-    android:id="@+id/ed_person_change_code"
+    android:id="@+id/ed_person_verify_code"
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:paddingStart="16dp"
@@ -59,8 +57,8 @@
     android:textSize="@dimen/textSize5"
     android:hint="@string/person_input_verification"
     app:layout_constraintDimensionRatio="100:14"
-    app:layout_constraintStart_toStartOf="@id/ed_person_change_num"
-    app:layout_constraintEnd_toEndOf="@id/ed_person_change_num"
+    app:layout_constraintStart_toStartOf="@id/ed_person_verify_num"
+    app:layout_constraintEnd_toEndOf="@id/ed_person_verify_num"
     app:layout_constraintBottom_toBottomOf="@id/v_bg" />
 
   <Button
@@ -74,9 +72,9 @@
     android:textSize="@dimen/textSize7"
     android:text="@string/person_verification_code"
     app:layout_constraintDimensionRatio="7:2"
-    app:layout_constraintEnd_toEndOf="@id/ed_person_change_code"
-    app:layout_constraintTop_toTopOf="@id/ed_person_change_code"
-    app:layout_constraintBottom_toBottomOf="@id/ed_person_change_code"/>
+    app:layout_constraintEnd_toEndOf="@id/ed_person_verify_code"
+    app:layout_constraintTop_toTopOf="@id/ed_person_verify_code"
+    app:layout_constraintBottom_toBottomOf="@id/ed_person_verify_code"/>
 
   <Button
     android:id="@+id/bt_determine"

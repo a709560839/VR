@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseFragment;
+import com.daydvr.store.bean.PersonBean;
 import com.daydvr.store.presenter.person.PersonContract;
 import com.daydvr.store.presenter.person.PersonPresenter;
 import com.daydvr.store.util.GlideImageLoader;
@@ -24,7 +25,8 @@ import com.daydvr.store.view.setting.SettingActivity;
 
 import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
 import static com.daydvr.store.base.PersonConstant.LOGIN_REQUEST_CODE;
-import static com.daydvr.store.base.PersonConstant.USER_HEAD_URL;
+import static com.daydvr.store.base.PersonConstant.USER_AVATAR_URL;
+import static com.daydvr.store.base.PersonConstant.USER_MESSGAE;
 import static com.daydvr.store.base.PersonConstant.USER_NAME;
 import static com.daydvr.store.base.PersonConstant.USER_INTEGRAL;
 import static com.daydvr.store.base.PersonConstant.isLogin;
@@ -50,17 +52,14 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     private TextView mSignTextView;
     private ImageView mSignImageView;
     private ViewGroup mDownloadManagerViewGroup;
-    private ScrollViewListener mScrollViewListener;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_person, container, false);
         mPresenter = new PersonPresenter(this);
-
-        mScrollViewListener = new ScrollViewListener();
 
         initView();
 
@@ -69,7 +68,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
 
     @Override
     protected void onFragmentFirstVisible() {
-        initSearchBar(mRootView, mScrollViewListener);
+        initSearchBar(mRootView, null);
     }
 
     @Override
@@ -159,7 +158,7 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
     @Override
     public void showPersonalMessage(Intent intent) {
         String name = intent.getStringExtra(USER_NAME);
-        String headUrl = intent.getStringExtra(USER_HEAD_URL);
+        String headUrl = intent.getStringExtra(USER_AVATAR_URL);
         String registeredTime = intent.getStringExtra(USER_INTEGRAL);
 
         mHeadTextView.setVisibility(View.GONE);
@@ -171,9 +170,11 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
         mUserNameTextView.setVisibility(View.VISIBLE);
         mIntegralTextView.setVisibility(View.VISIBLE);
 
-        mUserNameTextView.setText(getString(R.string.person_account) + name);
-        mIntegralTextView.setText(getString(R.string.person_integral) + registeredTime);
-        GlideImageLoader.commonLoader(mRootView.getContext(),headUrl,mLoginedRoundImageView);
+        PersonBean bean = intent.getParcelableExtra(USER_MESSGAE);
+
+        mUserNameTextView.setText(getString(R.string.person_account) + bean.getUserName());
+        mIntegralTextView.setText(getString(R.string.person_integral) + bean.getIntegral());
+        GlideImageLoader.commonLoader(mRootView.getContext(), bean.getAvatarUrl(), mLoginedRoundImageView);
     }
 
     @Override
@@ -193,8 +194,8 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
         Intent i = new Intent(getActivity(), SettingActivity.class);
         startActivity(i);
     }
-    
-	@Override
+
+    @Override
     public void jumpAppList() {
         startActivity(new Intent(getActivity(), AppManagerActivity.class));
     }
@@ -230,29 +231,6 @@ public class PersonFragment extends BaseFragment implements PersonContract.View 
                 default:
                     break;
             }
-        }
-    }
-
-    class ScrollViewListener extends BaseScrollViewLisenter {
-
-        @Override
-        protected int getBannerHeight() {
-            return 0;
-        }
-
-        @Override
-        protected View getSearchBackground() {
-            return mRootView.findViewById(R.id.v_search_bg);
-        }
-
-        @Override
-        protected Activity getHostActivity() {
-            return getActivity();
-        }
-
-        @Override
-        protected View getSearchToolbar() {
-            return mRootView.findViewById(R.id.tv_search);
         }
     }
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 
 import com.daydvr.store.util.PhotoUtils;
@@ -12,7 +11,7 @@ import com.daydvr.store.util.PhotoUtils;
 import java.io.File;
 
 import static com.daydvr.store.base.PersonConstant.CUT_PICKER_PHOTO_REQUEST_CODE;
-import static com.daydvr.store.base.PersonConstant.HEAD_OUTPUT_FILE;
+import static com.daydvr.store.base.PersonConstant.AVATAR_OUTPUT_FILE;
 import static com.daydvr.store.base.PersonConstant.PICKER_CAMERA_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.PICKER_PHOTO_REQUEST_CODE;
 
@@ -32,7 +31,7 @@ public class PersonMessagePresenter implements PersonMessageContract.Presenter {
     }
 
     private Uri createFileOfHead() {
-        File outputfile = new File(mView.getViewContext().getExternalCacheDir(), HEAD_OUTPUT_FILE);
+        File outputfile = new File(mView.getViewContext().getExternalCacheDir(), AVATAR_OUTPUT_FILE);
         try {
             if (outputfile.exists()) {
                 outputfile.delete();
@@ -63,6 +62,11 @@ public class PersonMessagePresenter implements PersonMessageContract.Presenter {
     }
 
     @Override
+    public void loadDatas() {
+
+    }
+
+    @Override
     public void pickerPhoto() {
         if (mView != null) {
             mView.jumpPickerPhoto();
@@ -70,9 +74,9 @@ public class PersonMessagePresenter implements PersonMessageContract.Presenter {
     }
 
     @Override
-    public void intoChangeSex() {
+    public void intoChangeGender() {
         if (mView != null) {
-            mView.jumpChangeSex();
+            mView.jumpChangeGender();
         }
     }
 
@@ -114,7 +118,7 @@ public class PersonMessagePresenter implements PersonMessageContract.Presenter {
         }
         if (type == PICKER_CAMERA_REQUEST_CODE) {
             String path = mView.getViewContext().getExternalCacheDir().getPath();
-            String name = HEAD_OUTPUT_FILE;
+            String name = AVATAR_OUTPUT_FILE;
             ((Activity) mView.getViewContext()).startActivityForResult(mPhotoUtils.cutForCamera(path, name), CUT_PICKER_PHOTO_REQUEST_CODE);
         }
     }

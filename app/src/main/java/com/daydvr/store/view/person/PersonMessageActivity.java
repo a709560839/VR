@@ -17,6 +17,7 @@ import com.daydvr.store.R;
 import com.daydvr.store.base.BaseActivity;
 import com.daydvr.store.presenter.person.PersonMessageContract;
 import com.daydvr.store.presenter.person.PersonMessagePresenter;
+import com.daydvr.store.util.GlideImageLoader;
 import com.daydvr.store.view.custom.CommonToolbar;
 import com.daydvr.store.view.custom.CustomPopupWindow;
 import com.daydvr.store.view.custom.RoundImageView;
@@ -26,8 +27,12 @@ import java.io.FileNotFoundException;
 import static com.daydvr.store.base.PersonConstant.CHANGE_BIRTHDAY_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.CHANGE_OK;
 import static com.daydvr.store.base.PersonConstant.CHANGE_PHONE_REQUEST_CODE;
-import static com.daydvr.store.base.PersonConstant.CHANGE_SEX_REQUEST_CODE;
+import static com.daydvr.store.base.PersonConstant.CHANGE_GENDER_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.CUT_PICKER_PHOTO_REQUEST_CODE;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_AVATAR;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_BIRTHDAY;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_GENDER;
+import static com.daydvr.store.base.PersonConstant.PERSON_MSG_TELEPHONE;
 import static com.daydvr.store.base.PersonConstant.PICKER_CAMERA_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.PICKER_PHOTO_REQUEST_CODE;
 import static com.daydvr.store.base.PersonConstant.cutedPhotoUri;
@@ -48,10 +53,10 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
     private View mPhone;
     private View mPassword;
     private View mLogout;
-    private RoundImageView mHeadRoundImageView;
-    private TextView mSexTextView;
+    private RoundImageView mAvatarRoundImageView;
+    private TextView mGenderTextView;
     private TextView mBirthdayTextView;
-    private TextView mPhoneTextView;
+    private TextView mTelephoneTextView;
     private CustomPopupWindow mPopupWindow;
     private TextView mOpenCameraTextView;
     private TextView mOpenGalleryTextView;
@@ -65,20 +70,22 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
         mPresenter.initUtils(this);
 
         initView();
+
+        initDatas();
     }
 
     private void initView() {
         mCommonToolbar = findViewById(R.id.toolbar);
         mPickerPhoto = findViewById(R.id.v_person_msg_picker_head);
-        mSex = findViewById(R.id.v_person_msg_change_sex);
+        mSex = findViewById(R.id.v_person_msg_change_gender);
         mBirthday = findViewById(R.id.v_person_msg_change_birthday);
         mPhone = findViewById(R.id.v_person_msg_change_phone);
         mPassword = findViewById(R.id.v_person_msg_change_password);
         mLogout = findViewById(R.id.v_person_msg_logout);
-        mHeadRoundImageView = findViewById(R.id.riv_person_msg_head);
-        mSexTextView = findViewById(R.id.tv_person_msg_sex);
+        mAvatarRoundImageView = findViewById(R.id.riv_person_msg_head);
+        mGenderTextView = findViewById(R.id.tv_person_msg_gender);
         mBirthdayTextView = findViewById(R.id.tv_person_msg_birthday);
-        mPhoneTextView = findViewById(R.id.tv_person_msg_phone);
+        mTelephoneTextView = findViewById(R.id.tv_person_msg_phone);
 
         mPopupWindow = new CustomPopupWindow.Builder()
                 .setContext(this)
@@ -112,36 +119,50 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
         mCancelTextView.setOnClickListener(this);
     }
 
+    private void initDatas() {
+        mPresenter.loadDatas();
+    }
+
     @Override
     public void setPresenter(PersonMessageContract.Presenter presenter) {
         mPresenter = (PersonMessagePresenter) presenter;
     }
 
     @Override
-    public void showHeadPhoto(Intent data) {
-        Uri imageUri = cutedPhotoUri;
-        Bitmap bitmap = null;
-        try {
-            bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public void showAvatar(Intent data, boolean isLocalImage) {
+        if (isLocalImage) {
+            Uri imageUri = cutedPhotoUri;
+            Bitmap bitmap = null;
+            try {
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            mAvatarRoundImageView.setImageBitmap(bitmap);
+        } else {
+            GlideImageLoader.commonLoader(this, data.getStringExtra(PERSON_MSG_AVATAR), mAvatarRoundImageView);
         }
-        mHeadRoundImageView.setImageBitmap(bitmap);
     }
 
     @Override
-    public void showSex(Intent data) {
-
+    public void showGender(Intent data) {
+        if (data != null) {
+            mGenderTextView.setText(data.getStringExtra(PERSON_MSG_GENDER));
+        }
     }
 
     @Override
     public void showBirthday(Intent data) {
-
+        if (data != null) {
+            mBirthdayTextView.setText(data.getStringExtra(PERSON_MSG_BIRTHDAY));
+        }
     }
 
     @Override
     public void showPhone(Intent data) {
-
+        if (data != null) {
+            mTelephoneTextView.setText(data.getStringExtra(PERSON_MSG_TELEPHONE));
+        }
     }
 
     @Override
@@ -150,27 +171,28 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
     }
 
     @Override
-    public void jumpChangeSex() {
-//        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//        startActivityForResult(intent, CHANGE_SEX_REQUEST_CODE);
+    public void jumpChangeGender() {
+        Intent intent = new Intent(this, SelectGenderActivity.class);
+        startActivityForResult(intent, CHANGE_GENDER_REQUEST_CODE);
     }
 
     @Override
     public void jumpChangeBirthday() {
-//        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//        startActivityForResult(intent, CHANGE_BIRTHDAY_REQUEST_CODE);
+        Intent intent = new Intent(this, SelectBirthdayActivity.class);
+        startActivityForResult(intent, CHANGE_BIRTHDAY_REQUEST_CODE);
     }
 
     @Override
     public void jumpChangePhone() {
-//        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//        startActivityForResult(intent, CHANGE_PHONE_REQUEST_CODE);
+        Intent intent = new Intent(this, VerifyNumActivity.class);
+        intent.putExtra("phoneNum", mTelephoneTextView.getText());
+        startActivityForResult(intent, CHANGE_PHONE_REQUEST_CODE);
     }
 
     @Override
     public void jumpChangePassword() {
-//        Intent intent = new Intent(getActivity(), LoginActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, ChangePwdActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -212,7 +234,7 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
 
                 case CUT_PICKER_PHOTO_REQUEST_CODE:
                     if (data != null) {
-                        showHeadPhoto(data);
+                        showAvatar(data, true);
                     }
                     break;
                 default:
@@ -221,9 +243,9 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
         }
         if (resultCode == CHANGE_OK) {
             switch (requestCode) {
-                case CHANGE_SEX_REQUEST_CODE:
+                case CHANGE_GENDER_REQUEST_CODE:
                     if (data != null) {
-                        showSex(data);
+                        showGender(data);
                     }
                     break;
 
@@ -252,8 +274,8 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
                 mPresenter.pickerPhoto();
                 break;
 
-            case R.id.v_person_msg_change_sex:
-                mPresenter.intoChangeSex();
+            case R.id.v_person_msg_change_gender:
+                mPresenter.intoChangeGender();
                 break;
 
             case R.id.v_person_msg_change_birthday:

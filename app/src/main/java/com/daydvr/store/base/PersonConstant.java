@@ -26,20 +26,25 @@ public class PersonConstant {
     public static boolean isLogin = false;
     public static Uri cutedPhotoUri;
 
-    public static final String HEAD_OUTPUT_FILE = "head.png";
+    public static final String AVATAR_OUTPUT_FILE = "avatar.png";
+
+    public static final String USER_MESSGAE = "user_message";
 
     public static final String USER_NAME = "user_name";
-    public static final String USER_HEAD_URL = "user_head_url";
+    public static final String USER_AVATAR_URL = "user_avatar_url";
     public static final String USER_INTEGRAL = "user_integral";
 
-    public static final String HEAD_CUT_URI = "head_cut_uri";
+    public static final String PERSON_MSG_AVATAR = "PERSON_MSG_AVATAR";
+    public static final String PERSON_MSG_GENDER = "PERSON_MSG_GENDER";
+    public static final String PERSON_MSG_BIRTHDAY = "PERSON_MSG_BIRTHDAY";
+    public static final String PERSON_MSG_TELEPHONE = "PERSON_MSG_TELEPHONE";
 
     public static final int LOGIN_REQUEST_CODE = 100;
     public static final int REGISTERED_REQUEST_CODE = 200;
     public static final int PICKER_PHOTO_REQUEST_CODE = 300;
     public static final int PICKER_CAMERA_REQUEST_CODE = 400;
     public static final int CUT_PICKER_PHOTO_REQUEST_CODE = 500;
-    public static final int CHANGE_SEX_REQUEST_CODE = 600;
+    public static final int CHANGE_GENDER_REQUEST_CODE = 600;
     public static final int CHANGE_BIRTHDAY_REQUEST_CODE = 700;
     public static final int CHANGE_PHONE_REQUEST_CODE = 800;
 

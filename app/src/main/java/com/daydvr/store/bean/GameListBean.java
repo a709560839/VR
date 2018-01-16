@@ -10,7 +10,7 @@ import static com.daydvr.store.base.GameConstant.DOWNLOADABLE;
 
 public class GameListBean {
     private String name;
-    private String summary;
+    private int integral;
     private String type;
     private Drawable icon;
     private String url;
@@ -66,12 +66,12 @@ public class GameListBean {
         this.name = name;
     }
 
-    public String getSummary() {
-        return summary;
+    public int getIntegral() {
+        return integral;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setIntegral(int integral) {
+        this.integral = integral;
     }
 
     public String getType() {

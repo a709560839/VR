@@ -18,7 +18,7 @@
   <string name="top_videos">热门视频</string>
   <string name="hint_game_name">游戏名字</string>
   <string name="hint_game_download">下载</string>
-  <string name="hint_game_smmary">概要</string>
+  <string name="hint_game_integral">积分</string>
   <string name="hint_game_type">类型</string>
   <string name="hint_game_size">游戏大小</string>
   <string name="hint_video_name">母鸡</string>
@@ -100,17 +100,26 @@
   <string name="download_list">下载榜</string>
   <string name="tip_no_download">下载的东西不见啦！（=´口｀=）</string>
 
+  <!--个人信息页-->
   <string name="person_msg_head">显示头像</string>
-  <string name="person_msg_sex">性别</string>
+  <string name="person_msg_gender">性别</string>
   <string name="person_msg_birthday">生日</string>
   <string name="person_msg_phone">手机号码</string>
   <string name="person_msg_change_password">修改密码</string>
   <string name="person_msg_logout">退出登录</string>
-  <string name="person_sex_noset">未设定</string>
+  <string name="person_gender_noset">未设定</string>
   <string name="person_birthday">1990-8-2</string>
   <string name="person_msg_phone_tip">134****6889</string>
-
   <string name="person_sign">签到</string>
+  <string name="person_change_gender">设定性别</string>
+  <string name="person_select_birthday">设定生日</string>
+  <string name="person_change_num">修改号码</string>
+  <string name="person_verify_num">验证号码</string>
+  <string name="person_verify_phone">手机号码：</string>
+  <string name="person_verification_code">获取验证码</string>
+  <string name="person_input_num">请输入手机号码</string>
+  <string name="person_input_verification">请输入验证码</string>
+  <string name="person_change_pwd">修改密码</string>
 
   <!--Guide-->
   <string name="guide_into_main">进入主页</string>

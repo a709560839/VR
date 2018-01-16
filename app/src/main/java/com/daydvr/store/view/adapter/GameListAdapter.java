@@ -1,6 +1,7 @@
 package com.daydvr.store.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -189,7 +190,10 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
     private void initItemView(ViewHolder holder, int position) {
         GameListBean bean = mDatas.get(position);
         holder.gameNameTextView.setText(bean.getName());
-        holder.gameSummaryTextView.setText(bean.getSummary());
+        if (bean.getIntegral() > 0) {
+            holder.gameIntegralTextView.setText(String.valueOf(bean.getIntegral()) + " 积分");
+            holder.gameIntegralTextView.setTextColor(Color.RED);
+        }
         holder.gameRatingBar.setMax(5);
         holder.gameRatingBar.setRating(bean.getRating());
         holder.gameSizeTextView.setText(bean.getSize() + "M");
@@ -267,7 +271,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         private ImageView gameIconImageView;
         private TextView gameTypeTextView;
         private TextView gameNameTextView;
-        private TextView gameSummaryTextView;
+        private TextView gameIntegralTextView;
         private TextView gameSizeTextView;
         private RatingBar gameRatingBar;
         private TextView gameDetailTextView;
@@ -293,7 +297,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             gameDetailTextView = itemView.findViewById(R.id.tv_game_detail);
             gameIconImageView = itemView.findViewById(R.id.iv_game_icon);
             gameNameTextView = itemView.findViewById(R.id.tv_game_name);
-            gameSummaryTextView = itemView.findViewById(R.id.tv_game_summary);
+            gameIntegralTextView = itemView.findViewById(R.id.tv_game_integral);
             gameSizeTextView = itemView.findViewById(R.id.tv_game_size);
             gameRatingBar = itemView.findViewById(R.id.rb_game_rating);
             gameTypeTextView = itemView.findViewById(R.id.tv_game_type);
@@ -352,7 +356,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
             gameDetailTextView.setText(TEXT_DOWNLOAD);
             gameRatingBar.setVisibility(View.VISIBLE);
             gameSizeTextView.setVisibility(View.VISIBLE);
-            gameSummaryTextView.setVisibility(View.VISIBLE);
+            gameIntegralTextView.setVisibility(View.VISIBLE);
 
             gameProgressBar.setVisibility(View.INVISIBLE);
             gameProgressBar.setProgress(0);
@@ -364,7 +368,7 @@ public class GameListAdapter extends RecyclerView.Adapter<GameListAdapter.ViewHo
         public void setAfterDownloadViewVisibility() {
             gameRatingBar.setVisibility(View.INVISIBLE);
             gameSizeTextView.setVisibility(View.INVISIBLE);
-            gameSummaryTextView.setVisibility(View.INVISIBLE);
+            gameIntegralTextView.setVisibility(View.INVISIBLE);
 
             gameProgressBar.setVisibility(View.VISIBLE);
             gameProgressTextView.setVisibility(View.VISIBLE);

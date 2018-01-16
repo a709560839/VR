@@ -14,7 +14,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
-import static com.daydvr.store.base.PersonConstant.HEAD_CUT_URI;
 import static com.daydvr.store.base.PersonConstant.cutedPhotoUri;
 
 /**

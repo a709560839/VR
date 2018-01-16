@@ -40,6 +40,7 @@ public class BaseConstant {
     public static final int SOARING_RANKING_LOADER_OK = 12;
     public static final int NEWS_RANKING_LOADER_OK = 13;
     public static final int DOWNLOAD_RANKING_LOADER_OK  = 14;
+    public static final int SIGN_DATA_LOADER_OK = 15;
 
     public static final int GAME_DETAIL_OK = 51;
     public static final int GAME_DETAIL_PIC_OK = 52;

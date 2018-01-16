@@ -1,5 +1,6 @@
 package com.daydvr.store.view.person;
 
+import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.widget.TextView;
 import com.daydvr.store.R;
 import com.daydvr.store.base.BaseActivity;
 import com.daydvr.store.bean.SignEntity;
+import com.daydvr.store.presenter.person.SignContract;
+import com.daydvr.store.presenter.person.SignContract.Presenter;
+import com.daydvr.store.presenter.person.SignPresenter;
 import com.daydvr.store.view.adapter.SignAdapter;
 import com.daydvr.store.view.custom.CommonToolbar;
 import com.daydvr.store.view.custom.SignIntegralLayout;
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class SignActivity extends BaseActivity {
+public class SignActivity extends BaseActivity implements SignContract.View{
 
     private SignView mSignView;
     private Button mSignButton;
@@ -28,14 +32,13 @@ public class SignActivity extends BaseActivity {
     private TextView mSignYearAndMonth;
     private SignAdapter signAdapter;
 
-    private List<SignEntity> data;
-    private int sign = 3;
-    private int year;
-    private int month;
+    private SignPresenter mPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
+        mPresenter = new SignPresenter(this);
         initView();
         initData();
         configComponent();
@@ -55,24 +58,48 @@ public class SignActivity extends BaseActivity {
         mSignView.setAdapter(signAdapter);
         mToolBar.setCenterTitle(getResources().getString(R.string.sign_everyday));
         mToolBar.initmToolBar(this,false);
-        mSignIntegralLayout.setSignDay(sign);
-        setSignContinueText(sign);
+        mSignIntegralLayout.setSignDay(mPresenter.getContinueSignDay());
+        setSignContinueText(mPresenter.getContinueSignDay());
         mSignButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ++sign;
-                signToday(sign);
+                mPresenter.signToday();
             }
         });
-        StringBuffer time = new StringBuffer();
-        time.append(year).append("年").append(month).append("月");
-        mSignYearAndMonth.setText(time);
+        mSignYearAndMonth.setText(mPresenter.getYearAndMonth());
     }
 
-    private void signToday(int signDay) {
+
+    private void setSignContinueText(int day){
+        mSignContinueTextView.setText(getResources().getString(R.string.sign_continue_sign).replace("?",String.valueOf(day)));
+    }
+
+    private void initData() {
+        mPresenter.showSignDay();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.freeView();
+        mPresenter = null;
+    }
+
+    @Override
+    public void setPresenter(Presenter presenter) {
+        mPresenter = (SignPresenter) presenter;
+    }
+
+    @Override
+    public <T> void showSignDay(List<T> beans) {
+        signAdapter = new SignAdapter((List<SignEntity>) beans);
+        mSignView.setAdapter(signAdapter);
+    }
+
+    @Override
+    public void signToday(int signDay) {
         setSignContinueText(signDay);
         mSignIntegralLayout.setSignDay(signDay);
-        data.get(mSignView.getDayOfMonthToday()-1).setDayType(DayType.SIGNED.getValue());
         mSignView.notifyDataSetChanged();
         mSignButton.setBackground(ContextCompat.getDrawable(SignActivity.this, R.drawable.shape_login_btn_clicked));
         mSignButton.setText(getResources().getString(R.string.sign_had));
@@ -80,27 +107,9 @@ public class SignActivity extends BaseActivity {
         mSignButton.setEnabled(false);
     }
 
-    private void setSignContinueText(int day){
-        mSignContinueTextView.setText(getResources().getString(R.string.sign_continue_sign).replace("?",String.valueOf(day)));
+    @Override
+    public Context getViewContext() {
+        return this;
     }
 
-    private void initData() {
-        data = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH)+1;
-        int dayOfMonthToday = calendar.get(Calendar.DAY_OF_MONTH);
-        for (int i = 0; i < 30; i++) {
-            SignEntity signEntity = new SignEntity();
-            if (dayOfMonthToday == i + 1) {
-                /*今天*/
-                signEntity.setDayType(DayType.WAITING.getValue());
-            } else {
-                /*今天之前*/
-                signEntity.setDayType(DayType.SIGNED.getValue());
-            }
-            data.add(signEntity);
-        }
-        signAdapter = new SignAdapter(data);
-    }
 }

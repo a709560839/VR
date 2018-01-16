@@ -15,9 +15,9 @@ import com.daydvr.store.base.IBaseView;
 
 public class PersonMessageContract {
     public interface View extends IBaseView<Presenter> {
-        void showHeadPhoto(Intent data);
+        void showAvatar(Intent data, boolean isLocalImage);
 
-        void showSex(Intent data);
+        void showGender(Intent data);
 
         void showBirthday(Intent data);
 
@@ -25,7 +25,7 @@ public class PersonMessageContract {
 
         void jumpPickerPhoto();
 
-        void jumpChangeSex();
+        void jumpChangeGender();
 
         void jumpChangeBirthday();
 
@@ -43,9 +43,11 @@ public class PersonMessageContract {
     public interface Presenter extends IBasePresenter {
         void initUtils(Activity activity);
 
+        void loadDatas();
+
         void pickerPhoto();
 
-        void intoChangeSex();
+        void intoChangeGender();
 
         void intoChangeBirthday();
 
