@@ -105,7 +105,7 @@ public class PersonMessageActivity extends BaseActivity implements PersonMessage
 
     private void configComponent() {
         mCommonToolbar.setCenterTitle(getString(R.string.person_message));
-        mCommonToolbar.initmToolBar(this, false);
+        mCommonToolbar.initmToolBar(this, true);
 
         mPickerPhoto.setOnClickListener(this);
         mSex.setOnClickListener(this);

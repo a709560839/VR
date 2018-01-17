@@ -30,6 +30,6 @@ public class ChangePwdActivity extends BaseActivity {
     private void configComponent() {
         mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this),0,0);
         mToolBar.setCenterTitle(getResources().getString(R.string.person_change_pwd));
-        mToolBar.initmToolBar(this,false);
+        mToolBar.initmToolBar(this,true);
     }
 }

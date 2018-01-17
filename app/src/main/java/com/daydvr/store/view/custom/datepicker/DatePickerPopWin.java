@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -310,12 +309,12 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
                     0, Animation.RELATIVE_TO_SELF, 1,
                     Animation.RELATIVE_TO_SELF, 0);
 
-            showAtLocation(activity.getWindow().getDecorView(), Gravity.BOTTOM,
+            showAtLocation(activity.getWindow().getDecorView(), Gravity.CENTER_VERTICAL,
                     0, 0);
-            trans.setDuration(400);
-            trans.setInterpolator(new AccelerateDecelerateInterpolator());
-
-            pickerContainerV.startAnimation(trans);
+//            trans.setDuration(400);
+//            trans.setInterpolator(new AccelerateDecelerateInterpolator());
+//
+//            pickerContainerV.startAnimation(trans);
         }
     }
 
@@ -354,9 +353,10 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        if (v == contentView || v == cancelBtn) {
+        if (v == cancelBtn) {
 
-//            dismissPopWin();
+            dismissPopWin();
+            mListener.onDatePickCancel();
         } else if (v == confirmBtn) {
 
             if (null != mListener) {
@@ -432,5 +432,7 @@ public class DatePickerPopWin extends PopupWindow implements OnClickListener {
          */
         void onDatePickCompleted(int year, int month, int day,
                 String dateDesc);
+
+        void onDatePickCancel();
     }
 }

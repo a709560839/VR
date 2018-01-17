@@ -43,7 +43,7 @@ public class ChangeNumActivity extends BaseActivity implements OnClickListener{
     private void configComponent() {
         mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this),0,0);
         mToolBar.setCenterTitle(getResources().getString(R.string.person_change_num));
-        mToolBar.initmToolBar(this,false);
+        mToolBar.initmToolBar(this,true);
 
         mDetermineButton.setOnClickListener(this);
     }

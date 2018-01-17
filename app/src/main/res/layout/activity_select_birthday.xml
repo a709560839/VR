@@ -4,7 +4,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.daydvr.store.view.person.SelectBirthdayActivity">
+  tools:context="com.daydvr.store.view.person.SelectBirthdayActivity"
+  android:background="@color/appBackground">
 
   <include layout="@layout/item_toolbar" />
 

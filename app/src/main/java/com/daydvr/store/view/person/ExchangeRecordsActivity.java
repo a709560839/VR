@@ -50,7 +50,7 @@ public class ExchangeRecordsActivity extends BaseActivity implements ExchangeCon
 
     private void configComponent() {
         mToolBar.setCenterTitle(getResources().getString(R.string.exchange_record));
-        mToolBar.initmToolBar(this,false);
+        mToolBar.initmToolBar(this,true);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false));

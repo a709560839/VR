@@ -1,6 +1,5 @@
 package com.daydvr.store.view.person;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,10 +24,7 @@ import com.daydvr.store.view.setting.SettingActivity;
 
 import static com.daydvr.store.base.PersonConstant.LOGIN_OK;
 import static com.daydvr.store.base.PersonConstant.LOGIN_REQUEST_CODE;
-import static com.daydvr.store.base.PersonConstant.USER_AVATAR_URL;
 import static com.daydvr.store.base.PersonConstant.USER_MESSGAE;
-import static com.daydvr.store.base.PersonConstant.USER_NAME;
-import static com.daydvr.store.base.PersonConstant.USER_INTEGRAL;
 import static com.daydvr.store.base.PersonConstant.isLogin;
 
 /**

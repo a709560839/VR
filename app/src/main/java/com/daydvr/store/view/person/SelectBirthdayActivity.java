@@ -47,7 +47,7 @@ public class SelectBirthdayActivity extends BaseActivity implements IdleHandler 
     private void configComponent() {
         mToolBar.setPadding(0, DensityUtil.getStatusBarHeight(this), 0, 0);
         mToolBar.setCenterTitle(getResources().getString(R.string.person_select_birthday));
-        mToolBar.initmToolBar(this, false);
+        mToolBar.initmToolBar(this, true);
 
         Looper.myQueue().addIdleHandler(this);
     }
@@ -65,8 +65,13 @@ public class SelectBirthdayActivity extends BaseActivity implements IdleHandler 
                         setReturnResult(dateDesc);
                         finish();
                     }
+
+                    @Override
+                    public void onDatePickCancel() {
+                        finish();
+                    }
                 }).textConfirm("确定")
-                .textCancel(" ")
+                .textCancel("取消")
                 .btnTextSize(16)
                 .viewTextSize(25)
                 .colorCancel(Color.parseColor("#999999"))
